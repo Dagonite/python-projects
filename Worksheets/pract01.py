@@ -78,19 +78,19 @@ def count2():
 # 100. (Don’t worry too much about formatting the table neatly.)
 def weights_table():
     for i in range(11):
-        print((i*10), ((i*10)*2.2))
+        print(i*10, (i*10) * 2.2)
 
 
-# 9. [harder] Write a future_value function that uses a loop to calculate the future 
+# 9. [harder] Write a future_value function that uses a loop to calculate the future
 # value of an investment amount, assuming an annual interest rate of 5.5%. The function
 # should ask the user for the initial amount and the number of years that it is
 # to be invested, and should output the final value of the investment using compound
 # interest with the interest compounded every year.
 def future_value():
     investment = eval(input("What is your investment amount? "))
-    years = eval(input("Over how many years? "))
+    years = eval(input("Years of investment? "))
 
     for i in range(years):
-        initValue = initValue * 1.055
+        investment = investment * 1.055
 
-    print("Your future value is ", initValue)
+    print("Your future value is ", investment)
