@@ -92,8 +92,9 @@ def first_patch(win, size, colour):
 
 def second_patch(win, size, colour, colour_tracker):
     """
-    Creates the second patch which forms a row of tiles (left-to-right) in the empty space of the second row, the third
-    row repeats but with 1 less tile. This repeats until only 1 tile is created in a row.
+    Creates the second patch which forms a row of tiles (left-to-right) in the
+    empty space of the second row, the third row repeats but with 1 less tile.
+    This repeats until only 1 tile is created in a row.
     :param win: the graphics window used to display the patchwork
     :param size: the size of the patchwork grid
     :param colour: the colour being used
@@ -114,8 +115,9 @@ def second_patch(win, size, colour, colour_tracker):
 
 def third_patch(win, size, colour, colour_tracker):
     """
-    Creates the third patch which forms a row of tiles (right-to-left) in the empty space of the second to last row,
-    the third to last row repeats but with 1 less tile. This repeats until only 1 title is created in a row.
+    Creates the third patch which forms a row of tiles (right-to-left) in the
+    empty space of the second to last row, the third to last row repeats but
+    with 1 less tile. This repeats until only 1 title is created in a row.
     :param win: the graphics window used to display the patchwork
     :param size: the size of the patchwork grid
     :param colour: the colour being used
@@ -168,8 +170,8 @@ def net_design(win, colour, x, y):
 
 def circle_design(win, colour, x, y):
     """
-    Creates the circle design by drawing filled red circles half covered by white rectangles. Red outlined circles are
-    drawn over the red circles.
+    Creates the circle design by drawing filled red circles half covered by
+    white rectangles. Red outlined circles are drawn over the red circles.
     :param win: the graphics window used to display the patchwork
     :param colour: the colour of the drawn shapes
     :param x: starting x co-ord for the design
@@ -198,7 +200,8 @@ def circle_design(win, colour, x, y):
 
 def cycle_colours(win, size, colours, colour_tracker):
     """
-    Allows the user to click on any of the tiles in the graphics window to cycle to one of the chosen colours.
+    Allows the user to click on any of the tiles in the graphics window to cycle
+    to one of the chosen colours.
     :param win: the graphics window used to display the patchwork
     :param size: the size of the patchwork grid
     :param colours: list of colours being used

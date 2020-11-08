@@ -38,8 +38,8 @@ def euros_to_pounds():
     print("The amount in pounds is", pounds)
 
 
-# 4. Write an add_up function that asks the user to enter two numbers, and
-# outputs their sum.
+# 4. Write an add_up function that asks the user to enter two numbers, and outputs
+# their sum.
 def add_up():
     first_nmbr = eval(input("Gimme a number: "))
     second_nmbr = eval(input("Gimme a another number: "))
@@ -49,8 +49,8 @@ def add_up():
 
 # 5. Write a change_counter function. This should ask the user how many 1p, 2p
 # and 5p coins they have (using three separate questions), and then display the
-# total amount of money in pence. (Hint: remember that variable names cannot
-# begin with a digit, so you might like to use names like two_pence.)
+# total amount of money in pence. (Hint: remember that variable names cannot begin
+# with a digit, so you might like to use names like two_pence.)
 def change_counter():
     one_pence = eval(input("How many 1p coins do you have? "))
     two_pence = eval(input("How many 2p coins do you have? "))
@@ -66,15 +66,31 @@ def ten_hellos():
         print("hello, world")
 
 
-# 7. Change the count function so that instead of counting from 0 to 9, it
-# counts up from 1 to 10. (Hint: Use a little arithmetic in the print statement.)
+# 7. Change the count function so that instead of counting from 0 to 9, it counts
+# up from 1 to 10. (Hint: Use a little arithmetic in the print statement.)
 def count2():
     for i in range(10):
         print(i+1)
 
 
-# 8. [harder] Write a function weights_table that outputs a two-column table of kilogram weights and their pound
-# equivalents for kilogram values 0, 10, 20 ... 100. (Don’t worry too much about formatting the table neatly.)
+# 8. [harder] Write a function weights_table that outputs a two-column table of
+# kilogram weights and their pound equivalents for kilogram values 0, 10, 20 ...
+# 100. (Don’t worry too much about formatting the table neatly.)
 def weights_table():
     for i in range(11):
         print((i*10), ((i*10)*2.2))
+
+
+# 9. [harder] Write a future_value function that uses a loop to calculate the future 
+# value of an investment amount, assuming an annual interest rate of 5.5%. The function
+# should ask the user for the initial amount and the number of years that it is
+# to be invested, and should output the final value of the investment using compound
+# interest with the interest compounded every year.
+def future_value():
+    investment = eval(input("What is your investment amount? "))
+    years = eval(input("Over how many years? "))
+
+    for i in range(years):
+        initValue = initValue * 1.055
+
+    print("Your future value is ", initValue)
