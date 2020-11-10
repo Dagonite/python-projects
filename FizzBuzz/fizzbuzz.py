@@ -1,21 +1,21 @@
-def FizzBuzz(x):
-    for nmbr in range(1, x + 1):
+def fizz_buzz(x):
+    for n in range(1, x + 1):
         output = ""
 
-        if (nmbr % 3 == 0):
+        if (n % 3 == 0):
             output += "Fizz"
 
-        if (nmbr % 5 == 0):
+        if (n % 5 == 0):
             output += "Buzz"
 
         # if (nmbr % 7 == 0):
         #     output += "Tozz"
 
         if output == "":
-            output = nmbr
+            output = n
 
         print(output)
 
 
 x = eval(input("Give me the range: "))
-FizzBuzz(x)
+fizz_buzz(x)
