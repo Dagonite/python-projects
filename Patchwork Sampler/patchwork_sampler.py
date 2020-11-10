@@ -35,6 +35,7 @@ def get_inputs():
 
     for i in range(3):
         while True:
+            print("The available colours are: ", end="")
             print(*available_colours, sep=", ")
             colour = input("Enter an above colour: ").lower()
             if colour in colours:
@@ -67,7 +68,7 @@ def create_patchwork(win, size, colours):
     """
     colour_tracker = [0] * size ** 2
 
-    first_patch(win, size, colours[0])  # first patch always colours[0] so don't need to return anything
+    first_patch(win, size, colours[0])  # first patch always starts as colours[0] so don't need to return anything
     colour_tracker = second_patch(win, size, colours[1], colour_tracker)
     colour_tracker = third_patch(win, size, colours[2], colour_tracker)
     return colour_tracker
@@ -211,13 +212,13 @@ def cycle_colours(win, size, colours, colour_tracker):
     colour_tracker = np.array(colour_tracker)
     print(colour_tracker.reshape(size, size), "\n")
 
-    while True:
+    for i in range(15):
         cursor = win.getMouse()
         x = cursor.getX()
         y = cursor.getY()
         x_pos = x // 100
         y_pos = y // 100
-        current_tile = x_pos + y_pos + y_pos * (size - 1)
+        current_tile = int(x_pos + y_pos + y_pos * (size - 1))
         colour = colour_tracker[current_tile] + 1
 
         if colour == 3:
@@ -230,6 +231,8 @@ def cycle_colours(win, size, colours, colour_tracker):
 
         colour_tracker[current_tile] = colour
         print(colour_tracker.reshape(size, size), "\n")
+
+    win.close()
 
 
 main()
