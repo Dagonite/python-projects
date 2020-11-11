@@ -2,7 +2,6 @@
 
 # Requires John Zelle's simple object oriented graphics library to work.
 # The patchwork patterns are specific to my student number.
-# Stop console to exit the sampler once done.
 
 from graphics import *
 import numpy as np
@@ -221,7 +220,7 @@ def cycle_colours(win, size, colours, colour_tracker):
         current_tile = int(x_pos + y_pos + y_pos * (size - 1))
         colour = colour_tracker[current_tile] + 1
 
-        if colour == 3:
+        if colour == 3:     # could just do modulus but this is fine
             colour = 0
 
         if x < 100 or x > 100 * (size - 1) or y < 100 or y > 100 * (size - 1):
