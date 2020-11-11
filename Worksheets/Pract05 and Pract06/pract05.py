@@ -1,4 +1,6 @@
 # Practical Worksheet 5: Using functions
+# Folders for Pract05 and Pract06 merged so that I can import pract05.py into
+# pract06.py easily.
 
 import math
 from graphics import *
@@ -77,6 +79,7 @@ def draw_brown_eye_in_centre():
 Write a function draw_block_of_stars which has two parameters width and height,
 and outputs a rectangle of asterisks of the appropriate dimensions. For example,
 the function call draw_block_of_stars(5, 3) should result in the following output:
+
     *****
     *****
     *****
@@ -161,11 +164,14 @@ other (consisting of spaces, then asterisks, then spaces and finally asterisks,
 all of the same height). The widths of the four rectangles and their common height
 should be parameters. E.g., a call: draw_blocks(0, 5, 4, 3, 2) will result in the
 output:
+
     *****    ***
     *****    ***
+
 (with no space before the first asterisks due to the 0 argument). Now, write a function
 draw_letter_A that uses draw_blocks in order to display a large capital A in asterisks,
 such as:
+
     ********
     ********
    **      **

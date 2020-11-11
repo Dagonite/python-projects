@@ -69,7 +69,7 @@ def draw_archery_target():
     win.setCoords(0, 0, 1, 1)
     centre = Point(.5, .5)
 
-    yellow_circle = Circle(centre, 0.1)
+    yellow_circle = Circle(centre, .1)
     yellow_circle.setFill("yellow")
 
     red_circle = Circle(centre, yellow_circle.getRadius() * 2)
@@ -253,13 +253,13 @@ def five_click_stick_figure():
 
 '''
 10. [harder]
-Write a plotRainfall function, which plots a histogram for daily rainfall figures
+Write a plot_rainfall function, which plots a histogram for daily rainfall figures
 over a 7 day period. The rainfall figures should be entered one-by-one into a text
 entry box within the window. The bars of the histogram should be numbered along
 the bottom.
 '''
 # Instructions way too vague for this one.
-def plotRainfall():
+def plot_rainfall():
     win = GraphWin("Plot Rainfall", 550, 300)
     message = Text(Point(275, 15), "Enter rainfall in mm over the last 7 days")
     message.draw(win)
@@ -276,7 +276,7 @@ def plotRainfall():
         text.draw(win)
 
     for i in range(6):
-        text = Text(Point(30, 255 - i * 36), 0 + i * 40)
+        text = Text(Point(30, 255 - i * 36), i * 40)
         text.draw(win)
 
     for i in range(7):
