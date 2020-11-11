@@ -14,6 +14,7 @@ import pract05
 # list(range(10, 0, -1))
 # >>> [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
 
+
 def is_leap_year(year):
     if year % 4 != 0:
         return False
@@ -26,10 +27,10 @@ def is_leap_year(year):
 
 
 def is_leap_year_tests():
-    print(is_leap_year(2000))
-    print(is_leap_year(2004))
-    print(is_leap_year(2009))
-    print(is_leap_year(2100))
+    is_leap_year(2000)
+    is_leap_year(2004)
+    is_leap_year(2096)
+    is_leap_year(2100)
 
 
 def days_in_month(month, year):
@@ -467,6 +468,7 @@ def archery_game():
         archery_game()
     else:
         win.close()
+
 
 def draw_arrow(win, arrow_x, arrow_y):
     arrow_shaft = Circle(Point(arrow_x, arrow_y), .008)
