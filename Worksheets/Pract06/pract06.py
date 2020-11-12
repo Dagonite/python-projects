@@ -2,7 +2,7 @@
 
 from graphics import *
 import random
-import pract05
+from pract05 import distance_between_points
 
 
 # list(range(1, 10, 2))
@@ -26,11 +26,17 @@ def is_leap_year(year):
         return True
 
 
-def is_leap_year_tests():
-    is_leap_year(2000)
-    is_leap_year(2004)
-    is_leap_year(2096)
-    is_leap_year(2100)
+# is_leap_year(2000)
+# >>> True
+
+# is_leap_year(2004)
+# >>> True
+
+# is_leap_year(2096)
+# >>> True
+
+# is_leap_year(2100)
+# >>> False
 
 
 def days_in_month(month, year):
@@ -58,6 +64,21 @@ def triangle(n):
         for j in range(1, i + 1):
             print(j, end=" ")
         print()
+
+
+def body_mass_index_table():
+    print(" cm")
+    for cm in range(200, 149, -5):
+        print(cm, end=" ")
+        for kg in range(50, 101, 5):
+            bmi = 10000 * kg / cm ** 2
+            print("{0:6.1f}".format(bmi), end="")
+        print()
+    print()
+    print(end="   ")
+    for kg in range(50, 101, 5):
+        print("{0:>6}".format(kg), end="")
+    print("   kg")
 
 
 '''
@@ -118,15 +139,15 @@ is too big or too small, the function should return a mark of X.
 '''
 def calculate_grade(mark):
     if mark > 20 or mark < 0:
-        return("X")
+        return "X"
     elif mark >= 16:
-        return("A")
+        return "A"
     elif mark >= 12:
-        return("B")
+        return "B"
     elif mark >= 8:
-        return("C")
+        return "C"
     else:
-        return("F")
+        return "F"
 
 
 '''
@@ -425,7 +446,8 @@ def archery_game():
         h_wind += random.uniform(-wd, wd)
         v_wind += random.uniform(-wd, wd)
 
-        arrow_zone = pract05.distance_between_points(Point(arrow_x, arrow_y), Point(.5, .5))
+        arrow_zone = distance_between_points(Point(arrow_x, arrow_y),
+                                             Point(.5, .5))
 
         if arrow_zone <= .3:
             draw_arrow(win, arrow_x, arrow_y)
@@ -463,7 +485,7 @@ def archery_game():
     choice_x = choice.getX()
     choice_y = choice.getY()
 
-    if pract05.distance_between_points(Point(choice_x, choice_y), Point(.5, .5)) <= .3:
+    if distance_between_points(Point(choice_x, choice_y), Point(.5, .5)) <= .3:
         win.close()
         archery_game()
     else:
@@ -475,12 +497,14 @@ def draw_arrow(win, arrow_x, arrow_y):
     arrow_shaft.setFill("brown")
     arrow_shaft.draw(win)
 
-    fletching = Line(Point(arrow_x + .02, arrow_y + .02), Point(arrow_x - .02, arrow_y - .02))
+    fletching = Line(Point(arrow_x + .02, arrow_y + .02),
+                     Point(arrow_x - .02, arrow_y - .02))
     fletching.setWidth(2)
     fletching.setFill("gray")
     fletching.draw(win)
 
-    fletching = Line(Point(arrow_x + .02, arrow_y - .02), Point(arrow_x - .02, arrow_y + .02))
+    fletching = Line(Point(arrow_x + .02, arrow_y - .02),
+                     Point(arrow_x - .02, arrow_y + .02))
     fletching.setWidth(2)
     fletching.setFill("gray")
     fletching.draw(win)

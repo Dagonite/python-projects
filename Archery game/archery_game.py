@@ -1,8 +1,9 @@
 # archery_game.py
 
 from graphics import *
-import math
 import random
+from pract05 import distance_between_points
+from pract06 import draw_circle
 
 
 def archery_game():
@@ -81,7 +82,8 @@ def archery_game():
         h_wind += random.uniform(-wd, wd)
         v_wind += random.uniform(-wd, wd)
 
-        arrow_zone = distance_between_points(Point(arrow_x, arrow_y), Point(.5, .5))
+        arrow_zone = distance_between_points(Point(arrow_x, arrow_y),
+                                             Point(.5, .5))
 
         if arrow_zone <= .3:
             draw_arrow(win, arrow_x, arrow_y)
@@ -126,35 +128,19 @@ def archery_game():
         win.close()
 
 
-def draw_circle(win, centre, radius, colour):
-    circle = Circle(centre, radius)
-    circle.setFill(colour)
-    circle.setWidth(2)
-    circle.draw(win)
-
-
-def distance_between_points(p1, p2):
-    p1X = p1.getX()
-    p1Y = p1.getY()
-
-    p2X = p2.getX()
-    p2Y = p2.getY()
-
-    distance = math.sqrt((p2X - p1X) ** 2 + (p2Y - p1Y) ** 2)
-    return distance
-
-
 def draw_arrow(win, arrow_x, arrow_y):
     arrow_shaft = Circle(Point(arrow_x, arrow_y), .008)
     arrow_shaft.setFill("brown")
     arrow_shaft.draw(win)
 
-    fletching = Line(Point(arrow_x + .02, arrow_y + .02), Point(arrow_x - .02, arrow_y - .02))
+    fletching = Line(Point(arrow_x + .02, arrow_y + .02),
+                     Point(arrow_x - .02, arrow_y - .02))
     fletching.setWidth(2)
     fletching.setFill("gray")
     fletching.draw(win)
 
-    fletching = Line(Point(arrow_x + .02, arrow_y - .02), Point(arrow_x - .02, arrow_y + .02))
+    fletching = Line(Point(arrow_x + .02, arrow_y - .02),
+                     Point(arrow_x - .02, arrow_y + .02))
     fletching.setWidth(2)
     fletching.setFill("gray")
     fletching.draw(win)
