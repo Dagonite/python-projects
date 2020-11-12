@@ -29,20 +29,20 @@ def solve(puzzle):
     :param puzzle: 2d array of ints
     :return: solved puzzle
     """
-    current_coords = find_empty_coords(puzzle)    # fetches the co-ords of an empty square in the puzzle
+    current_coords = find_empty_coords(puzzle)    # co-ords of empty square
     if current_coords:
-        row, col = current_coords     # stores the co-ords of the empty square as row, col
+        row, col = current_coords     # co-ords stored as row, col
     else:
         return True     # return when no empty squares are found
 
     for n in range(1, 10):
-        if valid(puzzle, row, col, n):    # check if an int is valid for current empty square
-            puzzle[row][col] = n        # insert n into the array
+        if valid(puzzle, row, col, n):    # check if n is valid for empty square
+            puzzle[row][col] = n        # insert n into the square
 
             if solve(puzzle):       # solve is recursively called until n is incompatible or the puzzle is solved
                 return True
 
-            puzzle[row][col] = 0    # if incompatible, n is removed from the current co-ords
+            puzzle[row][col] = 0    # puzzle isn't solved so current n must be wrong
 
     return False
 
@@ -53,12 +53,12 @@ def find_empty_coords(puzzle):
     :param puzzle: 2d array of ints
     :return x, y: row (int), col (int)
     """
-    for y in range(9):      # searches the first row
+    for y in range(9):      # searches all the rows from top to bottom
         for x in range(9):
-            if puzzle[y][x] == 0:   # finds the first empty column in the first row, otherwise moves to the next row
+            if puzzle[y][x] == 0:
                 return y, x      # returns co-ordinates of the empty square
 
-    return False        # there are no empty squares
+    return False        # there are no empty squares (puzzle solved)
 
 
 def valid(puzzle, row, col, n):
@@ -70,32 +70,29 @@ def valid(puzzle, row, col, n):
     :param n: current int being tried
     :return: bool
     """
-    # checks if n exists in the current column
-    for y in range(9):  # starts from the first row (0, col)
-        if puzzle[y][col] == n:    # not valid if n already exists in the column
-            return False
+    for y in range(9):
+        if puzzle[y][col] == n:
+            return False        # n exists in column y
 
-    # checks if n exists in the current row
-    for x in range(9):  # starts from the first column (row, 0)
-        if puzzle[row][x] == n:    # not valid if n already exists in the row
-            return False
+    for x in range(9):
+        if puzzle[row][x] == n:
+            return False        # n exists in row x
 
-    # determines which 3x3 box the empty square is in
-    # starts from box (0, 0) and ends at box (2, 2)
+    # finds what 3x3 box the square is in: (0, 1, 2) by (0, 1, 2)
     box_row = row // 3
     box_col = col // 3
 
     for y in range(0, 3):
         for x in range(0, 3):
-            if puzzle[box_row*3+y][box_col*3+x] == n:   # not valid if n is already in the box
-                return False
+            if puzzle[box_row*3+y][box_col*3+x] == n:
+                return False        # n exists in box (y, x)
 
-    return True     # n is valid if not found in same row, column, or box
+    return True     # n valid if not found in its row, column, or box
 
 
 def print_formatted(puzzle):
     """
-    Prints the puzzle into a readable format.
+    Prints the puzzle in a readable format.
     :param puzzle: 2d array of ints
     :return: None
     """
@@ -104,7 +101,7 @@ def print_formatted(puzzle):
             print("- - - - - - - - - - - ")
 
         for x in range(9):
-            current_value = str(puzzle[y][x]).replace("0", " ")  # holds the int of the current co-ord
+            current_value = str(puzzle[y][x]).replace("0", " ")
             if x % 3 == 0 and x != 0:
                 print("| ", end="")
             if x == 8:
