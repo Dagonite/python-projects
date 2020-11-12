@@ -97,7 +97,8 @@ def draw_rectangle():
     win = GraphWin("Rectangle")
     height = eval(input("What is the height: "))
     width = eval(input("What is the width: "))
-    rectangle = Rectangle(Point(100 - width / 2, 100 - height / 2), Point (100 + width / 2, 100 + height / 2))
+    rectangle = Rectangle(Point(100 - width / 2, 100 - height / 2),
+                          Point (100 + width / 2, 100 + height / 2))
     rectangle.draw(win)
 
 
@@ -234,20 +235,24 @@ def five_click_stick_figure():
     head.draw(win)
 
     torso = win.getMouse()
-    torso_line = Line(Point(head_centreX, head_centreY + head_radius), Point(head_centreX, torso.getY()))
+    torso_line = Line(Point(head_centreX, head_centreY + head_radius),
+                      Point(head_centreX, torso.getY()))
     torso_line.draw(win)
 
     arm_reach = win.getMouse()
     arm_length = head_centreX - arm_reach.getX()
-    arms_line = Line(Point(arm_reach.getX(), arm_reach.getY()), Point(head_centreX + arm_length, arm_reach.getY()))
+    arms_line = Line(Point(arm_reach.getX(), arm_reach.getY()),
+                     Point(head_centreX + arm_length, arm_reach.getY()))
     arms_line.draw(win)
 
     leg_reach = win.getMouse()
-    left_leg_line = Line(Point(head_centreX, torso.getY()), Point(leg_reach.getX(), leg_reach.getY()))
+    left_leg_line = Line(Point(head_centreX, torso.getY()),
+                         Point(leg_reach.getX(), leg_reach.getY()))
     left_leg_line.draw(win)
 
     leg_distance = head_centreX - leg_reach.getX()
-    right_leg_line = Line(Point(head_centreX, torso.getY()), Point(head_centreX + leg_distance, leg_reach.getY()))
+    right_leg_line = Line(Point(head_centreX, torso.getY()),
+                          Point(head_centreX + leg_distance, leg_reach.getY()))
     right_leg_line.draw(win)
 
 
@@ -283,7 +288,8 @@ def plot_rainfall():
         win.getMouse()
         box_message = int(input_box.getText())
 
-        rectangle = Rectangle(Point(50 + i * 60, 260 - box_message ), Point(110 + i * 60, 260))
+        rectangle = Rectangle(Point(50 + i * 60, 260 - box_message),
+                              Point(110 + i * 60, 260))
         rectangle.draw(win)
 
     message.setText("You're all finished")

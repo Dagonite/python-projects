@@ -1,10 +1,10 @@
 # Practical Worksheet 1: Getting started with Python
 
-def say_hello():
+def say_hello1():
     print("Hello world")
 
 
-def count():
+def count1():
     for i in range(10):
         print(i)
 

@@ -3,100 +3,9 @@
 import math
 from graphics import *
 
-def basic_string_operations():
-    print("Basic string operations")
-    print("-----------------------")
-    string1 = "Hello"
-    string2 = "World"
-    print(string1 + string2)
-    print(string1, string2)
-    print(string1 + " " + string2)
-    print(string1 * 5)
-    print(string1 * 5 + string2)
-    print(string1 + " " * 5 + string2)
-    print((string1 + " ") * 5 + string2, "\n")
-
-    print((string1 + "\n") * 5)
-
-    print(len("Hi"))
-    print(len(string1))
-    print(len(""), "\n")
-
-
-def string_indexing_and_slicings():
-    print("String indexing and slicing")
-    print("---------------------------")
-    my_string = "Hello there"
-    print(my_string[0], my_string[6])
-    print(my_string[-1], my_string[-7])
-    print(type(my_string[6]), "\n")   # a single character is also a string here
-
-    print(my_string[2:5])
-    print(my_string[0:5])
-    print(my_string[2:])
-    print(my_string[6:-1])
-    print(my_string[:-4])
-    print(my_string[:], "\n")
-
-
-def loops_and_strings():
-    print("Loops and strings")
-    print("-----------------")
-    for ch in my_string:
-        print(ch)
-    print("\n")
-
-
-def string_methods():
-    print("String methods")
-    print("--------------")
-    print(my_string.upper())
-    print("Don’t SHOUT".lower())
-    print(my_string.center(30))
-    print(my_string.find("er"))
-    print(my_string.replace("e", "ai"))
-    print(my_string.count("e"))
-    print(my_string.count("z"), "\n")
-
-    my_string.split()
-    words = my_string.split()
-    print(words[0])
-    print(words[1])
-    a_string = "a:list:of:words"
-    print(a_string.split(":"), "\n")
-
-
-def string_formatting():
-    print("String formatting")
-    print("-----------------")
-    x = 10.123456789
-    y = 20
-    print("The values are {0:0.4f} and {1:8}.".format(x, y), "\n")
-
-    print("The value {0:0.4f} is pi".format(math.pi))
-    print("The value {0:0.2f} is pi".format(math.pi))
-    print("The value {0:8.2f} is pi".format(math.pi))
-    print("The value {0:<8.2f} is pi".format(math.pi), "\n")
-
-
-def conversion_to_other_types():
-    print("Conversion to other types")
-    print("-------------------------")
-    string1 = "85"
-    string2 = "42.5"
-    print(int(string1))
-    print(float(string1))
-    print(float(string2))
-    x = 42
-    print(str(x))
-    print(eval(string1))
-    print(eval(string2))
-    exp_string = "34 + 8"
-    print(eval(exp_string))
-    print(eval("34 + 8 + x"), "\n")
-
 
 def numerical_encoding_of_characters():
+    print()
     print("Numerical encoding of characters")
     print("--------------------------------")
     print(ord("a"))
@@ -111,7 +20,7 @@ def numerical_encoding_of_characters():
     print(chr(98))
     print(chr(120))
     print(chr(960))
-    print(chr(8364), "\n")
+    print(chr(8364))
 
 
 # Reading files ([:-1] removes the new line after every paragraph)
@@ -333,6 +242,7 @@ several UK cities for a particular day, in the form:
 Write a function rainfall_chart that displays this data as a textual bar chart
 using one asterisk for each mm of rainfall; e.g., given the above data the output
 should be:
+
     Portsmouth  *********
     London      *****
     Southampton ************
@@ -360,15 +270,17 @@ def graphical_rainfall_chart():
     x_axis = Line(Point(50, 260), Point(1050, 260))
     x_axis.draw(win)
 
+    colours = ["red", "green", "orange", "blue", "white",
+               "yellow", "black", "brown", "gray"]
 
-    colours = ["red", "green", "orange", "blue", "white", "yellow", "black", "brown", "gray"]
     in_file = open("rainfall.txt", "r")
     item = 0
     for line in in_file:
         city = Text(Point((item + 1) * 100, 270), line.split()[0])
         city.draw(win)
         current_rainfall = int(line.split()[1])
-        rectangle = Rectangle(Point((item + .5) * 100, 260 - current_rainfall * 3.7), Point((item + 1.5) * 100, 260))
+        rectangle = Rectangle(Point((item + .5) * 100, 260 - current_rainfall * 3.7),
+                              Point((item + 1.5) * 100, 260))
         rectangle.setFill(colours[item])
         rectangle.draw(win)
         item += 1
@@ -384,8 +296,9 @@ def graphical_rainfall_chart():
 10. [harder]
 Write a rainfall_in_inches function that reads the rainfall data from rainfall.txt,
 and outputs the data to a file rainfall_inches.txt where all the mm values are
-converted to inches (there are 25.4mm in an inch). The inch values should be given
-to two decimal places, so the Portsmouth line above will become:
+converted to inches (there are 25.4mm in an inch). The inch values should be
+given to two decimal places, so the Portsmouth line above will become:
+
     Portsmouth 0.35
 '''
 def rainfall_in_inches():
@@ -402,9 +315,9 @@ def rainfall_in_inches():
 
 '''
 11. [harder]
-In Linux, there is a command called wc which reports the number of characters, words
-and lines in a file. Write a function wc which performs the same task. The name of
-the file should be entered by the user.
+In Linux, there is a command called wc which reports the number of characters,
+words and lines in a file. Write a function wc which performs the same task. The
+name of the file should be entered by the user.
 '''
 def wc():
     text_file = input("Enter the text file you want to use (try Battles - Atlas): ")
