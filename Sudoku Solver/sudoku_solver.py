@@ -26,7 +26,7 @@ puzzle2 = [
 def solve(puzzle):
     """
     Solves the Sudoku using backtracking.
-    :param puzzle: 2d array of ints
+    :param puzzle: 2d list of ints
     :return: solved puzzle
     """
     current_coords = find_empty_coords(puzzle)    # co-ords of empty square
@@ -50,7 +50,7 @@ def solve(puzzle):
 def find_empty_coords(puzzle):
     """
     Finds the next empty square in the puzzle (indicated by a 0).
-    :param puzzle: 2d array of ints
+    :param puzzle: 2d list of ints
     :return x, y: row (int), col (int)
     """
     for y in range(9):      # searches all the rows from top to bottom
@@ -64,7 +64,7 @@ def find_empty_coords(puzzle):
 def valid(puzzle, row, col, n):
     """
     Returns if n is a valid number.
-    :param puzzle: 2d array of ints
+    :param puzzle: 2d list of ints
     :param row: square's y co-ord
     :param col: square's x co-ord
     :param n: current int being tried
@@ -93,7 +93,7 @@ def valid(puzzle, row, col, n):
 def print_formatted(puzzle):
     """
     Prints the puzzle in a readable format.
-    :param puzzle: 2d array of ints
+    :param puzzle: 2d list of ints
     :return: None
     """
     for y in range(9):
