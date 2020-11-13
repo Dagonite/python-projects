@@ -197,7 +197,6 @@ def clickable_eye():
         choice = win.getMouse()
         choice_x = choice.getX()
         choice_y = choice.getY()
-
         choice_zone = distance_between_points(Point(choice_x, choice_y),
                                               Point(.5, .5))
 
