@@ -25,7 +25,7 @@ puzzle2 = [
 
 def solve(puzzle):
     """
-    Solves the Sudoku using backtracking.
+    Solves the Sudoku puzzle through backtracking.
     :param puzzle: 2d list of ints
     :return: solved puzzle
     """
@@ -33,14 +33,14 @@ def solve(puzzle):
     if current_coords:
         row, col = current_coords     # co-ords stored as row, col
     else:
-        return True     # return when no empty squares are found
+        return True     # no empty squares are found (puzzle solved)
 
     for n in range(1, 10):
         if valid(puzzle, row, col, n):    # check if n is valid for empty square
             puzzle[row][col] = n        # insert n into the square
 
-            if solve(puzzle):       # solve is recursively called until n is incompatible or the puzzle is solved
-                return True
+            if solve(puzzle):       # solve is recursively called until n is
+                return True         # incompatible or the puzzle is solved
 
             puzzle[row][col] = 0    # puzzle isn't solved so current n must be wrong
 
@@ -53,10 +53,11 @@ def find_empty_coords(puzzle):
     :param puzzle: 2d list of ints
     :return x, y: row (int), col (int)
     """
-    for y in range(9):      # searches all the rows from top to bottom
+    # searches co-ords from left-to-right, top-to-bottom
+    for y in range(9):
         for x in range(9):
             if puzzle[y][x] == 0:
-                return y, x      # returns co-ordinates of the empty square
+                return y, x      # co-ords of an empty square
 
     return False        # there are no empty squares (puzzle solved)
 
@@ -72,22 +73,22 @@ def valid(puzzle, row, col, n):
     """
     for y in range(9):
         if puzzle[y][col] == n:
-            return False        # n exists in column y
+            return False        # n exists in row (y) and column (col)
 
     for x in range(9):
         if puzzle[row][x] == n:
-            return False        # n exists in row x
+            return False        # n exists in row (row) and col (x)
 
-    # finds what 3x3 box the square is in: (0, 1, 2) by (0, 1, 2)
+    # determines the 3x3 box the square is in: (0, 1, 2) by (0, 1, 2)
     box_row = row // 3
     box_col = col // 3
 
     for y in range(0, 3):
         for x in range(0, 3):
-            if puzzle[box_row*3+y][box_col*3+x] == n:
+            if puzzle[box_row * 3 + y][box_col * 3 + x] == n:
                 return False        # n exists in box (y, x)
 
-    return True     # n valid if not found in its row, column, or box
+    return True     # valid if another n not found in same row, column, or box
 
 
 def print_formatted(puzzle):
