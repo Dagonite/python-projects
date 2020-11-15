@@ -43,9 +43,9 @@ def get_inputs():
         if colour in valid_colours:
             colours.append(colour)
             valid_colours.remove(colour)
-            print(colour.title(), "is valid")
+            print(colour.capitalize(), "is valid")
         elif colour in colours:
-            print("Error:", colour.title(), "already chosen")
+            print("Error:", colour.capitalize(), "already chosen")
         else:
             print("Error: Invalid colour")
 
@@ -265,7 +265,7 @@ def cycle_colours(win, size, colours, colour_tracker):
             colour_tracker[current_tile] = colour_n
             print()
             for i in range(3):
-                print(colours[i].title(), "tiles:", colour_tracker.count(i))
+                print(colours[i].capitalize(), "tiles:", colour_tracker.count(i))
 
             if row == 1 or row == size or col == 0 or col == size - 1:
                 net_design(win, colours[colour_n], col, row)
