@@ -90,6 +90,7 @@ def test_marks():
 
 
 '''
+5.
 Write a function draw_bar_chart that takes a list of integers as a parameter, and
 draws a simple downwards-facing bar chart of # symbols for the data in the list.
 For example, the call draw_bar_chart([3, 1, 2]) should result in the following
