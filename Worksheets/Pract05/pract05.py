@@ -140,7 +140,9 @@ Write a function distance_between_points that has two parameters p1 and p2, each
 type Point, and returns the distance between them. This function should use the
 formula for Pythagoras’ Theorem, as in practical worksheet P02. For example, the
 function call:
-    -> distance_between_points(Point(1, 2), Point(4, 6))
+
+    distance_between_points(Point(1, 2), Point(4, 6))
+
 should result in the value 5.0 being returned. (Hint: you’ll need to use the getX
 and getY methods to get the x and y coordinates of points p1 and p2.)
 '''
@@ -316,16 +318,20 @@ def draw_stick_figure(win, position, size):
     head = Circle(position, size)
     head.draw(win)
 
-    body = Line(Point(posX, posY + size), Point(posX, posY + size * 3))
+    body = Line(Point(posX, posY + size),
+                Point(posX, posY + size * 3))
     body.draw(win)
 
-    arms = Line(Point(posX - size, posY + size * 2), Point(posX + size, posY + size * 2))
+    arms = Line(Point(posX - size, posY + size * 2),
+                Point(posX + size, posY + size * 2))
     arms.draw(win)
 
-    left_leg = Line(Point(posX, posY + size * 3), Point(posX - size, posY + size * 5))
+    left_leg = Line(Point(posX, posY + size * 3),
+                    Point(posX - size, posY + size * 5))
     left_leg.draw(win)
 
-    right_leg = Line(Point(posX, posY + size * 3), Point(posX + size, posY + size * 5))
+    right_leg = Line(Point(posX, posY + size * 3),
+                     Point(posX + size, posY + size * 5))
     right_leg.draw(win)
 
 def draw_stick_figure_family():

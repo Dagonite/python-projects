@@ -1,3 +1,5 @@
+# Practical Worksheet 7: Using Booleans and While Loops
+
 from graphics import *
 from pract05 import draw_brown_eye, distance_between_points, draw_circle
 from pract06 import calculate_grade

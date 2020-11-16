@@ -2,6 +2,7 @@
 
 import math
 
+
 '''
 Slope of a line using two points it goes through:
     (y2 - y1) / (x2 - x1)

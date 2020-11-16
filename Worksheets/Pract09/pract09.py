@@ -1,4 +1,12 @@
+# Practical Worksheet 9: Using Lists
+
 from graphics import *
+
+
+# >>> fibonacci + [55, 89]
+# [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
+# >>> [10, 4] * 3
+# [10, 4, 10, 4, 10, 4]
 
 
 '''

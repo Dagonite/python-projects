@@ -1,4 +1,4 @@
-# Practical Worksheet 6: if statements and for loops
+# Practical Worksheet 6: If Statements and For Loops
 
 from graphics import *
 import random
@@ -39,7 +39,7 @@ def is_leap_year(year):
 # >>> False
 
 
-def days_in_month(month, year):
+def days_in_month1(month, year):
     if month == 4 or month == 6 or month == 9 or month == 11:
         return 30
     elif month == 2:
@@ -49,6 +49,14 @@ def days_in_month(month, year):
             return 28
     else:
         return 31
+
+
+def days_in_month2(month, year):
+    num_days = [31,28,31,30,31,30,31,31,30,31,30,31]
+    if month == 2 and is_leap_year(year):
+        return 29
+    else:
+        return num_days[month - 1]
 
 
 def nested_loops():

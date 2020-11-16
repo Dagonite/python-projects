@@ -107,7 +107,8 @@ the final two digits of the year they entered the university, separated by dots.
 Write a function called generate_email that outputs an email address given a
 student’s details. (E.g., if the user enters the following information: Sam, Brown
 and 2015, the function should output:
-    -> brow.s.15@myport.ac.uk
+
+    brow.s.15@myport.ac.uk
 '''
 def generate_email():
     first_name = input("Enter your first name: ")
@@ -236,9 +237,11 @@ def file_in_caps():
 12. [harder]
 The file rainfall.txt from the unit web-site contains rainfall data in mm for
 several UK cities for a particular day, in the form:
+
     Portsmouth 9
     London 5
     Southampton 12
+    
 Write a function rainfall_chart that displays this data as a textual bar chart
 using one asterisk for each mm of rainfall; e.g., given the above data the output
 should be:
