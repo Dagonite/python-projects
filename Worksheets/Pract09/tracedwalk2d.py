@@ -29,6 +29,7 @@ def simulate_steps(cols, rows):
             current_row += 1    # go down
         else:
             current_col -= 1    # go left
+            
         if current_row == -1 or current_row == rows \
         or current_col == -1 or current_col == cols:
             break
