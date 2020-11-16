@@ -2,14 +2,12 @@ import numpy as np
 from random import random
 
 
-'''
-7. [Harder]
-Write a two-dimensional version tracedwalk2d.py of tracedwalk.py. This should
-simulate a single random walk of the form considered in pract08, where the walker
-begins in the central square of a square two dimensional grid of dimensions 9 by
-9 steps, and where the walk ends when the walker steps off the grid. Output the
-results in tabular form. (Hint: you may need to use nested (two dimensional) lists.)
-'''
+'''7. [Harder] Write a two-dimensional version tracedwalk2d.py of 
+tracedwalk.py. This should simulate a single random walk of the form 
+considered in pract08, where the walker begins in the central square of a 
+square two dimensional grid of dimensions 9 by 9 steps, and where the walk 
+ends when the walker steps off the grid. Output the results in tabular form. 
+(Hint: you may need to use nested (two dimensional) lists.) '''
 # grid = [[0] * cols] * rows    # this makes a list with col times references
                                 # to the same list, grid[2][0] = 5 would make
                                 # all values in the first column 5

@@ -2,17 +2,14 @@ from random import random
 from graphics import *
 
 
-'''
-6.
-Write a new program street.py which draws a whole street (i.e. row) of houses like
-those in the original house.py program. The user should input the number of houses,
-the height of the graphics window, the (shared) door colour and the probability
-that any light is on. The houses should be numbered (on their doors) starting from
-1, and the houses should fill the graphics window.
+'''6. Write a new program street.py which draws a whole street (i.e. row) of 
+houses like those in the original house.py program. The user should input the 
+number of houses, the height of the graphics window, the (shared) door colour 
+and the probability that any light is on. The houses should be numbered (on 
+their doors) starting from 1, and the houses should fill the graphics window. 
 '''
 def main():
     houses, size, door_colour, prob = get_inputs()
-    #houses, size, door_colour, prob = 8, 4, "red", .5
     draw_houses(houses, size, door_colour, prob)
 
 
@@ -63,7 +60,8 @@ def get_inputs():
             print("Error: Input is not a valid colour")
 
     while True:
-        prob = input("\nEnter the % chance that a house's light is on (0 to 100): ")
+        prob = input("\nEnter the % chance that a house's light is on (0 to "
+                     "100): ")
         prob = prob.replace(" ", "")
         if prob.isdigit():
             prob = int(prob)
@@ -91,8 +89,10 @@ def draw_houses(houses, size, door_colour, prob):
 
 
 def draw_house(win, door_colour, lights_on, n, size):
-    roof = Polygon(Point(n * size + .01, .7), Point(n * size + .22, .992),
-                   Point(size * (n + 1) - .22, .992), Point(size * (n + 1) - .008, .7))
+    roof = Polygon(Point(n * size + .01, .7),
+                   Point(n * size + .22, .992),
+                   Point(size * (n + 1) - .22, .992),
+                   Point(size * (n + 1) - .008, .7))
     roof.setFill("pink")
     roof.draw(win)
 

@@ -12,11 +12,8 @@ def coordinate_transformations():
     line.draw(win)
 
 
-'''
-1.
-The draw_stick_figure function is incomplete. Finish it by giving the figure arms
-and legs.
-'''
+'''1. The draw_stick_figure function is incomplete. Finish it by giving the 
+figure arms and legs. '''
 def draw_stick_figure():
     win = GraphWin("Stick figure")
 
@@ -39,11 +36,8 @@ def draw_stick_figure():
     rightLeg.draw(win)
 
 
-'''
-2.
-Write a draw_circle function which asks the user for the radius of a circle and
-then draws the circle in the centre of a graphics window.
-'''
+'''2. Write a draw_circle function which asks the user for the radius of a 
+circle and then draws the circle in the centre of a graphics window. '''
 def draw_circle():
     win = GraphWin("Circle")
     win.setCoords(0, 0, 1, 1)
@@ -55,15 +49,12 @@ def draw_circle():
     circle.draw(win)
 
 
-'''
-3.
-Write a draw_archery_target function which draws a coloured target consisting of
-concentric circles of yellow (innermost), red and blue. The sizes of the circles
-should be in correct proportion i.e. the red circle should have a radius twice
-that of the yellow circle, and the blue circle should have a radius three times
-that of the yellow circle. (Hint: objects drawn later will appear on top of objects
-drawn earlier.)
-'''
+'''3. Write a draw_archery_target function which draws a coloured target 
+consisting of concentric circles of yellow (innermost), red and blue. The 
+sizes of the circles should be in correct proportion i.e. the red circle 
+should have a radius twice that of the yellow circle, and the blue circle 
+should have a radius three times that of the yellow circle. (Hint: objects 
+drawn later will appear on top of objects drawn earlier.) '''
 def draw_archery_target():
     win = GraphWin("Target")
     win.setCoords(0, 0, 1, 1)
@@ -83,16 +74,14 @@ def draw_archery_target():
     yellow_circle.draw(win)
 
 
-'''
-4.
-Write a draw_rectangle function which asks the user for the height and width of
-a rectangle and draws it in the centre of a graphics window of size 200 × 200 (i.e.
-with an equal space to the left and right of the rectangle, and also above and
-below the rectangle). Assume that the user enters values less than 200. (Hint: you
-need to work out the coordinates of the top-left and bottom-right points from the
-rectangle dimensions and the dimensions of the window — think about how much space
-there should be to the left of, and above, the rectangle.)
-'''
+'''4. Write a draw_rectangle function which asks the user for the height and 
+width of a rectangle and draws it in the centre of a graphics window of size 
+200 × 200 (i.e. with an equal space to the left and right of the rectangle, 
+and also above and below the rectangle). Assume that the user enters values 
+less than 200. (Hint: you need to work out the coordinates of the top-left 
+and bottom-right points from the rectangle dimensions and the dimensions of 
+the window — think about how much space there should be to the left of, 
+and above, the rectangle.) '''
 def draw_rectangle():
     win = GraphWin("Rectangle")
     height = eval(input("What is the height: "))
@@ -102,11 +91,8 @@ def draw_rectangle():
     rectangle.draw(win)
 
 
-'''
-5.
-Write a blue_circle function that allows the user to draw a blue circle of radius
-50 by clicking the location of its centre on the window.
-'''
+'''5. Write a blue_circle function that allows the user to draw a blue circle 
+of radius 50 by clicking the location of its centre on the window. '''
 def blue_circle():
     win = GraphWin("Blue Circle")
     message = Text(Point(100,100), "Click anywhere to place a blue circle")
@@ -119,12 +105,10 @@ def blue_circle():
     message.setText("")
 
 
-'''
-6.
-The function draw_line allows the user to draw a line by choosing two points of
-his/her choice. Write a function ten_lines that allows the user to draw 10 such
-lines. (Hint: combine the code from drawLine with a loop that uses range(10).)
-'''
+'''6. The function draw_line allows the user to draw a line by choosing two 
+points of his/her choice. Write a function ten_lines that allows the user to 
+draw 10 such lines. (Hint: combine the code from drawLine with a loop that 
+uses range(10).) '''
 def ten_lines():
     win = GraphWin("Line drawer")
     for i in range(10):
@@ -141,16 +125,15 @@ def draw_line(win):
     message.setText("")
 
 
-'''
-7.
-Write a ten_strings function which allows the user to plot 10 strings of their
-choice at locations of a graphics window chosen by clicking on the mouse (the
-strings should be entered one-by-one by the user within a text entry box at the
-top of the graphics window, clicking the mouse after entering each one).
-'''
+'''7. Write a ten_strings function which allows the user to plot 10 strings 
+of their choice at locations of a graphics window chosen by clicking on the 
+mouse (the strings should be entered one-by-one by the user within a text 
+entry box at the top of the graphics window, clicking the mouse after 
+entering each one). '''
 def ten_strings():
     win = GraphWin("Ten strings", 400, 300)
-    message = Text(Point(200, 15), "Enter what you want then click where you want")
+    message = Text(Point(200, 15), "Enter what you want then click where you "
+                                   "want")
     message.draw(win)
     input_box = Entry(Point(200, 50), 10)
     input_box.draw(win)
@@ -170,20 +153,18 @@ def ten_strings():
     message.setText("You have used up all of your messages")
 
 
-'''
-8.
-Write a ten_coloured_rectangles function to allow the user to draw 10 coloured
-rectangles on the screen. The user should choose the coordinates of the top-left
-and bottom-right corners by clicking on the window. The colour of each rectangle
-should be chosen by the user by entering a colour in a text entry box at the top
-of the window. (The colour of each rectangle is given by the string that is in
-this box when the user clicks its bottom-right point.) The entry box should initially
-contain the string “blue”. (Assume that the user never enters an invalid colour
-into the entry box.)
-'''
+'''8. Write a ten_coloured_rectangles function to allow the user to draw 10 
+coloured rectangles on the screen. The user should choose the coordinates of 
+the top-left and bottom-right corners by clicking on the window. The colour 
+of each rectangle should be chosen by the user by entering a colour in a text 
+entry box at the top of the window. (The colour of each rectangle is given by 
+the string that is in this box when the user clicks its bottom-right point.) 
+The entry box should initially contain the string “blue”. (Assume that the 
+user never enters an invalid colour into the entry box.) '''
 def ten_coloured_rectangles():
     win = GraphWin("Ten Rectangles", 400, 700)
-    message = Text(Point(200, 15), "Enter what colour you want then click where you want")
+    message = Text(Point(200, 15), "Enter what colour you want then click "
+                                   "where you want")
     message.draw(win)
     input_box = Entry(Point(200, 50), 10)
     input_box.setText("blue")
@@ -212,15 +193,13 @@ def ten_coloured_rectangles():
     message.setText("You have used up all of your messages")
 
 
-'''
-9. [harder]
-Write a five_click_stick_figure function that allows the user to draw a (symmetric)
-stick figure in a graphics window using five clicks of the mouse to determine the
-positions of its features. Each feature should be drawn as the user clicks the points.
-(Hint: the radius of the head is the distance between points 1 and 2 — see the
-previous worksheet.) Note that only the y-coordinate of point (3) should be used
-— its x coordinate should be copied from point (1).
-'''
+'''9. [harder] Write a five_click_stick_figure function that allows the user 
+to draw a (symmetric) stick figure in a graphics window using five clicks of 
+the mouse to determine the positions of its features. Each feature should be 
+drawn as the user clicks the points. (Hint: the radius of the head is the 
+distance between points 1 and 2 — see the previous worksheet.) Note that only 
+the y-coordinate of point (3) should be used — its x coordinate should be 
+copied from point (1). '''
 def five_click_stick_figure():
     win = GraphWin("Five Click Stick Figure", 800, 600)
     message = Text(Point(400, 15), "Click to create your stick figure")
@@ -256,13 +235,10 @@ def five_click_stick_figure():
     right_leg_line.draw(win)
 
 
-'''
-10. [harder]
-Write a plot_rainfall function, which plots a histogram for daily rainfall figures
-over a 7 day period. The rainfall figures should be entered one-by-one into a text
-entry box within the window. The bars of the histogram should be numbered along
-the bottom.
-'''
+'''10. [harder] Write a plot_rainfall function, which plots a histogram for 
+daily rainfall figures over a 7 day period. The rainfall figures should be 
+entered one-by-one into a text entry box within the window. The bars of the 
+histogram should be numbered along the bottom. '''
 # Instructions way too vague for this one.
 def plot_rainfall():
     win = GraphWin("Plot Rainfall", 550, 300)

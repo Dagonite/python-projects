@@ -1,14 +1,12 @@
 from graphics import *
 
 
-'''
-2.
-Modify the house.py program to give another program house2.py where the size of
-graphics window and the number displayed on the door of the house are additional
-user inputs. Assume that the graphics window is square so that the user only has
-to input a single value for its size. Like the original house.py program, the
-house should fill the entire graphics window (hint: use the setCoords method).
-'''
+'''2. Modify the house.py program to give another program house2.py where the 
+size of graphics window and the number displayed on the door of the house are 
+additional user inputs. Assume that the graphics window is square so that the 
+user only has to input a single value for its size. Like the original 
+house.py program, the house should fill the entire graphics window (hint: use 
+the setCoords method). '''
 def main():
     door_colour, lights_on, n, size  = get_inputs()
     draw_house(door_colour, lights_on, n, size)
