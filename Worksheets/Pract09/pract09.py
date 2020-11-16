@@ -94,13 +94,13 @@ def test_marks():
 Write a function draw_bar_chart that takes a list of integers as a parameter, and
 draws a simple downwards-facing bar chart of # symbols for the data in the list.
 For example, the call draw_bar_chart([3, 1, 2]) should result in the following
-output (note: legit the hardest thing in all of the worksheets):
+output:
 
     # # #
     #   #
     #
 '''
-def draw_bar_chart(numbers):
+def draw_bar_chart1(numbers):
     row_count = 0
     while True:
         row = "".join([" # " if item > row_count else "   " for item in numbers])
@@ -108,3 +108,9 @@ def draw_bar_chart(numbers):
         row_count += 1
         if "#" not in row:
             break
+
+
+def draw_bar_chart2(numbers):
+    for row_count in range(max(numbers)):
+        row = "".join([" # " if item > row_count else "   " for item in numbers])
+        print(row)
