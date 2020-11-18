@@ -16,7 +16,7 @@ def primes_sieve(limit):
     for (i, is_prime) in enumerate(a):
         if is_prime:
             yield i
-            for n in range(i*i, limit, i):
+            for n in range(i * i, limit, i):
                 a[n] = False
 
 
