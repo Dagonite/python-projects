@@ -1,7 +1,7 @@
 # patchwork_sampler.py
 # The patchwork layout and patterns are specific to my student number.
 
-from graphics import *
+from graphics import GraphWin, Line, Circle, Point, Rectangle, Text
 
 
 def main():
@@ -172,7 +172,8 @@ def second_patch(win, size, colour, colour_tracker):
     :param colour: the colour being used
     :param colour_tracker: list of each tiles' current colour
     """
-    stop_col = size - 1     # tiles will be drawn left to right up until this column
+    # tiles will be drawn left to right up until this column
+    stop_col = size - 1
 
     for row in range(2, size):
         for col in range(1, stop_col):
@@ -195,7 +196,8 @@ def third_patch(win, size, colour, colour_tracker):
     :param colour: the colour being used
     :param colour_tracker: 2d array of each tiles' current colour
     """
-    stop_col = 1    # tiles will be drawn right to left up until this column
+    # tiles will be drawn right to left up until this column
+    stop_col = 1
 
     for row in range(size - 1, 2, -1):
         for col in range(size - 2, stop_col, -1):
@@ -224,11 +226,15 @@ def circle_design(win, colour, col, row):
             full_circle = Circle(Point(width + col, height + row), .1)
             outline_circle = Circle(Point(width + col, height + row), .1)
             if width in (.3, .7):
-                white_rectangle = Rectangle(Point(width + col - .1, height + row),
-                                            Point(width + col + .1, height + row + .1))
+                white_rectangle = Rectangle(Point(width + col - .1,
+                                                  height + row),
+                                            Point(width + col + .1,
+                                                  height + row + .1))
             else:
-                white_rectangle = Rectangle(Point(width + col - .1, height + row - .1),
-                                            Point(width + col, height + row + .1))
+                white_rectangle = Rectangle(Point(width + col - .1,
+                                                  height + row - .1),
+                                            Point(width + col,
+                                                  height + row + .1))
 
             full_circle.setFill(colour)
             full_circle.draw(win)
@@ -265,7 +271,8 @@ def cycle_colours(win, size, colours, colour_tracker):
             colour_tracker[current_tile] = colour_n
             print()
             for i in range(3):
-                print(colours[i].capitalize(), "tiles:", colour_tracker.count(i))
+                print(colours[i].capitalize(), "tiles:",
+                      colour_tracker.count(i))
 
             if row == 1 or row == size or col == 0 or col == size - 1:
                 net_design(win, colours[colour_n], col, row)
