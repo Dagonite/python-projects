@@ -22,4 +22,4 @@ A program that solves any given Sudoku puzzle by using a backtracking algorithm 
 
 [Worksheets](https://github.com/Dagonite/python-projects/tree/main/Worksheets)
 ---
-Worksheets I completed that were given by my university. Each worksheet contains roughly a dozen problems which I have solved.
+Worksheets I have completed that were given by my university. Each worksheet contains roughly a dozen problems.
