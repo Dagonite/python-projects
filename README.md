@@ -22,7 +22,7 @@ University coursework where I had to write a program that displays a patchwork s
 
 [Sudoku Solver](https://github.com/Dagonite/python-projects/tree/main/Sudoku%20Solver)
 ---
-A program that solves any given Sudoku puzzle by using a backtracking algorithm and then prints out the solution.
+A program that solves any given Sudoku puzzle by using a backtracking algorithm and then prints out the solution. Currently, working on a playable GUI.
 
 [Worksheets](https://github.com/Dagonite/python-projects/tree/main/Worksheets)
 ---
