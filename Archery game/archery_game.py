@@ -1,6 +1,6 @@
 # archery_game.py
 
-from graphics import *
+from graphics import GraphWin, Point, Rectangle, Circle, Polygon, Text, Line
 import random
 from pract05 import distance_between_points
 from pract06 import draw_circle
@@ -33,7 +33,7 @@ def archery_game():
     draw_circle(win, centre, .1, "yellow")
 
     grades = ["amazing at this game", "pretty good at this", "average at this",
-    "below average at this", "awful at this"]
+              "below average at this", "awful at this"]
 
     score = 0
     score_text = Text(Point(.5, .04), "Score: {0}".format(score))
@@ -113,10 +113,12 @@ def archery_game():
         grade = 4
 
     grade_text = grades[grade]
-    wind_text.setText("You scored {0}, meaning you're {1}".format(score, grade_text))
+    wind_text.setText(
+        "You scored {0}, meaning you're {1}".format(score, grade_text))
 
     score_text.setSize(10)
-    score_text.setText("Click anywhere on the target to play again\nClick anywhere else to quit")
+    score_text.setText(
+        "Click anywhere on the target to play again\nClick anywhere else to quit")
     choice = win.getMouse()
     choice_x = choice.getX()
     choice_y = choice.getY()
