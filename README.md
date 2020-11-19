@@ -1,8 +1,12 @@
 Repository for my Python Projects
-=================================
+===
 [Archery Game](https://github.com/Dagonite/python-projects/tree/main/Archery%20Game)
 ---
 Simple graphical game where the user has to take the wind direction into account before shooting arrows at a target. The user then gets a grade depending on their score.
+
+[Demo Files](https://github.com/Dagonite/python-projects/tree/main/Demo%20Files)
+---
+Just some interesting solutions to specific problems.
 
 [FizzBuzz](https://github.com/Dagonite/python-projects/tree/main/FizzBuzz)
 ---
