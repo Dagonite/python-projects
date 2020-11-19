@@ -1,14 +1,16 @@
-from graphics import *
+from graphics import GraphWin, Point, Rectangle, Text, Polygon
 
 
-'''2. Modify the house.py program to give another program house2.py where the 
-size of graphics window and the number displayed on the door of the house are 
-additional user inputs. Assume that the graphics window is square so that the 
-user only has to input a single value for its size. Like the original 
-house.py program, the house should fill the entire graphics window (hint: use 
+'''2. Modify the house.py program to give another program house2.py where the
+size of graphics window and the number displayed on the door of the house are
+additional user inputs. Assume that the graphics window is square so that the
+user only has to input a single value for its size. Like the original
+house.py program, the house should fill the entire graphics window (hint: use
 the setCoords method). '''
+
+
 def main():
-    door_colour, lights_on, n, size  = get_inputs()
+    door_colour, lights_on, n, size = get_inputs()
     draw_house(door_colour, lights_on, n, size)
 
 
@@ -37,7 +39,7 @@ def draw_house(door_colour, lights_on, n, size):
 
     # draw door number
     door_n = Text(Point(.275, .35), n)
-    door_n.setSize(4 + 2*size)
+    door_n.setSize(4 + 2 * size)
     if door_colour == "black":
         door_n.setFill("white")
     door_n.draw(win)

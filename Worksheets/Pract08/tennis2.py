@@ -1,12 +1,14 @@
 from random import random
 
 
-'''5. Write a modified version tennis2.py of the tennis program from the 
-lecture. This program should ask the user to enter the probability of winning 
-a point for one of the players, and how many sets of tennis between the two 
-players should be simulated. It should report on the proportion of the sets 
-won by each player. Assume that to win a set a player has to have won 6 games 
+'''5. Write a modified version tennis2.py of the tennis program from the
+lecture. This program should ask the user to enter the probability of winning
+a point for one of the players, and how many sets of tennis between the two
+players should be simulated. It should report on the proportion of the sets
+won by each player. Assume that to win a set a player has to have won 6 games
 and be at least two games ahead of his opponent. '''
+
+
 def main():
     prob, sets = get_inputs()
     set_wins = simulate_n_sets(prob, sets)
@@ -35,7 +37,7 @@ def get_inputs():
             break
         else:
             print("Error: Input not an integer")
-    return prob/100, sets
+    return prob / 100, sets
 
 
 def simulate_n_sets(prob, sets):
@@ -64,7 +66,7 @@ def simulate_set(prob, set):
 
 def set_over(p1_games, p2_games):
     return (p1_games >= 6 or p2_games >= 6) and  \
-              abs(p1_games - p2_games) >= 2
+        abs(p1_games - p2_games) >= 2
 
 
 def simulate_game(prob, game, set):
@@ -82,7 +84,7 @@ def simulate_game(prob, game, set):
 
 def game_over(p1_points, p2_points):
     return (p1_points >= 4 or p2_points >= 4) and  \
-              abs(p1_points - p2_points) >= 2
+        abs(p1_points - p2_points) >= 2
 
 
 def print_summary(set_wins, sets):

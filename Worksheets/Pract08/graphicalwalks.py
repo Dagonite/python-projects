@@ -1,18 +1,20 @@
 from pract05 import distance_between_points
 from random import random
-from graphics import *
+from graphics import GraphWin, Line, Point, Circle
 
 
-'''4. Write another random walk program graphicalwalks.py that graphically 
-simulates two dimensional random walks. Each walk should end when the walker 
-is a specified distance way from the start point. The program should begin by 
-asking the user for this distance and the number of walks to simulate. It 
-should then draw a circle in the centre of a graphics window showing the 
-boundary of the walking area. The route of each random walk should be traced 
-out starting from the centre point. Use a black line of length 5 for each 
-step of the walk. (Hint: the step lines should fill out the circle evenly – 
-if all the walks tend to head in one general direction then you have made a 
+'''4. Write another random walk program graphicalwalks.py that graphically
+simulates two dimensional random walks. Each walk should end when the walker
+is a specified distance way from the start point. The program should begin by
+asking the user for this distance and the number of walks to simulate. It
+should then draw a circle in the centre of a graphics window showing the
+boundary of the walking area. The route of each random walk should be traced
+out starting from the centre point. Use a black line of length 5 for each
+step of the walk. (Hint: the step lines should fill out the circle evenly –
+if all the walks tend to head in one general direction then you have made a
 mistake.) '''
+
+
 def main():
     num_walks, distance = get_inputs()
     win = draw_window(distance)
@@ -60,16 +62,16 @@ def take_a_walk(win, distance):
         random_step = random()
         if random_step < 0.25:
             current_y += 1
-            step = "north"
+            # step = "north"
         elif random_step >= 0.25 and random_step < 0.5:
             current_x += 1
-            step = "east"
+            # step = "east"
         elif random_step >= 0.5 and random_step < 0.75:
             current_y -= 1
-            step = "south"
+            # step = "south"
         else:
             current_x -= 1
-            step = "west"
+            # step = "west"
 
         current_pos = Point(current_x, current_y)
         steps_away = distance_between_points(start, current_pos)

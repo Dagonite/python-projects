@@ -1,13 +1,15 @@
 from random import random
-from graphics import *
+from graphics import GraphWin, Point, Rectangle, Polygon, Text
 
 
-'''6. Write a new program street.py which draws a whole street (i.e. row) of 
-houses like those in the original house.py program. The user should input the 
-number of houses, the height of the graphics window, the (shared) door colour 
-and the probability that any light is on. The houses should be numbered (on 
-their doors) starting from 1, and the houses should fill the graphics window. 
+'''6. Write a new program street.py which draws a whole street (i.e. row) of
+houses like those in the original house.py program. The user should input the
+number of houses, the height of the graphics window, the (shared) door colour
+and the probability that any light is on. The houses should be numbered (on
+their doors) starting from 1, and the houses should fill the graphics window.
 '''
+
+
 def main():
     houses, size, door_colour, prob = get_inputs()
     draw_houses(houses, size, door_colour, prob)
@@ -72,7 +74,7 @@ def get_inputs():
         else:
             print("Error: Input is not an integer")
 
-    return houses, size, door_colour, prob/100
+    return houses, size, door_colour, prob / 100
 
 
 def draw_houses(houses, size, door_colour, prob):
@@ -98,10 +100,10 @@ def draw_house(win, door_colour, lights_on, n, size):
 
     # draw wall and door
     draw_rectangle(win, Point(n * size + .008, .008),
-                        Point(size * (n + 1) - .008, .7), "brown")
+                   Point(size * (n + 1) - .008, .7), "brown")
 
     draw_rectangle(win, Point(n * size + .15 * size, .008),
-                        Point(size * (n + 1) - .6 * size, .45), door_colour)
+                   Point(size * (n + 1) - .6 * size, .45), door_colour)
 
     # draw door number
     door_n = Text(Point(n * size + .275 * size, .35), n + 1)
@@ -116,7 +118,7 @@ def draw_house(win, door_colour, lights_on, n, size):
     else:
         window_colour = "black"
     draw_rectangle(win, Point(n * size + .55 * size, .15),
-                        Point(size * (n + 1) - .15 * size, .45), window_colour)
+                   Point(size * (n + 1) - .15 * size, .45), window_colour)
 
 
 def draw_rectangle(win, point1, point2, colour):
