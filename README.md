@@ -31,4 +31,5 @@ Worksheets I have completed that were given by my university. Each worksheet con
 Requirements
 ---
 A few of these projects will require John Zelle's simple object oriented graphics library [graphics.py](https://mcsp.wartburg.edu/zelle/python/graphics.py) to work. To install, simply navigate your prompt to a directory that requires the graphics library and then install by entering:
+
 `pip install -r requirements.txt`
