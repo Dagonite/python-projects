@@ -6,7 +6,7 @@ Simple graphical game where the user has to take the wind direction into account
 
 [FizzBuzz](https://github.com/Dagonite/python-projects/tree/main/FizzBuzz)
 ---
-My solution to the FizzBuzz game.
+My solution to FizzBuzz.
 
 [Graphical Traced Walk](https://github.com/Dagonite/python-projects/tree/main/Graphical%20Traced%20Walk)
 ---
