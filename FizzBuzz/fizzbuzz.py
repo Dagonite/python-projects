@@ -3,16 +3,13 @@ def fizz_buzz(x):
         output = ""
 
         if n % 3 == 0:
-            output += "Fizz"
+            output = "Fizz"
 
         if n % 5 == 0:
             output += "Buzz"
 
-        if output == "":
-            output = n
-
-        print(output)
+        print(output or n)
 
 
-x = eval(input("Give me the range: "))
+x = int(input("Give me the range: "))
 fizz_buzz(x)
