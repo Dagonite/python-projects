@@ -103,10 +103,7 @@ function should use a loop.) '''
 
 
 def sum_of_numbers():
-    n = 0
-    while n <= 0:
-        n = math.ceil(eval(input("Enter a number larger than 0: ")))
-
+    n = math.ceil(eval(input("Enter a number larger than 0: ")))
     total = 0
     while n > 0:
         total += n
@@ -121,16 +118,22 @@ user how many numbers there are to be inputted. '''
 
 def average_of_numbers():
     no_of_inputs = 0
-    while no_of_inputs <= 0:
-        no_of_inputs = math.ceil(eval(input("Enter how many numbers you want "
-                                            "to input: ")))
+    while True:
+        no_of_inputs = input("\nEnter how many numbers you want to input: ")
+        no_of_inputs.replace(" ", "")
+        if no_of_inputs.isdigit():
+            no_of_inputs = int(no_of_inputs)
+            if no_of_inputs == 0:
+                print("Error: number must be at least 1")
+                continue
+            break
+        else:
+            print("Error: invalid input")
 
-    temp_no_of_inputs = no_of_inputs
     sum_of_inputs = 0
-    while temp_no_of_inputs > 0:
-        n = eval(input("Enter a number: "))
+    for i in range(no_of_inputs):
+        n = eval(input("\nEnter a number: "))
         sum_of_inputs += n
-        temp_no_of_inputs -= 1
 
     print("The average of these numbers is", sum_of_inputs / no_of_inputs)
 
@@ -144,7 +147,7 @@ is 292, then the function should report: 1 × £2, 0 × £1, 1 × 50p, 2 × 20p,
 
 
 def select_coins():
-    pence = eval(input("Enter an amount in pence: "))
+    pence = int(input("Enter an amount in pence: "))
 
     two_pound = pence // 200
     pence = pence % 200
