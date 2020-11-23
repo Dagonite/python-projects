@@ -30,7 +30,7 @@ def reverse_list_ite(self, head):
 # tmp = head.next   # [4 -> 5 -> None]
 # head.next = node  # [2 -> 1 -> None]
 # node = head       # [3 -> 2 -> 1 -> None]
-# head = tmp        # [4 -> 5 -> None]s
+# head = tmp        # [4 -> 5 -> None]
 
 # 4th loop
 # tmp = head.next   # [5 -> None]
