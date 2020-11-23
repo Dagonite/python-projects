@@ -1,3 +1,0 @@
-graphics==5.0
-../Worksheets/pract06.py
-../Worksheets/pract05.py
