@@ -4,9 +4,9 @@ Repository for my Python Projects
 ---
 Simple graphical game where the user has to take the wind direction into account before shooting arrows at a target. The user then gets a grade depending on their score.
 
-[Demo Files](https://github.com/Dagonite/python-projects/tree/main/Demo%20Files)
+[Binary Tree DFS Traversals](https://github.com/Dagonite/python-projects/tree/main/Binary%20Tree%20DFS%20Traversals)
 ---
-Just some interesting solutions to specific problems.
+Program which demonstrates how three recursive depth-first search (DFS) algorithms traverse a binary tree.
 
 [FizzBuzz](https://github.com/Dagonite/python-projects/tree/main/FizzBuzz)
 ---
@@ -28,6 +28,10 @@ A program that solves any given Sudoku puzzle by using a backtracking algorithm 
 ---
 Worksheets I have completed that were given by my university. Each worksheet contains roughly a dozen problems.
 
+[Unspecific Files](https://github.com/Dagonite/python-projects/tree/main/Demo%20Files)
+---
+Just some interesting solutions to specific problems.
+
 Requirements
 ---
 A few of these projects will require John Zelle's simple object oriented graphics library [graphics.py](https://mcsp.wartburg.edu/zelle/python/graphics.py) to work. To install the library, enter the following into a command-line interpreter (will require pip to be installed as well):
@@ -36,4 +40,4 @@ A few of these projects will require John Zelle's simple object oriented graphic
 pip install -r requirements.txt
 ```
 
-Make sure the library is installed somewhere where Python can find it, e.g. `Lib/site-packages`.
+Make sure the library is installed somewhere Python can find it, e.g. `Lib/site-packages`.
