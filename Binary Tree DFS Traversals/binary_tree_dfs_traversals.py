@@ -23,28 +23,28 @@ class BinaryTree:
             print("Traversal type", str(traversal_type), "is not supported")
             return False
 
-    def preorder(self, start, traversal):
+    def preorder(self, node, traversal):
         # Root -> Left -> Right
-        if start:
-            traversal += str(start.val) + " "
-            traversal = self.preorder(start.left, traversal)
-            traversal = self.preorder(start.right, traversal)
+        if node:
+            traversal += str(node.val) + " "
+            traversal = self.preorder(node.left, traversal)
+            traversal = self.preorder(node.right, traversal)
         return traversal
 
-    def inorder(self, start, traversal):
+    def inorder(self, node, traversal):
         # Left -> Root -> Right
-        if start:
-            traversal = self.inorder(start.left, traversal)
-            traversal += str(start.val) + " "
-            traversal = self.inorder(start.right, traversal)
+        if node:
+            traversal = self.inorder(node.left, traversal)
+            traversal += str(node.val) + " "
+            traversal = self.inorder(node.right, traversal)
         return traversal
 
-    def postorder(self, start, traversal):
+    def postorder(self, node, traversal):
         # Left -> Right -> Root
-        if start:
-            traversal = self.postorder(start.left, traversal)
-            traversal = self.postorder(start.right, traversal)
-            traversal += str(start.val) + " "
+        if node:
+            traversal = self.postorder(node.left, traversal)
+            traversal = self.postorder(node.right, traversal)
+            traversal += str(node.val) + " "
         return traversal
 
 
