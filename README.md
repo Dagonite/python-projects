@@ -1,4 +1,4 @@
-Repository for my Python Projects
+Repository for my Python projects
 ===
 [Archery Game](https://github.com/Dagonite/python-projects/tree/main/Archery%20Game)
 ---
@@ -28,7 +28,7 @@ A program that solves any given Sudoku puzzle by using a backtracking algorithm 
 ---
 Worksheets I have completed that were given by my university. Each worksheet contains roughly a dozen problems.
 
-[Unspecific Files](https://github.com/Dagonite/python-projects/tree/main/Demo%20Files)
+[Unspecific Files](https://github.com/Dagonite/python-projects/tree/main/Unspecific%20Files)
 ---
 Just some interesting solutions to specific problems.
 
