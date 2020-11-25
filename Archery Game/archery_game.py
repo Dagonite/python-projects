@@ -51,13 +51,13 @@ def archery_game():
     wind_text.setStyle('bold')
     wind_text.draw(win)
 
-    wsd = .25   # wind start deviation
-    wd = .1    # wind deviation per arrow
+    wsd = .25    # wind start deviation
+    wd = .1      # wind deviation per arrow
+    wth = .08    # wind threshold
 
     h_wind, v_wind = random.uniform(-wsd, wsd), random.uniform(-wsd, wsd)
 
     for arrow in range(5):
-        wth = .08    # wind threshold
         wind = ""
 
         if v_wind > wth:
