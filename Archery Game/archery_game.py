@@ -73,7 +73,7 @@ def archery_game():
         if wind == "":
             wind = "Calm"
 
-        wind_text.setText("Wind: {0}".format(wind.title()))
+        wind_text.setText("Wind: {}".format(wind.title()))
 
         cursor_pos = win.getMouse()
         arrow_x = cursor_pos.getX() + h_wind
@@ -99,7 +99,7 @@ def archery_game():
         else:
             zone_text.setText("TARGET MISSED (0 POINTS!)")
 
-        score_text.setText("Score: {0}".format(score))
+        score_text.setText("Score: {}".format(score))
 
     if score > 44:
         grade = 0
@@ -114,11 +114,11 @@ def archery_game():
 
     grade_text = grades[grade]
     wind_text.setText(
-        "You scored {0}, meaning you're {1}".format(score, grade_text))
+        "You scored {}, meaning you're {}".format(score, grade_text))
 
     score_text.setSize(10)
     score_text.setText(
-        "Click anywhere on the target to play again\nClick anywhere else to quit")
+        "Click on the target to play again\nClick anywhere else to quit")
     choice = win.getMouse()
     choice_x = choice.getX()
     choice_y = choice.getY()
