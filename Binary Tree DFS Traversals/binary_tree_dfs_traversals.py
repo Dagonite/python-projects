@@ -18,7 +18,6 @@ class BinaryTree:
             return self.inorder(self.root, "")
         elif traversal_type == "postorder":
             return self.postorder(self.root, "")
-
         else:
             print("Traversal type", str(traversal_type), "is not supported")
             return False
