@@ -23,7 +23,7 @@ class BinaryTree:
             return False
 
     def preorder(self, node, traversal):
-        # Root -> Left -> Right
+        # Node -> Left -> Right
         if node:
             traversal += str(node.val) + " "
             traversal = self.preorder(node.left, traversal)
@@ -31,7 +31,7 @@ class BinaryTree:
         return traversal
 
     def inorder(self, node, traversal):
-        # Left -> Root -> Right
+        # Left -> Node -> Right
         if node:
             traversal = self.inorder(node.left, traversal)
             traversal += str(node.val) + " "
@@ -39,7 +39,7 @@ class BinaryTree:
         return traversal
 
     def postorder(self, node, traversal):
-        # Left -> Right -> Root
+        # Left -> Right -> Node
         if node:
             traversal = self.postorder(node.left, traversal)
             traversal = self.postorder(node.right, traversal)
