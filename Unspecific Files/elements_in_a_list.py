@@ -1,9 +1,10 @@
 ################################################################################
 # elements_in_a_list.py
 #
-# Program that shows that the first list results in a row amount of references
-# to the same element. The second list has unique references for each element in
-# the list
+# Program demonstrating that the first 2d list (grid1) results in a row amount
+# of references to the same element. The second 2d list (grid2) has unique
+# references for each element in the list. The second list is usually the
+# desired result.
 ################################################################################
 
 from numpy import array
@@ -20,5 +21,4 @@ print()
 grid2 = [[0] * cols for _ in range(rows)]
 grid2[2][0] = 5
 grid2 = array(grid2)
-
 print(grid2)
