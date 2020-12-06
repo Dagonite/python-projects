@@ -30,7 +30,7 @@ Worksheets I have completed that were given by my university. Each worksheet con
 
 [Unspecific Files](https://github.com/Dagonite/python-projects/tree/main/Unspecific%20Files)
 ---
-Just some interesting solutions to specific problems.
+Just some interesting solutions to common coding problems and scenarios.
 
 Requirements
 ---
