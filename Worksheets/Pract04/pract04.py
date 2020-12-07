@@ -26,14 +26,14 @@ def numerical_encoding_of_characters():
 def read_file():
     in_file = open("quotation.txt", "r")
     contents = in_file.read()
-    print(contents[:-1])
+    print(contents)
     in_file.close()
 
 
 def readlines_file():
     in_file = open("quotation.txt", "r")
     contents = in_file.readlines()
-    print(contents[:-1])
+    print(contents)
     in_file.close()
 
 
