@@ -11,6 +11,6 @@ lines = in_file.readlines()
 in_file.close()
 
 for line in lines:
-    line = "".join([ch for ch in line if ch.isalpha()]) \
-             .replace(" ", "").lower()
-    print(line, line == line[::-1])
+    s = "".join([ch for ch in line if ch.isalpha()]) \
+        .replace(" ", "").lower()
+    print(line[:-1], s == s[::-1])
