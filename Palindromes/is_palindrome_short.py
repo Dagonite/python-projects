@@ -12,5 +12,5 @@ in_file.close()
 
 for line in lines:
     line = "".join([ch for ch in line if ch.isalpha()]) \
-        .replace(" ", "").lower()
+             .replace(" ", "").lower()
     print(line, line == line[::-1])
