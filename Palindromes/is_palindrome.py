@@ -1,8 +1,7 @@
 ################################################################################
-# is_palindrome_short.py
+# is_palindrome.py
 #
-# Checks if a string is a palindrome. This solution requires linear time and
-# linear space so isn't the most efficient, however is very concise.
+# Checks if a string is a palindrome.
 ################################################################################
 
 
