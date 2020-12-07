@@ -4,17 +4,29 @@ Repository for my Python projects
 ---
 Simple graphical game where the user has to take the wind direction into account before shooting arrows at a target. The user then gets a grade depending on their score.
 
+[Binary Trees](https://github.com/Dagonite/python-projects/tree/main/Binary%20Trees)
+---
+Binary tree related programs.
+
 [Binary Tree DFS Traversals](https://github.com/Dagonite/python-projects/tree/main/Binary%20Tree%20DFS%20Traversals)
 ---
 Program which demonstrates how three recursive depth-first search (DFS) algorithms traverse a binary tree.
 
+[Fibonacci](https://github.com/Dagonite/python-projects/tree/main/Fibonacci)
+---
+Fibonacci sequence related programs.
+
 [FizzBuzz](https://github.com/Dagonite/python-projects/tree/main/FizzBuzz)
 ---
-My solution to FizzBuzz.
+Solutions to FizzBuzz.
 
 [Graphical Traced Walk](https://github.com/Dagonite/python-projects/tree/main/Graphical%20Traced%20Walk)
 ---
 Program that draws a two-dimensional grid with a person at the centre. Every quarter of a second, the person takes a random step up, down, left, or right. The program ends once the person leaves the grid. This is an adaption of my tracedwalk2d.py program from Pract09 of the Worksheets.
+
+[Palindromes](https://github.com/Dagonite/python-projects/tree/main/Palindromes)
+---
+Palindrome related programs.
 
 [Patchwork Sampler](https://github.com/Dagonite/python-projects/tree/main/Patchwork%20Sampler)
 ---
