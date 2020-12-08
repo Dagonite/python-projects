@@ -6,11 +6,7 @@ Simple graphical game where the user has to take the wind direction into account
 
 [Binary Trees](https://github.com/Dagonite/python-projects/tree/main/Binary%20Trees)
 ---
-Binary tree related programs.
-
-[Binary Tree DFS Traversals](https://github.com/Dagonite/python-projects/tree/main/Binary%20Tree%20DFS%20Traversals)
----
-Program which demonstrates how three recursive depth-first search (DFS) algorithms traverse a binary tree.
+Binary tree related programs including a program which demonstrates how three recursive depth-first search (DFS) algorithms traverse a binary tree.
 
 [Fibonacci](https://github.com/Dagonite/python-projects/tree/main/Fibonacci)
 ---
