@@ -113,5 +113,5 @@ def future_value():
     return_amount = investment
     for year in range(years):
         return_amount *= (1 + interest_rate)
-    print("Investing £{:0.2f} for {} years".format(investment, years),
+    print("Investing £{:.2f} for {} years".format(investment, years),
           "will result in £{:.2f}.".format(return_amount))
