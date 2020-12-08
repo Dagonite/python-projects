@@ -16,7 +16,6 @@ class Dice:
 
     def throw_dice(self):
         from random import choice
-
         return choice(self.side_labels)
 
 
