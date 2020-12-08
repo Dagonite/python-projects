@@ -1,5 +1,9 @@
+################################################################################
 # patchwork_sampler.py
-# The patchwork layout and patterns are specific to my student number.
+#
+# Program which displays a patchwork using inputs given by the user. The
+# patchwork layout and patterns are specific to my student number.
+################################################################################
 
 from graphics import GraphWin, Line, Circle, Point, Rectangle, Text
 
