@@ -36,14 +36,16 @@ def solve(puzzle):
         return True     # no empty squares are found (puzzle solved)
 
     for n in range(1, 10):
-        if valid(puzzle, row, col, n):    # check if n is valid for empty square
-            puzzle[row][col] = n        # insert n into the square
+        # check if n is valid for empty square
+        if valid(puzzle, row, col, n):
+            puzzle[row][col] = n
 
-            if solve(puzzle):       # solve is recursively called until n is
-                return True         # incompatible or the puzzle is solved
+            # solve recursively called until n is incompatible or puzzle solved
+            if solve(puzzle):
+                return True
 
-            puzzle[row][col] = 0    # puzzle isn't solved so current n must be wrong
-
+            # puzzle isn't solved so current n must be wrong
+            puzzle[row][col] = 0
     return False
 
 
