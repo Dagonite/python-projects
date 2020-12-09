@@ -1,7 +1,19 @@
 Discard
 __pycache__/
+.idea/
+.vscode/
+
+# Environments
+project_env
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Template files
 Worksheets/Pract08/randomwalks.py
 Worksheets/Pract08/house.py
 Worksheets/Pract08/tennis.py
-.idea/
-.vscode/
