@@ -15,8 +15,7 @@ would be bsmith@university.ac.uk)
 The university administrators will need to be able to change the student’s course,
 record their fees as paid (the amount is not required to be stored), withdraw them as a
 student (i.e. make them inactive), re-activate the student, print all the information
-they hold on the student.
-"""
+they hold on the student."""
 
 
 class Student:

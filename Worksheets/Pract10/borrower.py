@@ -13,8 +13,7 @@ information:
 The library need to be able to increase the maximum number of books the person can
 loan, loan books to the person, return books, associate a fine with the borrower,
 record that the borrower has paid some of their fine, and print the information held
-about the borrower.
-"""
+about the borrower."""
 
 
 class Borrower:

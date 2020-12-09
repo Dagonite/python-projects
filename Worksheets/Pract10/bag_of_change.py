@@ -11,8 +11,7 @@ and calculate the total value of the coins in the collection total_value(self).
 
 Hint: for the remove_coin and add_coin methods, you may need to create an additional
 instance variable in the constructor self.coins = [1,2,5,10,20,50,100,200] which you
-can use to help you find the relevent index.
-"""
+can use to help you find the relevent index."""
 
 
 class BagOfChange:
