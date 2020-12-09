@@ -1,9 +1,7 @@
-'''
-10.
-You have been asked by the library to create a borrower class. The first name,
-last name, borrower number, and maximum number of books they can loan should be
-set when the object is created. The library would like the object to hold the
-following information:
+"""10. You have been asked by the library to create a borrower class. The first name,
+last name, borrower number, and maximum number of books they can loan should be set
+when the object is created. The library would like the object to hold the following
+information:
 
 • first name
 • last name
@@ -12,11 +10,11 @@ following information:
 • the number of books currently on loan (assume this to be 0 initially)
 • the outstanding fine accrued by the borrower (assume this to be 0 initially)
 
-The library need to be able to increase the maximum number of books the person
-can loan, loan books to the person, return books, associate a fine with the
-borrower, record that the borrower has paid some of their fine, and print the
-information held about the borrower.
-'''
+The library need to be able to increase the maximum number of books the person can
+loan, loan books to the person, return books, associate a fine with the borrower,
+record that the borrower has paid some of their fine, and print the information held
+about the borrower.
+"""
 
 
 class Borrower:
@@ -62,12 +60,13 @@ class Borrower:
             print("Value is higher than borrower's current fine")
 
     def retrieve_borrower_information(self):
-        return (f"\nName: {self.first_name} {self.last_name}\n"
-                f"Borrrower number: {self.borrower_number}\n"
-                f"Max number of loans: {self.max_no_of_loans}\n"
-                f"Number of books on loan: {self.books_on_loan}\n"
-                f"Outstanding fine: £{self.outstanding_fine:.2f}"
-                )
+        return (
+            f"\nName: {self.first_name} {self.last_name}\n"
+            f"Borrrower number: {self.borrower_number}\n"
+            f"Max number of loans: {self.max_no_of_loans}\n"
+            f"Number of books on loan: {self.books_on_loan}\n"
+            f"Outstanding fine: £{self.outstanding_fine:.2f}"
+        )
 
 
 borrower1 = Borrower("John", "Doe")

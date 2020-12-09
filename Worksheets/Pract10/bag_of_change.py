@@ -1,8 +1,6 @@
-'''
-8.
-Create a class called ”BagOfChange”, which will model a collection of coins
-(1p, 2p, 5p, 10p, 20p, 50p, £1, £2). The constructor will take the quantity of
-each coin as individual parameters and convert them into a single list
+"""8. Create a class called ”BagOfChange”, which will model a collection of coins
+(1p, 2p, 5p, 10p, 20p, 50p, £1, £2). The constructor will take the quantity of each
+coin as individual parameters and convert them into a single list
 __init__(self, pence1, pence2, pence5, pence10, pence20, pence50, pound1, pound2).
 You will need to include methods to allow users to:
 
@@ -11,16 +9,26 @@ add a specific coin into the collection add_coin(self, coin);
 calculate the total number of coins total_no_coins(self);
 and calculate the total value of the coins in the collection total_value(self).
 
-Hint: for the remove_coin and add_coin methods, you may need to create an
-additional instance variable in the constructor self.coins =
-[1,2,5,10,20,50,100,200] which you can use to help you find the relevent index.
-'''
+Hint: for the remove_coin and add_coin methods, you may need to create an additional
+instance variable in the constructor self.coins = [1,2,5,10,20,50,100,200] which you
+can use to help you find the relevent index.
+"""
 
 
 class BagOfChange:
-    def __init__(self, pence1, pence2, pence5, pence10, pence20, pence50, pound1, pound2):
-        self.bag_of_change = [pence1, pence2, pence5, pence10,
-                              pence20, pence50, pound1, pound2]
+    def __init__(
+        self, pence1, pence2, pence5, pence10, pence20, pence50, pound1, pound2
+    ):
+        self.bag_of_change = [
+            pence1,
+            pence2,
+            pence5,
+            pence10,
+            pence20,
+            pence50,
+            pound1,
+            pound2,
+        ]
         self.coins = [1, 2, 5, 10, 20, 50, 100, 200]
 
     def remove_coin(self, coin):
@@ -49,7 +57,7 @@ class BagOfChange:
 
     def total_value(self):
         # note: could have map lambda here instead
-        value = sum([a*b for a, b in zip(self.bag_of_change, self.coins)])
+        value = sum([a * b for a, b in zip(self.bag_of_change, self.coins)])
         return f"Sum of coins in bag: £{value/100:.2f}"
 
 

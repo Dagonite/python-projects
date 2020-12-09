@@ -1,24 +1,22 @@
-'''
-9.
-You have been asked to create a class which models a student. The first name,
-last name, and course for the student need to be set on creation of the object.
-The university need to store the following information about the student:
+"""9. You have been asked to create a class which models a student. The first name,
+last name, and course for the student need to be set on creation of the object. The
+university need to store the following information about the student:
 
 • first name
 • last name
-• student ID - which is generated from the first letter of the forename and the
-surname (e.g. for Bob Smith the ID would be bsmith)
-• email address - which follows the format studentID@university.ac.uk (e.g. Bob
-Smith would be bsmith@university.ac.uk)
+• student ID - which is generated from the first letter of the forename and the surname
+(e.g. for Bob Smith the ID would be bsmith)
+• email address - which follows the format studentID@university.ac.uk (e.g. Bob Smith 
+would be bsmith@university.ac.uk)
 • course
 • fees payment status
 • whether the student is active (i.e. if they are still considered a student)
 
-The university administrators will need to be able to change the student’s
-course, record their fees as paid (the amount is not required to be stored),
-withdraw them as a student (i.e. make them inactive), re-activate the student,
-print all the information they hold on the student.
-'''
+The university administrators will need to be able to change the student’s course,
+record their fees as paid (the amount is not required to be stored), withdraw them as a
+student (i.e. make them inactive), re-activate the student, print all the information
+they hold on the student.
+"""
 
 
 class Student:
@@ -60,13 +58,14 @@ class Student:
             print("Student has already been marked as active")
 
     def retrieve_student_information(self):
-        return (f"Name: {self.first_name} {self.last_name}\n"
-                f"Student ID: {self.student_ID}\n"
-                f"Email address: {self.email}\n"
-                f"Course: {self.course}\n"
-                f"Fees paid: {self.fees_paid}\n"
-                f"Active: {self.active}"
-                )
+        return (
+            f"Name: {self.first_name} {self.last_name}\n"
+            f"Student ID: {self.student_ID}\n"
+            f"Email address: {self.email}\n"
+            f"Course: {self.course}\n"
+            f"Fees paid: {self.fees_paid}\n"
+            f"Active: {self.active}"
+        )
 
 
 student1 = Student("John", "Doe", "Law")

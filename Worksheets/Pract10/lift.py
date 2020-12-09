@@ -1,15 +1,12 @@
-'''
-1.
-Using the Lift class created during the introduction, add an additional method
-which can be used to call the lift call_lift(self, floor_called_from). Note:
-your method should make use of both the go_up, and go_down methods
-'''
+"""1. Using the Lift class created during the introduction, add an additional method
+which can be used to call the lift call_lift(self, floor_called_from). Note: your
+method should make use of both the go_up, and go_down methods"""
 
 
 class Lift:
     def __init__(self, max_floors):
         self.max_no_floors = max_floors
-        self.current_floor = 0      # ground floor is floor 0
+        self.current_floor = 0  # ground floor is floor 0
         print("Current floor is: floor", self.current_floor)
 
     def go_up(self, target_floor):

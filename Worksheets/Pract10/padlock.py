@@ -1,17 +1,12 @@
-'''
-7.
-Create a class to model a combination padlock, called ”Padlock”. The object
-should be created with a combination as the parameter
-__init__(self, combination). It is assumed that the padlock is locked when it is
-created. The user should be able to open the lock
-open_lock(self, entered_combination), and close it again close_lock(self).
-Additionally, the user should be able to change the combination
+"""7. Create a class to model a combination padlock, called ”Padlock”. The object
+should be created with a combination as the parameter __init__(self, combination). It
+is assumed that the padlock is locked when it is created. The user should be able to 
+open the lock open_lock(self, entered_combination), and close it again 
+close_lock(self). Additionally, the user should be able to change the combination
 change_combination(self, new_combination). However, the combination can only be
-changed once the padlock is open, and the new code should be of the same length
-as the previous one. Hint: in the constructor, create an additional instance
-variable self.combination_no_digits to support fixing the length of the
-combination.
-'''
+changed once the padlock is open, and the new code should be of the same length as the
+previous one. Hint: in the constructor, create an additional instance variable 
+self.combination_no_digits to support fixing the length of the combination."""
 
 
 class Padlock:
