@@ -1,9 +1,9 @@
-################################################################################
+########################################################################################
 # patchwork_sampler.py
 #
-# Program which displays a patchwork using inputs given by the user. The
-# patchwork layout and patterns are specific to my student number.
-################################################################################
+# Program which displays a patchwork using inputs given by the user. The patchwork
+# layout and patterns are specific to my student number.
+########################################################################################
 
 from graphics import GraphWin, Line, Circle, Point, Rectangle, Text
 
@@ -24,8 +24,10 @@ def get_inputs():
     size = ""
 
     while size not in sizes:
-        size = input("\nEnter how many tiles long the square patchwork should "
-                     "be (5, 7, or 9): ")
+        size = input(
+            "\nEnter how many tiles long the square patchwork should "
+            "be (5, 7, or 9): "
+        )
 
         size = size.replace(" ", "")
 
@@ -85,13 +87,12 @@ def create_patchwork(size, colours):
     win.setBackground("white")
     win.setCoords(0, size + 1, size, 0)
 
-    quit_but = Rectangle(Point(size / 2 - .47, .8),
-                         Point(size / 2 + .47, .2))
+    quit_but = Rectangle(Point(size / 2 - 0.47, 0.8), Point(size / 2 + 0.47, 0.2))
     quit_but.setFill("gray")
     quit_but.setWidth(3)
     quit_but.draw(win)
 
-    quit_text = Text(Point(size / 2, .5), "Quit")
+    quit_text = Text(Point(size / 2, 0.5), "Quit")
     quit_text.setSize(14)
     quit_text.setStyle("bold")
     quit_text.setFill("white")
@@ -136,28 +137,24 @@ def net_design(win, colour, col, row):
     :param row: starting y co-ord for the design
     :return: None
     """
-    for distance in (.2, .4, .6, .8, 1):
-        line1 = Line(Point(col, distance + row),
-                     Point(col + distance, row))
+    for distance in (0.2, 0.4, 0.6, 0.8, 1):
+        line1 = Line(Point(col, distance + row), Point(col + distance, row))
         line1.setWidth(2)
         line1.setFill(colour)
         line1.draw(win)
 
-        line2 = Line(Point(col + 1 - distance, row),
-                     Point(col + 1, row + distance))
+        line2 = Line(Point(col + 1 - distance, row), Point(col + 1, row + distance))
         line2.setWidth(2)
         line2.setFill(colour)
         line2.draw(win)
 
-    for distance in (.2, .4, .6, .8):
-        line3 = Line(Point(col + distance, row + 1),
-                     Point(col + 1, row + distance))
+    for distance in (0.2, 0.4, 0.6, 0.8):
+        line3 = Line(Point(col + distance, row + 1), Point(col + 1, row + distance))
         line3.setWidth(2)
         line3.setFill(colour)
         line3.draw(win)
 
-        line4 = Line(Point(col, row + distance),
-                     Point(col + 1 - distance, row + 1))
+        line4 = Line(Point(col, row + distance), Point(col + 1 - distance, row + 1))
         line4.setWidth(2)
         line4.setFill(colour)
         line4.draw(win)
@@ -225,20 +222,20 @@ def circle_design(win, colour, col, row):
     :param row: starting y co-ord for the design
     :return: None
     """
-    for width in (.1, .3, .5, .7, .9):
-        for height in (.1, .3, .5, .7, .9):
-            full_circle = Circle(Point(width + col, height + row), .1)
-            outline_circle = Circle(Point(width + col, height + row), .1)
-            if width in (.3, .7):
-                white_rectangle = Rectangle(Point(width + col - .1,
-                                                  height + row),
-                                            Point(width + col + .1,
-                                                  height + row + .1))
+    for width in (0.1, 0.3, 0.5, 0.7, 0.9):
+        for height in (0.1, 0.3, 0.5, 0.7, 0.9):
+            full_circle = Circle(Point(width + col, height + row), 0.1)
+            outline_circle = Circle(Point(width + col, height + row), 0.1)
+            if width in (0.3, 0.7):
+                white_rectangle = Rectangle(
+                    Point(width + col - 0.1, height + row),
+                    Point(width + col + 0.1, height + row + 0.1),
+                )
             else:
-                white_rectangle = Rectangle(Point(width + col - .1,
-                                                  height + row - .1),
-                                            Point(width + col,
-                                                  height + row + .1))
+                white_rectangle = Rectangle(
+                    Point(width + col - 0.1, height + row - 0.1),
+                    Point(width + col, height + row + 0.1),
+                )
 
             full_circle.setFill(colour)
             full_circle.draw(win)
@@ -275,8 +272,7 @@ def cycle_colours(win, size, colours, colour_tracker):
             colour_tracker[current_tile] = colour_n
             print()
             for i in range(3):
-                print(colours[i].capitalize(), "tiles:",
-                      colour_tracker.count(i))
+                print(colours[i].capitalize(), "tiles:", colour_tracker.count(i))
 
             if row == 1 or row == size or col == 0 or col == size - 1:
                 net_design(win, colours[colour_n], col, row)

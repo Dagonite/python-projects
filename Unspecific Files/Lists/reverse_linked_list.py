@@ -1,7 +1,13 @@
+########################################################################################
 # reverse_linked_list.py
+#
+# Program showing how to reverse a linked list both iteratively and recursively. Only
+# shows the methods and not the relevant classes for creating and parsing the linked
+# list.
+########################################################################################
 
 # Iteratively
-def reverse_list_ite(self, head):
+def reverse_list_iteratively(self, head):
     node = None
     while head:
         tmp = head.next
@@ -9,6 +15,7 @@ def reverse_list_ite(self, head):
         node = head
         head = tmp
     return node
+
 
 # input [1,2,3,4,5]
 
@@ -48,12 +55,13 @@ def reverse_list_ite(self, head):
 
 
 # Recursively
-def reverse_list_rec(self, head, node=None):
+def reverse_list_recursively(self, head, node=None):
     if head is None:
         return node
     tmp = head.next
     head.next = node
     return self.reverse_list_rec(tmp, head)
+
 
 # input [1,2,3,4,5]
 

@@ -1,4 +1,10 @@
+########################################################################################
 # flatten_binary_tree_to_linked_list.py
+#
+# Program showing how to flatten a binary tree to a linked list. Only shows the methods
+# and not the relevant classes for creating a binary tree.
+########################################################################################
+
 
 def flatten(self, root):
     self.previous_right = None

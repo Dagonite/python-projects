@@ -1,11 +1,10 @@
-################################################################################
+########################################################################################
 # elements_in_a_list.py
 #
-# Program demonstrating that the first 2d list (grid1) results in a row amount
-# of references to the same element. The second 2d list (grid2) has unique
-# references for each element in the list. The second list is usually the
-# desired result.
-################################################################################
+# Program demonstrating that the first 2d list `grid1` results in a row amount of
+# references to the same element. The second 2d list `grid2` has unique references for
+# each element in the list. The second list is usually the desired result.
+########################################################################################
 
 from numpy import array
 
