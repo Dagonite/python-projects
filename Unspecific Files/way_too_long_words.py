@@ -9,7 +9,7 @@
 
 
 def way_too_long_words():
-    for i in [0] * int(input("Enter the number of words to convert: ")):
+    for _ in [0] * int(input("Enter the number of words to convert: ")):
         word = input("Enter a word: ")
         length = len(word) - 2
         print([word, word[0] + str(length) + word[-1]][length > 8])
