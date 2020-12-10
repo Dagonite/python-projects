@@ -1,4 +1,9 @@
+########################################################################################
 # invert_binary_tree.py
+#
+# Program showing how to invert a binary tree. Only shows the methods and not the
+# relevant classes for creating a binary tree.
+########################################################################################
 
 
 def invert_tree(self, root):

@@ -1,4 +1,8 @@
+########################################################################################
 # binary_trees_dfs_traversals.py
+#
+# Program showing three ways of traversing a binary tree.
+########################################################################################
 
 
 class TreeNode:
@@ -56,10 +60,10 @@ tree1.root.left.right = TreeNode("E")
 tree1.root.right.left = TreeNode("F")
 tree1.root.right.right = TreeNode("G")
 #                A
-#             /    \
-#            B      C
-#           / \    / \
-#          D  E   F  G
+#              /   \
+#             B     C
+#            / \   / \
+#           D   E F   G
 
 tree2 = BinaryTree(1)
 tree2.root.left = TreeNode(2)
@@ -71,12 +75,12 @@ tree2.root.left.left.left = TreeNode(7)
 tree2.root.left.left.right = TreeNode(8)
 tree2.root.right.right.left = TreeNode(9)
 #                1
-#             /    \
-#            2      3
-#           / \      \
-#          4  5       6
-#         / \        /
-#        7  8       9
+#              /   \
+#             2     3
+#            / \     \
+#           4   5     6
+#          / \       /
+#         7   8     9
 
 print("Preorder traversal: {:>16}".format(tree1.print_tree("preorder")))
 print("Inorder traversal: {:>17}".format(tree1.print_tree("inorder")))
