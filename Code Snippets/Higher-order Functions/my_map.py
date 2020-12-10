@@ -1,7 +1,8 @@
 ########################################################################################
 # my_map.py
 #
-# Recreation of the map() function using square and cube functions as examples.
+# Recreation of the map() function and using it to square and cube elements in a list to
+# give a new list.
 ########################################################################################
 
 
