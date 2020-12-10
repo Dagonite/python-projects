@@ -1,4 +1,7 @@
-def fizz_buzz(x):
+# fizzbuzz.py
+
+
+def fizzbuzz(x):
     for n in range(1, x + 1):
         output = ""
 
@@ -12,4 +15,4 @@ def fizz_buzz(x):
 
 
 x = int(input("Give me the range: "))
-fizz_buzz(x)
+fizzbuzz(x)
