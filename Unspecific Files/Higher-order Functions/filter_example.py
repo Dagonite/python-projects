@@ -1,5 +1,5 @@
 ########################################################################################
-# filter_function.py
+# filter_example.py
 #
 # The filter() function returns an iterator were the items are filtered through a
 # function to test if the item is accepted or not. In this example, filter takes a

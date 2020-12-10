@@ -1,5 +1,5 @@
 ########################################################################################
-# map_function.py
+# map_example.py
 #
 # The map() function executes a specified function for each item in an iterable. In this
 # example, map takes a function and a list, multiplies items in the list by 10 to give a
