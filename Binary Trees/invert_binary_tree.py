@@ -3,8 +3,9 @@
 
 def invert_tree(self, root):
     if root:
-        root.left, root.right = self.invert_tree(root.right), self.invert_tree(
-            root.left
+        root.left, root.right = (
+            self.invert_tree(root.right),
+            self.invert_tree(root.left),
         )
     return root
 
