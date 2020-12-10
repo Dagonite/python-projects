@@ -8,6 +8,10 @@ Simple graphical game where the user has to take the wind direction into account
 ---
 Binary tree related programs including a program which demonstrates how three recursive depth-first search (DFS) algorithms traverse a binary tree.
 
+[Code Snippets](https://github.com/Dagonite/python-projects/tree/main/Code%20Snippets)
+---
+Just some interesting solutions to common coding problems and scenarios.
+
 [Fibonacci](https://github.com/Dagonite/python-projects/tree/main/Fibonacci)
 ---
 Fibonacci sequence related programs.
@@ -35,10 +39,6 @@ A program that solves any given Sudoku puzzle by using a backtracking algorithm 
 [Worksheets](https://github.com/Dagonite/python-projects/tree/main/Worksheets)
 ---
 Worksheets I have completed that were given by my university. Each worksheet contains roughly a dozen problems.
-
-[Unspecific Files](https://github.com/Dagonite/python-projects/tree/main/Unspecific%20Files)
----
-Just some interesting solutions to common coding problems and scenarios.
 
 Requirements
 ---
