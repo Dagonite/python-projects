@@ -1,6 +1,14 @@
-from random import random
-from graphics import GraphWin, Line, Text, Circle, Rectangle, Point
+########################################################################################
+# graphical_traced_walk.py
+#
+# Program which asks the user to pick a grid size and then draws the grid onto a
+# graphics window. A person is drawn in the centre and they will move in random
+# directions until they leave the grid.
+########################################################################################
 import time
+from random import random
+
+from graphics import Circle, GraphWin, Line, Point, Rectangle, Text
 
 
 def main():
@@ -12,8 +20,9 @@ def main():
 
 def get_inputs():
     while True:
-        squares = input("\nEnter the common height and width of the grid (must "
-                        "be an odd number): ")
+        squares = input(
+            "\nEnter the common height and width of the grid (must be an odd number): "
+        )
         squares.replace(" ", "")
         if squares.isdigit():
             squares = int(squares)
@@ -32,29 +41,27 @@ def get_inputs():
 
 def draw_grid(squares_with_border):
     squares = squares_with_border - 1
-    win = GraphWin("Graphical traced walk",
-                   50 * squares_with_border,
-                   50 * squares_with_border)
-    win.setCoords(0, squares_with_border,
-                  squares_with_border, 0)
+    win = GraphWin(
+        "Graphical traced walk", 50 * squares_with_border, 50 * squares_with_border
+    )
+    win.setCoords(0, squares_with_border, squares_with_border, 0)
 
-    border_rectangle = Rectangle(Point(.5, .5),
-                                 Point(squares_with_border - .5,
-                                       squares_with_border - .5))
+    border_rectangle = Rectangle(
+        Point(0.5, 0.5), Point(squares_with_border - 0.5, squares_with_border - 0.5)
+    )
     border_rectangle.setFill("gray")
     border_rectangle.setWidth(2)
     border_rectangle.draw(win)
 
-    centre_square = Rectangle(Point(squares_with_border / 2 - .5,
-                                    squares_with_border / 2 - .5),
-                              Point(squares_with_border / 2 + .5,
-                                    squares_with_border / 2 + .5))
+    centre_square = Rectangle(
+        Point(squares_with_border / 2 - 0.5, squares_with_border / 2 - 0.5),
+        Point(squares_with_border / 2 + 0.5, squares_with_border / 2 + 0.5),
+    )
     centre_square.setFill("cyan")
     centre_square.setOutline("")
     centre_square.draw(win)
 
-    person = Circle(Point(squares_with_border / 2,
-                          squares_with_border / 2), .25)
+    person = Circle(Point(squares_with_border / 2, squares_with_border / 2), 0.25)
     person.setFill("red")
     person.draw(win)
 
@@ -62,12 +69,14 @@ def draw_grid(squares_with_border):
 
     for i in range(squares):
         for j in range(squares):
-            grid_line = Line(Point(1.5 + j, .5),
-                             Point(1.5 + j, squares_with_border - .5))
+            grid_line = Line(
+                Point(1.5 + j, 0.5), Point(1.5 + j, squares_with_border - 0.5)
+            )
             grid_line.draw(win)
 
-            grid_line = Line(Point(.5, 1.5 + j),
-                             Point(squares_with_border - .5, 1.5 + j))
+            grid_line = Line(
+                Point(0.5, 1.5 + j), Point(squares_with_border - 0.5, 1.5 + j)
+            )
             grid_line.draw(win)
 
             square_text = Text(Point(1 + j, 1 + i), "")
@@ -86,26 +95,29 @@ def simulate_steps(win, person, squares, square_texts):
     while True:
         random_step = random()
         total_steps += 1
-        if random_step < .25:
-            current_row -= 1    # go up
+        if random_step < 0.25:
+            current_row -= 1  # go up
             draw_step(win, person, 0, -1)
-        elif random_step >= .25 and random_step < .5:
-            current_col += 1    # go right
+        elif random_step >= 0.25 and random_step < 0.5:
+            current_col += 1  # go right
             draw_step(win, person, 1, 0)
-        elif random_step >= .5 and random_step < .75:
-            current_row += 1    # go down
+        elif random_step >= 0.5 and random_step < 0.75:
+            current_row += 1  # go down
             draw_step(win, person, 0, 1)
         else:
-            current_col -= 1    # go left
+            current_col -= 1  # go left
             draw_step(win, person, -1, 0)
 
-        if current_row == -1 or current_row == squares \
-                or current_col == -1 or current_col == squares:
+        if (
+            current_row == -1
+            or current_row == squares
+            or current_col == -1
+            or current_col == squares
+        ):
             break
 
         grid[current_row][current_col] += 1
-        square_texts[current_row][current_col].setText(
-            grid[current_row][current_col])
+        square_texts[current_row][current_col].setText(grid[current_row][current_col])
 
     print(f"\nIt took {total_steps} steps to leave the grid")
     win.getMouse()
@@ -114,7 +126,7 @@ def simulate_steps(win, person, squares, square_texts):
 
 def draw_step(win, person, x, y):
     person.move(x, y)
-    time.sleep(.25)
+    time.sleep(0.25)
 
 
 main()
