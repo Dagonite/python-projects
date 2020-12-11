@@ -6,43 +6,38 @@
 ########################################################################################
 
 
-def invert_tree(self, root):
-    if root:
-        root.left, root.right = (
-            self.invert_tree(root.right),
-            self.invert_tree(root.left),
-        )
-    return root
+class Solution:
+    def invert_tree(self, root):
+        if root:
+            root.left, root.right = (
+                self.invert_tree(root.right),
+                self.invert_tree(root.left),
+            )
+        return root
+
+        # more readable version
+        # if root:
+        #     left = root.left
+        #     right = root.right
+        #     root.left = right
+        #     root.right = left
+        #     self.invertTree(root.left)
+        #     self.invertTree(root.right)
+        # return root
 
 
-# input [4,2,7]
+# input [4,2,7,1,3,None,9]
 
-# invert_tree(root)                # [4,2,7]
+#      4
+#    /   \
+#   2     7
+#  / \     \
+# 1   3     9
 
-#     invert_tree(root.right)      # 7
+# output [4,7,2,9,None,3,1]
 
-#         invert_tree(root.right)  # None
-#         return root              # None
-
-#         invert_tree(root.left)   # None
-#         return root              # None
-
-#     root.left = None
-#     root.right = None
-#     return root                  # 7
-
-#     invert_tree(root.left)       # 2
-
-#         invert_tree(root.right)  # None
-#         return root              # None
-
-#         invert_tree(root.left)   # None
-#         return root              # None
-
-#     root.left = None
-#     root.right = None
-#     return root                  # 2
-
-# root.left = 7
-# root.right = 2
-# return root                      # [4,7,2]
+#      4
+#    /   \
+#   7     2
+#  /     / \
+# 9     3   1
