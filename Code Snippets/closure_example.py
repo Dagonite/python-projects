@@ -7,7 +7,7 @@
 
 def html_tag(tag):
     def wrap_text(msg):
-        print("<{0}>{1}</{0}>".format(tag, msg))
+        print(f"<{tag}>{msg}</{tag}>")
 
     return wrap_text
 
