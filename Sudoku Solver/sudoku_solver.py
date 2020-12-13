@@ -91,8 +91,8 @@ def valid(puzzle, row, col, n):
     box_row = row // 3
     box_col = col // 3
 
-    for y in range(0, 3):
-        for x in range(0, 3):
+    for y in range(3):
+        for x in range(3):
             if puzzle[box_row * 3 + y][box_col * 3 + x] == n:
                 return False  # n exists in box (y, x)
 
