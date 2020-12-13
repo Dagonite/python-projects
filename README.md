@@ -6,7 +6,7 @@ Simple graphical game where the user has to take the wind direction into account
 
 [Graphical Traced Walk](https://github.com/Dagonite/python-projects/tree/main/Graphical%20Traced%20Walk)
 ---
-Program that draws a two-dimensional grid with a person at the centre. Every quarter of a second, the person takes a random step up, down, left, or right. Every square of the grid displays how many times the person has visited it. The walk ends once the person leaves the grid. This is an adaption of my tracedwalk2d.py from Pract09 of the Worksheets found in my `python-code-snippets` repo.
+Program that draws a two-dimensional grid with a person at the centre. Every quarter of a second, the person takes a random step up, down, left, or right. Every square of the grid displays how many times the person has visited it. The walk ends once the person leaves the grid. This is an adaption of my tracedwalk2d.py from Pract09 of the Worksheets found within my `python-code-snippets` repo.
 
 [Patchwork Sampler](https://github.com/Dagonite/python-projects/tree/main/Patchwork%20Sampler)
 ---
