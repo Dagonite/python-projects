@@ -214,6 +214,7 @@ def cycle_colours(win, size, colours, colour_tracker, tiles):
 
 
 def get_current_tile_pos(size, col, row):
+    """Return the position within the patchwork of the current tile."""
     return (row - 1) * (size - 1) + (col - 1) + (row - 1)
 
 
