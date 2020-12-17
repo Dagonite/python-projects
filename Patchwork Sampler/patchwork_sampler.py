@@ -2,38 +2,35 @@
 # patchwork_sampler.py
 #
 # Program which displays a patchwork using inputs given by the user. The patchwork
-# layout and patterns are specific to my student number.
+# layout and patterns are specific to my student number. This code uses input functions
+# so must be ran using the Python interpreter or at a read/write command line.
 ########################################################################################
 from graphics import GraphWin, Line, Circle, Point, Rectangle, Text
 
 
 def main():
     size, colours = get_inputs()
-    win, colour_tracker = create_patchwork(size, colours)
-    cycle_colours(win, size, colours, colour_tracker)
+    win, colour_tracker, tiles = create_patchwork(size, colours)
+    cycle_colours(win, size, colours, colour_tracker, tiles)
+    print("\nGoodbye!")
+    win.close()
 
 
 def get_inputs():
-    """
-    Get user input to determine the size and colours of the patchwork.
-    :return size: the size of the patchwork grid
-    :return colours: list of colours being used
-    """
-    sizes = ["5", "7", "9"]
+    sizes = ["4", "5", "6", "7", "8"]
     size = ""
 
     while size not in sizes:
         size = input(
             "\nEnter how many tiles long the square patchwork should "
-            "be (5, 7, or 9): "
+            "be (4, 5, 6, 7, or 8): "
+        ).replace(" ", "")
+
+        print(
+            f"The patchwork will be a {size} x {size} grid"
+            if size in sizes
+            else "Error: invalid size"
         )
-
-        size = size.replace(" ", "")
-
-        if size in sizes:
-            print(f"The patchwork will be a {size} x {size} grid")
-        else:
-            print("Error: Invalid size")
 
     valid_colours = ["red", "green", "blue", "orange", "brown", "pink"]
     colours = []
@@ -41,190 +38,130 @@ def get_inputs():
     while len(colours) < 3:
         print("\nThe available colours are: ", end="")
         print_colours(valid_colours)
-        colour = input("Enter one of the above colours: ").lower()
-
-        colour = colour.replace(" ", "")
+        colour = input("Enter one of the above colours: ").lower().replace(" ", "")
 
         if colour in valid_colours:
             colours.append(colour)
             valid_colours.remove(colour)
             print(colour.capitalize(), "is valid")
         elif colour in colours:
-            print("Error:", colour.capitalize(), "already chosen")
+            print("Error:", colour, "already chosen")
         else:
-            print("Error: Invalid colour")
+            print("Error: invalid colour")
 
-    print("You have chosen... ", end="")
+    print("\nYou have chosen... ", end="")
     print_colours(colours)
 
     return int(size), colours
 
 
 def print_colours(colours):
-    """
-    Prints out a list of colours by comma separating them.
-    :return colours: list of colours
-    :return: None
-    """
-    for i in range(len(colours)):
-        if i == len(colours) - 1:
-            print("and", colours[i])
-        else:
-            print(colours[i], end=", ")
+    print(
+        "".join(
+            colours[i] + ", " if i < len(colours) - 1 else "and " + colours[i]
+            for i in range(len(colours))
+        )
+    )
 
 
 def create_patchwork(size, colours):
-    """
-    Generates the three different patch types.
-    :param win: the graphics window used to display the patchwork
-    :param size: the size of the patchwork grid
-    :param colours: list of colours being used
-    :return colour_tracker: list of each tiles' current colour
-    :return win: the graphics window used to display the patchwork
-    """
-    win = GraphWin("Patchwork sampler", 100 * size, 100 * (size + 1))
+    win = GraphWin("Patchwork sampler", 100 * (size + 2), 100 * (size + 2))
     win.setBackground("white")
-    win.setCoords(0, size + 1, size, 0)
-
-    quit_but = Rectangle(Point(size / 2 - 0.47, 0.8), Point(size / 2 + 0.47, 0.2))
-    quit_but.setFill("gray")
-    quit_but.setWidth(3)
-    quit_but.draw(win)
-
-    quit_text = Text(Point(size / 2, 0.5), "Quit")
-    quit_text.setSize(14)
-    quit_text.setStyle("bold")
-    quit_text.setFill("white")
-    quit_text.draw(win)
+    win.setCoords(0, size + 2, size + 2, 0)
 
     colour_tracker = [0] * size ** 2
+    tiles = [0] * size ** 2
 
-    first_patch(win, size, colours[0])
-    second_patch(win, size, colours[1], colour_tracker)
-    third_patch(win, size, colours[2], colour_tracker)
+    first_patch(win, size, colours[0], tiles)
+    second_patch(win, size, colours[1], colour_tracker, tiles)
+    third_patch(win, size, colours[2], colour_tracker, tiles)
 
-    return win, colour_tracker
+    return win, colour_tracker, tiles
 
 
-def first_patch(win, size, colour):
-    """
-    Creates the first patch which is a tile wide outline for the patchwork.
-    :param win: the graphics window used to display the patchwork
-    :param size: the size of the patchwork grid
-    :param colour: the colour being used
-    :return: None
-    """
+def first_patch(win, size, colour, tiles):
+    """Calls net_design to draw a perimeter of net tiles at the specified positions
+    using the first chosen colour."""
     for row in range(1, size + 1):
-        # left column of tiles
-        net_design(win, colour, 0, row)
-        # right column of tiles
-        net_design(win, colour, size - 1, row)
+        net_design(win, size, colour, 1, row, tiles)  # left column of tiles
+        net_design(win, size, colour, size, row, tiles)  # right column of tiles
 
-    for col in range(1, size - 1):
-        # top-most row of tiles
-        net_design(win, colour, col, 1)
-        # bottom row of tiles
-        net_design(win, colour, col, size)
+    for col in range(2, size):
+        net_design(win, size, colour, col, 1, tiles)  # top row of tiles
+        net_design(win, size, colour, col, size, tiles)  # bottom row of tiles
 
 
-def net_design(win, colour, col, row):
-    """
-    Creates the net design by drawing interlacing lines for a tile.
-    :param win: the graphics window used to display the patchwork
-    :param colour: the colour of the lines
-    :param col: starting x co-ord for the design
-    :param row: starting y co-ord for the design
-    :return: None
-    """
+def net_design(win, size, colour, col, row, tiles):
+    """Draws the net design using the supplied position and colour."""
+    current_tile = []
     for distance in (0.2, 0.4, 0.6, 0.8, 1):
         line1 = Line(Point(col, distance + row), Point(col + distance, row))
         line1.setWidth(2)
         line1.setFill(colour)
         line1.draw(win)
+        current_tile.append(line1)
 
         line2 = Line(Point(col + 1 - distance, row), Point(col + 1, row + distance))
         line2.setWidth(2)
         line2.setFill(colour)
         line2.draw(win)
+        current_tile.append(line2)
 
     for distance in (0.2, 0.4, 0.6, 0.8):
         line3 = Line(Point(col + distance, row + 1), Point(col + 1, row + distance))
         line3.setWidth(2)
         line3.setFill(colour)
         line3.draw(win)
+        current_tile.append(line3)
 
         line4 = Line(Point(col, row + distance), Point(col + 1 - distance, row + 1))
         line4.setWidth(2)
         line4.setFill(colour)
         line4.draw(win)
+        current_tile.append(line4)
 
     border_rectangle = Rectangle(Point(col, row), Point(col + 1, row + 1))
     border_rectangle.draw(win)
+    current_tile.append(border_rectangle)
+
+    current_tile_pos = (row - 1) * (size - 1) + (col - 1) + (row - 1)
+    tiles[current_tile_pos] = current_tile
 
 
-def second_patch(win, size, colour, colour_tracker):
-    """
-    Patch which forms a row of tiles (left-to-right) in the empty space of the
-    second row. The following rows have 1 less tile than the row above until
-    only 1 tile is in a single row.
-    :param win: the graphics window used to display the patchwork
-    :param size: the size of the patchwork grid
-    :param colour: the colour being used
-    :param colour_tracker: list of each tiles' current colour
-    """
-    # tiles will be drawn left to right up until this column
+def second_patch(win, size, colour, colour_tracker, tiles):
+    """Calls circle_design to draw an inverted staircase of circle tiles at the
+    specified positions using the second chosen colour."""
     stop_col = size - 1
 
     for row in range(2, size):
-        for col in range(1, stop_col):
-            circle_design(win, colour, col, row)
-
-            # gives the tile's position in a list of length size^2
-            # 1 subtracted from row because of top row dedicated to quit button
-            current_tile = (row - 1) * (size - 1) + col + (row - 1)
-            colour_tracker[current_tile] = 1
+        for col in range(2, stop_col + 1):
+            circle_design(win, size, colour, col, row, tiles)
+            current_tile_pos = (row - 1) * (size - 1) + (col - 1) + (row - 1)
+            colour_tracker[current_tile_pos] = 1
         stop_col -= 1
 
 
-def third_patch(win, size, colour, colour_tracker):
-    """
-    Patch which forms a row of tiles (right-to-left) in the empty space of the
-    second to last row. The aboes rows have 1 less tile than the row subsequent
-    row below until only 1 tile is in a single row.
-    :param win: the graphics window used to display the patchwork
-    :param size: the size of the patchwork grid
-    :param colour: the colour being used
-    :param colour_tracker: 2d array of each tiles' current colour
-    """
-    # tiles will be drawn right to left up until this column
-    stop_col = 1
+def third_patch(win, size, colour, colour_tracker, tiles):
+    """Calls circle_design to draw a staircase of circle tiles at the specified
+    positions using the third chosen colour."""
+    stop_col = 2
 
     for row in range(size - 1, 2, -1):
-        for col in range(size - 2, stop_col, -1):
-            circle_design(win, colour, col, row)
-
-            # gives the tile's position in a list of length size^2
-            # 1 subtracted from row because of top row dedicated to quit button
-            current_tile = (row - 1) * (size - 1) + col + (row - 1)
-            colour_tracker[current_tile] = 2
+        for col in range(size - 1, stop_col, -1):
+            circle_design(win, size, colour, col, row, tiles)
+            current_tile_pos = (row - 1) * (size - 1) + (col - 1) + (row - 1)
+            colour_tracker[current_tile_pos] = 2
         stop_col += 1
 
 
-def circle_design(win, colour, col, row):
-    """
-    Creates the circle design by drawing filled circles half covered by
-    white rectangles. Outlined circles are drawn over both the rectangles and
-    the filled circles.
-    :param win: the graphics window used to display the patchwork
-    :param colour: the colour of the drawn shapes
-    :param col: starting x co-ord for the design
-    :param row: starting y co-ord for the design
-    :return: None
-    """
+def circle_design(win, size, colour, col, row, tiles):
+    """Draws the circle design using the supplied position and colour."""
+    current_tile = []
     for width in (0.1, 0.3, 0.5, 0.7, 0.9):
         for height in (0.1, 0.3, 0.5, 0.7, 0.9):
             full_circle = Circle(Point(width + col, height + row), 0.1)
             outline_circle = Circle(Point(width + col, height + row), 0.1)
+
             if width in (0.3, 0.7):
                 white_rectangle = Rectangle(
                     Point(width + col - 0.1, height + row),
@@ -238,49 +175,58 @@ def circle_design(win, colour, col, row):
 
             full_circle.setFill(colour)
             full_circle.draw(win)
+            current_tile.append(full_circle)
 
             white_rectangle.setFill("white")
             white_rectangle.setOutline("white")
             white_rectangle.draw(win)
+            current_tile.append(white_rectangle)
 
             outline_circle.setOutline(colour)
             outline_circle.draw(win)
+            current_tile.append(outline_circle)
 
     border_rectangle = Rectangle(Point(col, row), Point(col + 1, row + 1))
     border_rectangle.draw(win)
+    current_tile.append(border_rectangle)
+
+    current_tile_pos = (row - 1) * (size - 1) + (col - 1) + (row - 1)
+    tiles[current_tile_pos] = current_tile
 
 
-def cycle_colours(win, size, colours, colour_tracker):
-    """
-    Allows user to click on any of the tiles in the graphics window to cycle to
-    another chosen colour.
-    :param win: the graphics window used to display the patchwork
-    :param size: the size of the patchwork grid
-    :param colours: list of colours being used
-    :param colour_tracker: list of each tiles' current colour
-    :return: None
-    """
+def cycle_colours(win, size, colours, colour_tracker, tiles):
+    """User can endlessly click tiles to cycle their colour. Clicking the whitespace
+    outside the patchwork will exit the program."""
     while True:
         cursor = win.getMouse()
         col = int(cursor.getX())
         row = int(cursor.getY())
-        current_tile = (row - 1) * (size - 1) + col + (row - 1)
+        current_tile_pos = (row - 1) * (size - 1) + (col - 1) + (row - 1)
 
-        if row >= 1:
-            colour_n = (colour_tracker[current_tile] + 1) % 3
-            colour_tracker[current_tile] = colour_n
-            print()
-            for i in range(3):
-                print(colours[i].capitalize(), "tiles:", colour_tracker.count(i))
+        if 1 <= row <= size and 1 <= col <= size:
+            colour_n = (colour_tracker[current_tile_pos] + 1) % 3
+            colour_tracker[current_tile_pos] = colour_n
 
-            if row == 1 or row == size or col == 0 or col == size - 1:
-                net_design(win, colours[colour_n], col, row)
-            else:
-                circle_design(win, colours[colour_n], col, row)
-        elif col == int(size / 2) and row == 0:
+            undraw_shapes(win, current_tile_pos, tiles)
+            redraw_shapes(win, size, colours[colour_n], col, row, colours, tiles)
+        else:
             break
-    print("\nGoodbye!")
-    win.close()
+
+
+def undraw_shapes(win, current_tile_pos, tiles):
+    """Undraw the shapes that make up the provided tile index."""
+    current_tile = tiles[current_tile_pos]
+    for shape in current_tile:
+        shape.undraw()
+
+
+def redraw_shapes(win, size, colour, col, row, colours, tiles):
+    """Redraw the shapes that make up the previously undrawn tile using the next
+    colour in the list of chosen colours."""
+    if row == 1 or row == size or col == 1 or col == size:
+        net_design(win, size, colour, col, row, tiles)
+    else:
+        circle_design(win, size, colour, col, row, tiles)
 
 
 main()
