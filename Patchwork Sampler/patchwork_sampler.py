@@ -124,7 +124,7 @@ def net_design(win, size, colour, col, row, tiles):
     border_rectangle.draw(win)
     current_tile.append(border_rectangle)
 
-    current_tile_pos = (row - 1) * (size - 1) + (col - 1) + (row - 1)
+    current_tile_pos = get_current_tile_pos(size, col, row)
     tiles[current_tile_pos] = current_tile
 
 
@@ -136,7 +136,7 @@ def second_patch(win, size, colour, colour_tracker, tiles):
     for row in range(2, size):
         for col in range(2, stop_col + 1):
             circle_design(win, size, colour, col, row, tiles)
-            current_tile_pos = (row - 1) * (size - 1) + (col - 1) + (row - 1)
+            current_tile_pos = get_current_tile_pos(size, col, row)
             colour_tracker[current_tile_pos] = 1
         stop_col -= 1
 
@@ -149,7 +149,7 @@ def third_patch(win, size, colour, colour_tracker, tiles):
     for row in range(size - 1, 2, -1):
         for col in range(size - 1, stop_col, -1):
             circle_design(win, size, colour, col, row, tiles)
-            current_tile_pos = (row - 1) * (size - 1) + (col - 1) + (row - 1)
+            current_tile_pos = get_current_tile_pos(size, col, row)
             colour_tracker[current_tile_pos] = 2
         stop_col += 1
 
@@ -190,7 +190,7 @@ def circle_design(win, size, colour, col, row, tiles):
     border_rectangle.draw(win)
     current_tile.append(border_rectangle)
 
-    current_tile_pos = (row - 1) * (size - 1) + (col - 1) + (row - 1)
+    current_tile_pos = get_current_tile_pos(size, col, row)
     tiles[current_tile_pos] = current_tile
 
 
@@ -201,7 +201,7 @@ def cycle_colours(win, size, colours, colour_tracker, tiles):
         cursor = win.getMouse()
         col = int(cursor.getX())
         row = int(cursor.getY())
-        current_tile_pos = (row - 1) * (size - 1) + (col - 1) + (row - 1)
+        current_tile_pos = get_current_tile_pos(size, col, row)
 
         if 1 <= row <= size and 1 <= col <= size:
             colour_n = (colour_tracker[current_tile_pos] + 1) % 3
@@ -211,6 +211,10 @@ def cycle_colours(win, size, colours, colour_tracker, tiles):
             redraw_shapes(win, size, colours[colour_n], col, row, colours, tiles)
         else:
             break
+
+
+def get_current_tile_pos(size, col, row):
+    return (row - 1) * (size - 1) + (col - 1) + (row - 1)
 
 
 def undraw_shapes(win, current_tile_pos, tiles):
