@@ -35,11 +35,14 @@ def solve(puzzle):
     :param puzzle: 2d list of ints
     :return: solved puzzle
     """
-    current_coords = find_empty_coords(puzzle)  # co-ords of empty square
+    # co-ords of empty square unless puzzle solved
+    current_coords = find_empty_coords(puzzle)
+
+    # co-ords stored as row, col if current_coords is true
     if current_coords:
-        row, col = current_coords  # co-ords stored as row, col
+        row, col = current_coords
     else:
-        return True  # no empty squares are found (puzzle solved)
+        return True
 
     for n in range(1, 10):
         # check if n is valid for empty square
@@ -64,7 +67,7 @@ def find_empty_coords(puzzle):
     # searches co-ords from left-to-right, top-to-bottom
     for y in range(9):
         for x in range(9):
-            if puzzle[y][x] == 0:
+            if not puzzle[y][x]:
                 return y, x  # co-ords of an empty square
 
     return False  # there are no empty squares (puzzle solved)
@@ -81,20 +84,20 @@ def valid(puzzle, row, col, n):
     """
     for y in range(9):
         if puzzle[y][col] == n:
-            return False  # n exists in row (y) and column (col)
+            return False  # n exists in row y and column col
 
     for x in range(9):
         if puzzle[row][x] == n:
-            return False  # n exists in row (row) and col (x)
+            return False  # n exists in row row and column x
 
-    # determines the 3x3 box the square is in: (0, 1, 2) by (0, 1, 2)
+    # determines the 3x3 box the square is in
     box_row = row // 3
     box_col = col // 3
 
     for y in range(3):
         for x in range(3):
             if puzzle[box_row * 3 + y][box_col * 3 + x] == n:
-                return False  # n exists in box (y, x)
+                return False  # n exists in box y, x
 
     return True  # valid if another n not found in same row, column, or box
 
@@ -106,17 +109,17 @@ def print_formatted(puzzle):
     :return: None
     """
     for y in range(9):
-        if y % 3 == 0 and y != 0:
+        if not y % 3 and y:
             print("- - - - - - - - - - - ")
 
         for x in range(9):
-            current_value = str(puzzle[y][x]).replace("0", " ")
-            if x % 3 == 0 and x != 0:
+            current_square = str(puzzle[y][x]).replace("0", " ")
+            if not x % 3 and x:
                 print("| ", end="")
             if x == 8:
-                print(current_value)
+                print(current_square)
             else:
-                print(current_value + " ", end="")
+                print(current_square + " ", end="")
 
 
 print_formatted(puzzle1)
