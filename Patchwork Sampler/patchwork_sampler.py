@@ -17,6 +17,7 @@ def main():
 
 
 def get_inputs():
+    """Ask user for the patchwork size and colours."""
     sizes = ["4", "5", "6", "7", "8"]
     size = ""
 
@@ -56,6 +57,7 @@ def get_inputs():
 
 
 def print_colours(colours):
+    """Takes a list of colours and prints them comma separated."""
     print(
         "".join(
             colours[i] + ", " if i < len(colours) - 1 else "and " + colours[i]
@@ -65,6 +67,8 @@ def print_colours(colours):
 
 
 def create_patchwork(size, colours):
+    """Creates the graphics window and calls the three different patches that make up
+    the patchwork."""
     win = GraphWin("Patchwork sampler", 100 * (size + 2), 100 * (size + 2))
     win.setBackground("white")
     win.setCoords(0, size + 2, size + 2, 0)
@@ -226,8 +230,8 @@ def undraw_shapes(win, current_tile_pos, tiles):
 
 
 def redraw_shapes(win, size, colour, col, row, colours, tiles):
-    """Redraw the shapes that make up the previously undrawn tile using the next
-    colour in the list of chosen colours."""
+    """Redraw the shapes that make up the previously undrawn tile using the next colour
+    in the list of chosen colours."""
     if row == 1 or row == size or col == 1 or col == size:
         net_design(win, size, colour, col, row, tiles)
     else:
