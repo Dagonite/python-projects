@@ -80,8 +80,8 @@ def create_patchwork(size, colours):
     # current colour of each tile
     colour_tracker = [0] * size ** 2
 
-    # only need to supply colour_tracker to the second and third patches as by default
-    # all values of the colour_tracker start with the first colour
+    # only need to supply colour_tracker to the second and third patches as
+    # by default all values of the colour_tracker start with the first colour
     first_patch(win, size, colours[0], tiles)
     second_patch(win, size, colours[1], colour_tracker, tiles)
     third_patch(win, size, colours[2], colour_tracker, tiles)
