@@ -24,7 +24,7 @@ def get_inputs():
     while size not in sizes:
         size = input(
             "\nEnter how many tiles long the square patchwork should "
-            "be (4, 5, 6, 7, or 8): "
+            "be (" + concat_list(sizes, "or ") + "): "
         ).replace(" ", "")
 
         print(
@@ -38,7 +38,7 @@ def get_inputs():
 
     while len(colours) < 3:
         print("\nThe available colours are: ", end="")
-        print_colours(valid_colours)
+        print(concat_list(valid_colours, "and, "))
         colour = input("Enter one of the above colours: ").lower().replace(" ", "")
 
         if colour in valid_colours:
@@ -51,18 +51,17 @@ def get_inputs():
             print("Error: invalid colour")
 
     print("\nYou have chosen... ", end="")
-    print_colours(colours)
+    print(concat_list(colours, "and, "))
 
     return int(size), colours
 
 
-def print_colours(colours):
-    """Takes a list of colours and prints them comma separated."""
-    print(
-        "".join(
-            colours[i] + ", " if i < len(colours) - 1 else "and " + colours[i]
-            for i in range(len(colours))
-        )
+def concat_list(lst, condition):
+    """Takes a list and returns a concatenated string of comma separated elements. The
+    condition is a string which is used as the separator for the final element."""
+    return "".join(
+        lst[i] + ", " if i < len(lst) - 1 else condition + lst[i]
+        for i in range(len(lst))
     )
 
 
