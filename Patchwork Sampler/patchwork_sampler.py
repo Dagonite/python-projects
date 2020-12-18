@@ -72,9 +72,16 @@ def create_patchwork(size, colours):
     win.setBackground("white")
     win.setCoords(0, size + 2, size + 2, 0)
 
-    colour_tracker = [0] * size ** 2
-    tiles = [0] * size ** 2
+    # initialise empty list which will be filled
+    # up with the shapes that make up the patchwork
+    tiles = [None] * size ** 2
 
+    # initialise list tracking the
+    # current colour of each tile
+    colour_tracker = [0] * size ** 2
+
+    # only need to supply colour_tracker to the second and third patches as by default
+    # all values of the colour_tracker start with the first colour
     first_patch(win, size, colours[0], tiles)
     second_patch(win, size, colours[1], colour_tracker, tiles)
     third_patch(win, size, colours[2], colour_tracker, tiles)
@@ -94,48 +101,10 @@ def first_patch(win, size, colour, tiles):
         net_design(win, size, colour, col, size, tiles)  # bottom row of tiles
 
 
-def net_design(win, size, colour, col, row, tiles):
-    """Draws the net design using the supplied position and colour."""
-    current_tile = []
-    for distance in (0.2, 0.4, 0.6, 0.8, 1):
-        line1 = Line(Point(col, distance + row), Point(col + distance, row))
-        line1.setWidth(2)
-        line1.setFill(colour)
-        line1.draw(win)
-        current_tile.append(line1)
-
-        line2 = Line(Point(col + 1 - distance, row), Point(col + 1, row + distance))
-        line2.setWidth(2)
-        line2.setFill(colour)
-        line2.draw(win)
-        current_tile.append(line2)
-
-    for distance in (0.2, 0.4, 0.6, 0.8):
-        line3 = Line(Point(col + distance, row + 1), Point(col + 1, row + distance))
-        line3.setWidth(2)
-        line3.setFill(colour)
-        line3.draw(win)
-        current_tile.append(line3)
-
-        line4 = Line(Point(col, row + distance), Point(col + 1 - distance, row + 1))
-        line4.setWidth(2)
-        line4.setFill(colour)
-        line4.draw(win)
-        current_tile.append(line4)
-
-    border_rectangle = Rectangle(Point(col, row), Point(col + 1, row + 1))
-    border_rectangle.draw(win)
-    current_tile.append(border_rectangle)
-
-    current_tile_pos = get_current_tile_pos(size, col, row)
-    tiles[current_tile_pos] = current_tile
-
-
 def second_patch(win, size, colour, colour_tracker, tiles):
     """Calls circle_design to draw an inverted staircase of circle tiles at the
     specified positions using the second chosen colour."""
     stop_col = size - 1
-
     for row in range(2, size):
         for col in range(2, stop_col + 1):
             circle_design(win, size, colour, col, row, tiles)
@@ -148,7 +117,6 @@ def third_patch(win, size, colour, colour_tracker, tiles):
     """Calls circle_design to draw a staircase of circle tiles at the specified
     positions using the third chosen colour."""
     stop_col = 2
-
     for row in range(size - 1, 2, -1):
         for col in range(size - 1, stop_col, -1):
             circle_design(win, size, colour, col, row, tiles)
@@ -157,42 +125,101 @@ def third_patch(win, size, colour, colour_tracker, tiles):
         stop_col += 1
 
 
+def net_design(win, size, colour, col, row, tiles):
+    """Draws the net design using the supplied position and colour."""
+    current_tile = []
+    for distance in (0.2, 0.4, 0.6, 0.8, 1):
+        draw_line(
+            win,
+            colour,
+            (col, distance + row),
+            (col + distance, row),
+            current_tile,
+        )
+
+        draw_line(
+            win,
+            colour,
+            (col + 1 - distance, row),
+            (col + 1, row + distance),
+            current_tile,
+        )
+
+    for distance in (0.2, 0.4, 0.6, 0.8):
+        draw_line(
+            win,
+            colour,
+            (col + distance, row + 1),
+            (col + 1, row + distance),
+            current_tile,
+        )
+
+        draw_line(
+            win,
+            colour,
+            (col, row + distance),
+            (col + 1 - distance, row + 1),
+            current_tile,
+        )
+
+    # draw black border for current tile
+    draw_rectangle(win, "black", (col, row), (col + 1, row + 1), current_tile, False)
+
+    # store current_tile in a list of ordered tiles
+    current_tile_pos = get_current_tile_pos(size, col, row)
+    tiles[current_tile_pos] = current_tile
+
+
 def circle_design(win, size, colour, col, row, tiles):
     """Draws the circle design using the supplied position and colour."""
     current_tile = []
     for width in (0.1, 0.3, 0.5, 0.7, 0.9):
         for height in (0.1, 0.3, 0.5, 0.7, 0.9):
-            full_circle = Circle(Point(width + col, height + row), 0.1)
-            outline_circle = Circle(Point(width + col, height + row), 0.1)
+            # draw filled circle
+            draw_circle(
+                win,
+                colour,
+                (width + col, height + row),
+                0.1,
+                current_tile,
+                True,
+            )
 
             if width in (0.3, 0.7):
-                white_rectangle = Rectangle(
-                    Point(width + col - 0.1, height + row),
-                    Point(width + col + 0.1, height + row + 0.1),
+                # draw horizontal white rectangle
+                draw_rectangle(
+                    win,
+                    "white",
+                    (width + col - 0.1, height + row),
+                    (width + col + 0.1, height + row + 0.1),
+                    current_tile,
+                    True,
                 )
             else:
-                white_rectangle = Rectangle(
-                    Point(width + col - 0.1, height + row - 0.1),
-                    Point(width + col, height + row + 0.1),
+                # draw vertical white rectangle
+                draw_rectangle(
+                    win,
+                    "white",
+                    (width + col - 0.1, height + row - 0.1),
+                    (width + col, height + row + 0.1),
+                    current_tile,
+                    True,
                 )
 
-            full_circle.setFill(colour)
-            full_circle.draw(win)
-            current_tile.append(full_circle)
+            # draw outlined circle
+            draw_circle(
+                win,
+                colour,
+                (width + col, height + row),
+                0.1,
+                current_tile,
+                False,
+            )
 
-            white_rectangle.setFill("white")
-            white_rectangle.setOutline("white")
-            white_rectangle.draw(win)
-            current_tile.append(white_rectangle)
+    # draw black border for current tile
+    draw_rectangle(win, "black", (col, row), (col + 1, row + 1), current_tile, False)
 
-            outline_circle.setOutline(colour)
-            outline_circle.draw(win)
-            current_tile.append(outline_circle)
-
-    border_rectangle = Rectangle(Point(col, row), Point(col + 1, row + 1))
-    border_rectangle.draw(win)
-    current_tile.append(border_rectangle)
-
+    # store current_tile in a list of ordered tiles
     current_tile_pos = get_current_tile_pos(size, col, row)
     tiles[current_tile_pos] = current_tile
 
@@ -211,9 +238,46 @@ def cycle_colours(win, size, colours, colour_tracker, tiles):
             colour_tracker[current_tile_pos] = colour_n
 
             undraw_shapes(win, current_tile_pos, tiles)
-            redraw_shapes(win, size, colours[colour_n], col, row, colours, tiles)
+            redraw_shapes(win, size, colours[colour_n], col, row, tiles)
         else:
             break
+
+
+def draw_line(win, colour, point1, point2, current_tile):
+    "Helper function for drawing lines."
+    current_line = Line(
+        Point(point1[0], point1[1]),
+        Point(point2[0], point2[1]),
+    )
+    current_line.setWidth(2)
+    current_line.setFill(colour)
+    current_line.draw(win)
+    current_tile.append(current_line)
+
+
+def draw_circle(win, colour, centre, radius, current_tile, fill):
+    "Helper function for drawing circles."
+    current_circle = Circle(Point(centre[0], centre[1]), radius)
+    if fill:
+        current_circle.setFill(colour)
+    else:
+        current_circle.setOutline(colour)
+    current_circle.setOutline(colour)
+    current_circle.draw(win)
+    current_tile.append(current_circle)
+
+
+def draw_rectangle(win, colour, point1, point2, current_tile, fill):
+    "Helper function for drawing rectangles."
+    current_rectangle = Rectangle(
+        Point(point1[0], point1[1]),
+        Point(point2[0], point2[1]),
+    )
+    if fill:
+        current_rectangle.setFill(colour)
+    current_rectangle.setOutline(colour)
+    current_rectangle.draw(win)
+    current_tile.append(current_rectangle)
 
 
 def get_current_tile_pos(size, col, row):
@@ -228,7 +292,7 @@ def undraw_shapes(win, current_tile_pos, tiles):
         shape.undraw()
 
 
-def redraw_shapes(win, size, colour, col, row, colours, tiles):
+def redraw_shapes(win, size, colour, col, row, tiles):
     """Redraw the shapes that make up the previously undrawn tile using the next colour
     in the list of chosen colours."""
     if row == 1 or row == size or col == 1 or col == size:
