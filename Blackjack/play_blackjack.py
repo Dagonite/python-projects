@@ -6,7 +6,7 @@
 #
 # Rules:
 # - dealer must hit below 17 if player isn't bust
-# - dealer must stand on 17 or higher.
+# - dealer must stand when they reach 17.
 # - minimum bet of 1 chip
 # - maximum bet of 100 chips
 # - no card counting :^)
@@ -195,6 +195,7 @@ def dealer_hit_or_stand(win, deck, dealer_hand, dealer_card_index, player_hand):
     if dealer_hand.value <= player_hand.value:
 
         while dealer_hand.value < 17:
+            sleep(1.5)
             hit(deck, dealer_hand)
             dealer_card_index += 1
             card_name = str(dealer_hand.cards[dealer_card_index])
@@ -377,6 +378,7 @@ def draw_rectangle(win, point1, point2, colour, card_object="False"):
         Point(point2[0], point2[1]),
     )
     current_rectangle.setFill(colour)
+    current_rectangle.setWidth(2)
     current_rectangle.draw(win)
 
     if card_object:
