@@ -4,6 +4,10 @@ Repository for my Python projects
 ---
 Simple graphical game where the user has to take the wind direction into account before shooting arrows at a target. The user then gets a grade depending on their score.
 
+[Blackjack](https://github.com/Dagonite/python-projects/tree/main/Blackjack)
+---
+A game of Blackjack between a player and a computer, all displayed on a graphical user interface. Did this to test how quickly I can code so the logic and functions are not super eloquent. Overall took about 6 hours.
+
 [Graphical Traced Walk](https://github.com/Dagonite/python-projects/tree/main/Graphical%20Traced%20Walk)
 ---
 Program that draws a two-dimensional grid with a person at the centre. Every quarter of a second, the person takes a random step up, down, left, or right. Every square of the grid displays how many times the person has visited it. The walk ends once the person leaves the grid. This is an adaption of my tracedwalk2d.py from Pract09 of the Worksheets found within my `python-code-snippets` repo.
