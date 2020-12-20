@@ -6,7 +6,7 @@ Simple graphical game where the user has to take the wind direction into account
 
 [Blackjack](https://github.com/Dagonite/python-projects/tree/main/Blackjack)
 ---
-A game of Blackjack between a player and a computer, all displayed on a graphical user interface. Did this to test how quickly I can code so the logic and functions are not super eloquent. Overall took about 6 hours.
+A game of Blackjack between a user and a computer, all displayed on a graphical user interface. Did this to test how quickly I can code so the logic and functions are not super eloquent. Overall took about 6 hours.
 
 [Graphical Traced Walk](https://github.com/Dagonite/python-projects/tree/main/Graphical%20Traced%20Walk)
 ---
