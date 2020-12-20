@@ -1,4 +1,4 @@
-Repository for my Python projects
+Repository for my small Python projects
 ===
 [Archery Game](https://github.com/Dagonite/python-projects/tree/main/Archery%20Game)
 ---
