@@ -1,11 +1,7 @@
 # archery_game.py
-########################################################################################
-# archery_game.py
-#
-# Game where the user has to shoot arrows at a target. The arrows are offset by wind so
-# the user has to take this into accont before each shot. After 5 arrows are used up,
-# the user gets a score and a grade.
-########################################################################################
+"""Game where the user has to shoot arrows at a target. The arrows are offset by wind so the user has to take this into 
+accont before each shot. After 5 arrows are used up, the user gets a score and a grade."""
+
 import random
 
 from graphics import Circle, GraphWin, Line, Point, Polygon, Rectangle, Text

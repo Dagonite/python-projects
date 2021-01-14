@@ -1,10 +1,8 @@
-########################################################################################
 # patchwork_sampler.py
-#
-# Program which displays a patchwork using inputs given by the user. The patchwork
-# layout and patterns are specific to my student number. This code uses input functions
-# so must be ran using the Python interpreter or at a read/write command line.
-########################################################################################
+"""Program which displays a patchwork using inputs given by the user. The patchwork layout and patterns are specific to 
+my student number. This code uses input functions so must be ran using the Python interpreter or at a read/write command
+line."""
+
 from graphics import GraphWin, Line, Circle, Point, Rectangle, Text
 
 

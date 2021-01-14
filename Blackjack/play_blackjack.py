@@ -1,16 +1,14 @@
-########################################################################################
 # play_blackjack.py
-#
-# Program which allows a player to play blackjack with a computer dealer within a
-# graphical user interface.
-#
-# Rules:
-# - dealer must hit below 17 if player isn't bust
-# - dealer must stand when they reach 17.
-# - minimum bet of 1 chip
-# - maximum bet of 100 chips
-# - no card counting :^)
-########################################################################################
+"""Program which allows a player to play blackjack with a computer dealer within a graphical user interface.
+
+Rules:
+-dealer must hit below 17 if player isn't bust
+-dealer must stand when they reach 17.
+-minimum bet of 1 chip
+-maximum bet of 100 chips
+-no card counting :^)
+"""
+
 from time import sleep
 
 from graphics import Circle, Entry, GraphWin, Line, Point, Polygon, Rectangle, Text

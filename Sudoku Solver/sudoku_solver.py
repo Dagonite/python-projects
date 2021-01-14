@@ -1,8 +1,5 @@
-########################################################################################
 # sudoku_solver.py
-#
-# Program which solves Sudoku puzzles using backtracking.
-########################################################################################
+"""Program which solves Sudoku puzzles using backtracking."""
 
 puzzle1 = [
     [0, 0, 0, 0, 0, 0, 8, 0, 0],

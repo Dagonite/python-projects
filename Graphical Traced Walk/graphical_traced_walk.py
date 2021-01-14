@@ -1,10 +1,7 @@
-########################################################################################
 # graphical_traced_walk.py
-#
-# Program which asks the user to pick a grid size and then draws the grid onto a
-# graphics window. A person is drawn in the centre and they will move in random
-# directions until they leave the grid.
-########################################################################################
+"""Program which asks the user to pick a grid size and then draws a grid on a graphics window. A person is drawn in 
+the centre and they will move in random directions until they leave the grid."""
+
 import time
 from random import random
 
