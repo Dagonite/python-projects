@@ -25,7 +25,7 @@ def get_inputs():
         size = input(
             "\nEnter how many tiles long the square patchwork should "
             "be (" + concat_list(sizes, "or ") + "): "
-        ).replace(" ", "")
+        ).strip()
 
         print(
             f"The patchwork will be a {size} x {size} grid"
@@ -39,7 +39,7 @@ def get_inputs():
     while len(colours) < 3:
         print("\nThe available colours are: ", end="")
         print(concat_list(valid_colours, "and, "))
-        colour = input("Enter one of the above colours: ").lower().replace(" ", "")
+        colour = input("Enter one of the above colours: ").lower().strip()
 
         if colour in valid_colours:
             colours.append(colour)
