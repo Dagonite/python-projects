@@ -40,10 +40,10 @@ def archery_game():
 
     grades = [
         "amazing at this game",
-        "pretty good at this",
-        "average at this",
-        "below average at this",
-        "awful at this",
+        "pretty good at this game",
+        "average at this game",
+        "below average at this game",
+        "awful at this game",
     ]
 
     score = 0
