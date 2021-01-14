@@ -1,6 +1,6 @@
 # archery_game.py
-"""Game where the user has to shoot arrows at a target. The arrows are offset by wind so the user has to take this into 
-accont before each shot. After 5 arrows are used up, the user gets a score and a grade."""
+"""Game where a user has to shoot arrows at a target. The arrows are offset by wind so the user has to take this into 
+account before each shot. After 5 arrows the user gets a score and a grade."""
 
 import random
 
