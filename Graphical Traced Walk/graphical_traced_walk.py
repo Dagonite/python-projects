@@ -19,8 +19,7 @@ def get_inputs():
     while True:
         squares = input(
             "\nEnter the common height and width of the grid (must be an odd number): "
-        )
-        squares.replace(" ", "")
+        ).strip()
         if squares.isdigit():
             squares = int(squares)
             if squares % 2 == 0:
