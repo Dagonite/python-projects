@@ -2,6 +2,13 @@
 """Program which solves Sudoku puzzles using backtracking."""
 
 
+def main(puzzle):
+    print_formatted(puzzle)
+    print("_____________________\n")
+    solve(puzzle)
+    print_formatted(puzzle)
+
+
 def solve(puzzle):
     """
     Solves the Sudoku puzzle through backtracking.
@@ -108,7 +115,4 @@ if __name__ == "__main__":
         [0, 0, 0, 0, 0, 0, 7, 0, 0],
     ]
 
-    print_formatted(puzzle)
-    print("_____________________\n")
-    solve(puzzle)
-    print_formatted(puzzle)
+    main(puzzle)
