@@ -1,4 +1,5 @@
 # graphical_traced_walk.py
+# fmt: off
 """Program which asks the user to pick a grid size and then draws a grid on a graphics window. A person is drawn in 
 the centre and they will move in random directions until they leave the grid."""
 
@@ -17,9 +18,7 @@ def main():
 
 def get_inputs():
     while True:
-        squares = input(
-            "\nEnter the common height and width of the grid (must be an odd number): "
-        ).strip()
+        squares = input("\nEnter the common height and width of the grid (must be an odd number): ").strip()
         if squares.isdigit():
             squares = int(squares)
             if squares % 2 == 0:
@@ -37,14 +36,10 @@ def get_inputs():
 
 def draw_grid(squares_with_border):
     squares = squares_with_border - 1
-    win = GraphWin(
-        "Graphical traced walk", 50 * squares_with_border, 50 * squares_with_border
-    )
+    win = GraphWin("Graphical traced walk", 50 * squares_with_border, 50 * squares_with_border)
     win.setCoords(0, squares_with_border, squares_with_border, 0)
 
-    border_rectangle = Rectangle(
-        Point(0.5, 0.5), Point(squares_with_border - 0.5, squares_with_border - 0.5)
-    )
+    border_rectangle = Rectangle(Point(0.5, 0.5), Point(squares_with_border - 0.5, squares_with_border - 0.5))
     border_rectangle.setFill("gray")
     border_rectangle.setWidth(2)
     border_rectangle.draw(win)
@@ -65,14 +60,10 @@ def draw_grid(squares_with_border):
 
     for i in range(squares):
         for j in range(squares):
-            grid_line = Line(
-                Point(1.5 + j, 0.5), Point(1.5 + j, squares_with_border - 0.5)
-            )
+            grid_line = Line(Point(1.5 + j, 0.5), Point(1.5 + j, squares_with_border - 0.5))
             grid_line.draw(win)
 
-            grid_line = Line(
-                Point(0.5, 1.5 + j), Point(squares_with_border - 0.5, 1.5 + j)
-            )
+            grid_line = Line(Point(0.5, 1.5 + j), Point(squares_with_border - 0.5, 1.5 + j))
             grid_line.draw(win)
 
             square_text = Text(Point(1 + j, 1 + i), "")
