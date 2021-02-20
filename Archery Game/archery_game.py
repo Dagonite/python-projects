@@ -1,4 +1,5 @@
 # archery_game.py
+# fmt: off
 """Game where a user has to shoot arrows at a target. The arrows are offset by wind so the user has to take this into 
 account before each shot. After 5 arrows the user gets a score and a grade."""
 
@@ -20,16 +21,12 @@ def archery_game():
     ground_rect.setFill("green")
     ground_rect.draw(win)
 
-    left_target_stand = Polygon(
-        Point(0.02, -0.01), Point(0.45, 0.5), Point(0.55, 0.5), Point(0.12, -0.01)
-    )
+    left_target_stand = Polygon(Point(0.02, -0.01), Point(0.45, 0.5), Point(0.55, 0.5), Point(0.12, -0.01))
     left_target_stand.setFill("brown")
     left_target_stand.setWidth(2)
     left_target_stand.draw(win)
 
-    right_target_stand = Polygon(
-        Point(0.98, -0.01), Point(0.55, 0.5), Point(0.45, 0.5), Point(0.88, -0.01)
-    )
+    right_target_stand = Polygon(Point(0.98, -0.01), Point(0.55, 0.5), Point(0.45, 0.5), Point(0.88, -0.01))
     right_target_stand.setFill("brown")
     right_target_stand.setWidth(2)
     right_target_stand.draw(win)
@@ -65,10 +62,11 @@ def archery_game():
     wsd = 0.25  # wind start deviation
     wd = 0.1  # wind deviation per arrow
     wth = 0.08  # wind threshold
+    arrows = 5  # number of arrows to shoot
 
     h_wind, v_wind = random.uniform(-wsd, wsd), random.uniform(-wsd, wsd)
 
-    for arrow in range(5):
+    for _ in range(arrows):
         wind = ""
 
         if v_wind > wth:
@@ -128,8 +126,7 @@ def archery_game():
     score_text.setSize(10)
     score_text.setText("Click on the target to play again\nClick anywhere else to quit")
     choice = win.getMouse()
-    choice_x = choice.getX()
-    choice_y = choice.getY()
+    choice_x, choice_y = choice.getX(), choice.getY()
 
     if distance_between_points(Point(choice_x, choice_y), Point(0.5, 0.5)) <= 0.3:
         win.close()
@@ -143,19 +140,11 @@ def draw_arrow(win, arrow_x, arrow_y):
     arrow_shaft.setFill("brown")
     arrow_shaft.draw(win)
 
-    fletching = Line(
-        Point(arrow_x + 0.02, arrow_y + 0.02), Point(arrow_x - 0.02, arrow_y - 0.02)
-    )
-    fletching.setWidth(2)
-    fletching.setFill("gray")
-    fletching.draw(win)
-
-    fletching = Line(
-        Point(arrow_x + 0.02, arrow_y - 0.02), Point(arrow_x - 0.02, arrow_y + 0.02)
-    )
-    fletching.setWidth(2)
-    fletching.setFill("gray")
-    fletching.draw(win)
+    for x in (1, -1):
+        fletching = Line(Point(arrow_x + 0.02, arrow_y + 0.02 * x), Point(arrow_x - 0.02, arrow_y - 0.02 * x))
+        fletching.setWidth(2)
+        fletching.setFill("gray")
+        fletching.draw(win)
 
 
 archery_game()
