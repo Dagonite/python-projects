@@ -2,7 +2,7 @@ Repository for my small Python projects
 ===
 [Archery Game](https://github.com/Dagonite/python-projects/tree/main/Archery%20Game)
 ---
-Simple graphical game where the user has to take the wind direction into account before shooting arrows at a target. The user then gets a grade depending on their score.
+Simple graphical game where the user has to take the wind direction into account before shooting arrows at a target. The user then gets a grade depending on their score.  This game requires imports from my `python-exercises` repo.
 
 [Blackjack](https://github.com/Dagonite/python-projects/tree/main/Blackjack)
 ---
@@ -10,7 +10,7 @@ A game of Blackjack between a user and a computer, all displayed on a graphical 
 
 [Graphical Traced Walk](https://github.com/Dagonite/python-projects/tree/main/Graphical%20Traced%20Walk)
 ---
-Program that draws a two-dimensional grid with a person at the centre. Every quarter of a second, the person takes a random step up, down, left, or right. Every square of the grid displays how many times the person has visited it. The walk ends once the person leaves the grid. This is an adaption of my tracedwalk2d.py from Pract09 of the Worksheets found within my `python-code-snippets` repo.
+Program that draws a two-dimensional grid with a person at the centre. Every quarter of a second, the person takes a random step up, down, left, or right. Every square of the grid displays how many times the person has visited it. The walk ends once the person leaves the grid. This is an adaption of my tracedwalk2d.py from Pract09 of the Worksheets found within my `python-exercises` repo.
 
 [Patchwork Sampler](https://github.com/Dagonite/python-projects/tree/main/Patchwork%20Sampler)
 ---
