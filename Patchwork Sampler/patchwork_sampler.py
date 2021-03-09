@@ -225,4 +225,5 @@ def redraw_shapes(win, size, colour, col, row, tiles):
         circle_design(win, size, colour, col, row, tiles)
 
 
-main()
+if __name__ == "__main__":
+    main()
