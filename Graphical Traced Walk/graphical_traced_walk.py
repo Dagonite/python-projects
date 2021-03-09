@@ -116,4 +116,5 @@ def draw_step(win, person, x, y):
     time.sleep(0.25)
 
 
-main()
+if __name__ == "__main__":
+    main()

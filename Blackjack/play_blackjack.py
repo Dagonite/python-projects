@@ -383,4 +383,5 @@ def draw_rectangle(win, point1, point2, colour, card_object="False"):
         return current_rectangle
 
 
-main()
+if __name__ == "__main__":
+    main()

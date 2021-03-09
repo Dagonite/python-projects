@@ -147,4 +147,5 @@ def draw_arrow(win, arrow_x, arrow_y):
         fletching.draw(win)
 
 
-archery_game()
+if __name__ == "__main__":
+    archery_game()
