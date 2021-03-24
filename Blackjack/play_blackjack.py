@@ -1,6 +1,8 @@
+# play_blackjack.py
+
 import sys
 
-from blackjack import RANKS, DIAMONDS, HEARTS, CLUBS, SPADES, SUITS, Card, Deck, Hand, Chips
+from blackjack import FACE_CARDS, RANKS, SUITS, Card, Deck, Hand, Chips
 
 
 START_CHIPS = 1000
@@ -27,7 +29,7 @@ def main():
 
     while True:  # main game loop
         if player_chips.total < 1:  # check if the player has run out of chips
-            print("\nYou've run out of chips. Thanks for playing!")
+            print("You've run out of chips. Thanks for playing!")
             sys.exit()
 
         # prompt the player for their intitial bet
@@ -46,11 +48,9 @@ def main():
 
         if player_is_bust:  # check if the player has bust
             print("You've gone over 21.")
-            print(f"You've lost {player_chips.bet} chip(s).")
+            print(f"You've lost {player_chips.full_bet} chip(s).")
         else:  # player hasn't bust
-
-            # reveal dealer's hidden card
-            display_hands(deck, (dealer_hand, player_hand), False)
+            display_hands(deck, (dealer_hand, player_hand), False)  # reveal dealer's hidden card
 
             # await for user input beforing proceeding
             input("Press Enter to continue... ")
@@ -62,18 +62,20 @@ def main():
 
             if dealer_is_bust:  # check if the dealer has bust
                 print("The dealer has gone over 21.")
-                print(f"You've won {player_chips.win_bet()} chip(s).")
+                player_chips.win_bet()
+                print(f"You've won {player_chips.full_bet} chip(s).")
             else:
                 if player_hand.value > dealer_hand.value:  # check if player hand beats dealer's
                     print("You have the better hand.")
-                    print(f"You've won {player_chips.win_bet()} chip(s).")
+                    player_chips.win_bet()
+                    print(f"You've won {player_chips.full_bet} chip(s).")
                 elif player_hand.value == dealer_hand.value:  # check if the hands are equal
                     print("Both hands are equal. It's a draw.")
                     player_chips.draw_bet()
                     print("Your chips have been returned.")
                 else:  # otherwise dealer's hand is better
                     print("Dealer has the better hand.")
-                    print(f"You've lost {player_chips.bet} chip(s).")
+                    print(f"You've lost {player_chips.full_bet} chip(s).")
 
         print()
 
@@ -112,11 +114,15 @@ def deal_initial_hands(deck):
 
 def hit(deck, hand):
     """Add a card to the supplied hand by taking a card from the deck."""
-    hand.add_card(deck.deal())
+    new_card = deck.deal()
+    hand.add_card(new_card)
     hand.adjust_for_ace()
+
+    return new_card
 
 
 def display_hands(deck, hands, hidden=True):
+    """Print out both hands along with their values. Hide dealer's value if hidden is True."""
     hidden_value = "??" if hidden else hands[0].value
     print(f"\nDEALER: {hidden_value}")
     hands[0].format_hand(hidden)
@@ -126,9 +132,7 @@ def display_hands(deck, hands, hidden=True):
 
 
 def get_bet(player_chips, initial_bet=None):
-    # determine the maximum chips the player can bet
-    # if there has already been an initial bet: use the minimum of the initial bet and the player's total chips
-    # else: use the player's total chips
+    """Ask the player how much they want to bet for this round."""
     max_bet = min(initial_bet, (player_chips.total)) if initial_bet is not None else player_chips.total
 
     while True:  # loop until the player gives a valid bet
@@ -148,24 +152,28 @@ def get_bet(player_chips, initial_bet=None):
 
 
 def process_player_moves(deck, dealer_hand, player_hand, player_chips, bet):
+    """Process player moves until they reach 21, go bust, or stand."""
     move = ""
     while player_hand.value < 22:  # loop whilst player hasn't bust
         if player_hand.value == 21 or move == "D":
+            # await for user input beforing proceeding
+            input("Press Enter to continue... ")
+
             return False  # automatically stand for the player if they have 21 or doubled down
 
         # get the player's move
         move = get_move(player_hand, player_chips)
 
-        if move == "H":
-            hit(deck, player_hand)  # add a card to the player's hand
+        if move in ("H", "D"):
+            if move == "D":
+                # player has doubled down so get another bet
+                bet = get_bet(player_chips, bet)
+
+            new_card = hit(deck, player_hand)  # add a card to the player's hand
+            print(f"\nYou drew {new_card}")
+
         elif move == "S":
             return False  # player decides to stand
-        elif move == "D":
-            # player has doubled down so get another bet
-            bet = get_bet(player_chips, bet)
-
-            # add a card to the player's hand
-            hit(deck, player_hand)
 
         # show the cards
         display_hands(deck, (dealer_hand, player_hand))
@@ -174,6 +182,7 @@ def process_player_moves(deck, dealer_hand, player_hand, player_chips, bet):
 
 
 def get_move(player_hand, player_chips):
+    """Ask the player for a valid move."""
     while True:  # loop until the player gives a valid answer
         moves = ["(H)it", "(S)tand"]
 
@@ -189,8 +198,13 @@ def get_move(player_hand, player_chips):
 
 
 def process_dealer_moves(deck, dealer_hand, player_hand):
+    """Process dealer moves until their hand value reaches 17."""
     while dealer_hand.value < 17:  # dealer must hit until they have at least 17
-        hit(deck, dealer_hand)
+        # draw a card
+        new_card = hit(deck, dealer_hand)
+        print(f"\nDealer drew {new_card}")
+
+        # show the cards
         display_hands(deck, (dealer_hand, player_hand), False)
 
         # await for user input beforing proceeding
