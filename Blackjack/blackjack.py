@@ -23,11 +23,11 @@ class Card:
 
         suit = SUITS[self.suit]
 
-        postfix = ""
+        article = "a"
         if rank == "8" or rank == "Ace":
-            postfix = "n"
+            article += "n"
 
-        return f"a{postfix} {rank} of {suit}"
+        return f"{article} {rank} of {suit}"
 
     def format_card(self, rows, hidden=False):
         rows[0] += " ___  "  # top line of a card
