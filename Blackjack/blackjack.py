@@ -1,18 +1,33 @@
+# blackjack.py
+
 import random
 
 # set up the constants
-RANKS = tuple(range(2, 11)) + ("Jack", "Queen", "King", "Ace")
-DIAMONDS = chr(9830)
-HEARTS = chr(9829)
-CLUBS = chr(9827)
-SPADES = chr(9824)
-SUITS = (DIAMONDS, HEARTS, CLUBS, SPADES)
+FACE_CARDS = ("Jack", "Queen", "King", "Ace")
+RANKS = tuple(range(2, 11)) + FACE_CARDS
+SUITS = {chr(9830): "Diamonds", chr(9829): "Hearts", chr(9827): "Clubs", chr(9824): "Spades"}
 
 
 class Card:
     def __init__(self, suit, rank):
         self.suit = suit
         self.rank = rank
+
+    def __str__(self):
+        for face in FACE_CARDS:
+            if self.rank == face[0]:
+                rank = face
+                break
+        else:
+            rank = self.rank
+
+        suit = SUITS[self.suit]
+
+        postfix = ""
+        if rank == "8" or rank == "Ace":
+            postfix = "n"
+
+        return f"a{postfix} {rank} of {suit}"
 
     def format_card(self, rows, hidden=False):
         rows[0] += " ___  "  # top line of a card
@@ -72,21 +87,20 @@ class Hand:
 class Chips:
     def __init__(self, total):
         self.total = total
-        self.bet = 0
+        self.full_bet = 0
 
     def __str__(self):
         return str(self.total)
 
-    def take_bet(self, bet):
-        self.bet += bet
-        self.total -= bet
+    def take_bet(self, additional_bet):
+        self.full_bet += additional_bet
+        self.total -= additional_bet
 
     def win_bet(self):
-        self.total += self.bet * 2
-        return self.bet
+        self.total += self.full_bet * 2
 
     def draw_bet(self):
-        self.total += self.bet
+        self.total += self.full_bet
 
     def clear_bet(self):
-        self.bet = 0
+        self.full_bet = 0
