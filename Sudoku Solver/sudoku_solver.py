@@ -18,7 +18,7 @@ def solve(puzzle):
     # co-ords of empty square unless puzzle solved
     current_coords = find_empty_coords(puzzle)
 
-    # co-ords stored as row, col if current_coords is true
+    # co-ords stored as row, col if current_coords is truthy
     if current_coords:
         row, col = current_coords
     else:
