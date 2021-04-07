@@ -1,25 +1,22 @@
 # sudoku_solver.py
 """Program which solves Sudoku puzzles using backtracking."""
 
+from typing import Union, Tuple, List
 
-def main(puzzle):
+
+def main(puzzle: list) -> None:
     print_formatted(puzzle)
     print("_____________________\n")
     solve(puzzle)
     print_formatted(puzzle)
 
 
-def solve(puzzle):
-    """
-    Solves the Sudoku puzzle through backtracking.
-    :param puzzle: 2d list of ints
-    :return: solved puzzle
-    """
+def solve(puzzle: list) -> bool:
     # co-ords of empty square unless puzzle solved
     current_coords = find_empty_coords(puzzle)
 
     # co-ords stored as row, col if current_coords is truthy
-    if current_coords:
+    if current_coords != (-1, -1):
         row, col = current_coords
     else:
         return True
@@ -38,30 +35,17 @@ def solve(puzzle):
     return False
 
 
-def find_empty_coords(puzzle):
-    """
-    Finds the next empty square in the puzzle (indicated by a 0).
-    :param puzzle: 2d list of ints
-    :return x, y: row (int), col (int)
-    """
+def find_empty_coords(puzzle: list) -> Tuple[int, int]:
     # searches co-ords from left-to-right, top-to-bottom
     for y in range(9):
         for x in range(9):
             if not puzzle[y][x]:
                 return y, x  # co-ords of an empty square
 
-    return False  # there are no empty squares (puzzle solved)
+    return -1, -1  # there are no empty squares (puzzle solved)
 
 
-def valid(puzzle, row, col, n):
-    """
-    Returns if n is a valid number.
-    :param puzzle: 2d list of ints
-    :param row: square's y co-ord
-    :param col: square's x co-ord
-    :param n: current int being tried
-    :return: bool
-    """
+def valid(puzzle: list, row: int, col: int, n: int) -> bool:
     for y in range(9):
         if puzzle[y][col] == n:
             return False  # n exists in row y and column col
@@ -82,18 +66,13 @@ def valid(puzzle, row, col, n):
     return True  # valid if another n not found in same row, column, or box
 
 
-def print_formatted(puzzle):
-    """
-    Prints the puzzle in a readable format.
-    :param puzzle: 2d list of ints
-    :return: None
-    """
+def print_formatted(puzzle: list) -> None:
     for y in range(9):
         if not y % 3 and y:
             print("- - - - - - - - - - - ")
 
         for x in range(9):
-            current_square = str(puzzle[y][x]).replace("0", " ")
+            current_square = str(puzzle[y][x]).replace("0", "·")
             if not x % 3 and x:
                 print("| ", end="")
             if x == 8:
@@ -103,7 +82,7 @@ def print_formatted(puzzle):
 
 
 if __name__ == "__main__":
-    puzzle = [
+    puzzle: List[List[int]] = [
         [0, 0, 0, 0, 0, 0, 8, 0, 0],
         [1, 2, 0, 0, 0, 4, 0, 0, 0],
         [5, 7, 0, 0, 0, 6, 0, 3, 0],
