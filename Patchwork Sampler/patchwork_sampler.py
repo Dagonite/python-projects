@@ -21,16 +21,15 @@ def get_inputs():
     size = ""
 
     while size not in sizes:
-        size = input("\nEnter how many tiles long the square patchwork should be (" + concat_list(sizes, "or ") + "): ").strip()
+        size = input("\nEnter how many tiles long the square patchwork should be (" + concat_list(sizes, "or") + ")\n> ").strip()
         print(f"The patchwork will be a {size} x {size} grid" if size in sizes else "Error: invalid size")
 
     valid_colours = ["red", "green", "blue", "orange", "brown", "pink"]
     colours = []
 
     while len(colours) < 3:
-        print("\nThe available colours are: ", end="")
-        print(concat_list(valid_colours, "and, "))
-        colour = input("Enter one of the above colours: ").lower().strip()
+        print("\nThe available colours are:", concat_list(valid_colours, "and"))
+        colour = input("Enter one of the above colours\n> ").lower().strip()
 
         if colour in valid_colours:
             colours.append(colour)
@@ -41,16 +40,15 @@ def get_inputs():
         else:
             print("Error: invalid colour")
 
-    print("\nYou have chosen... ", end="")
-    print(concat_list(colours, "and, "))
+    print("\nYou have chosen...", concat_list(colours, "and"))
 
     return int(size), colours
 
 
-def concat_list(lst, condition):
-    """Takes a list and returns a concatenated string of comma separated elements. The condition is a string which is 
+def concat_list(lst, conjunction):
+    """Takes a list and returns a concatenated string of comma separated values. The conjuction is a string which is 
     used as the separator for the final element."""
-    return "".join(lst[i] + ", " if i < len(lst) - 1 else condition + lst[i] for i in range(len(lst)))
+    return ", ".join(lst[:-1]) + f", {conjunction} {lst[-1]}"
 
 
 def create_patchwork(size, colours):
@@ -59,16 +57,13 @@ def create_patchwork(size, colours):
     win.setBackground("white")
     win.setCoords(0, size + 2, size + 2, 0)
 
-    # initialise empty list which will be filled
-    # up with the shapes that make up the patchwork
+    # initialise a list of length size^2 which will be filled up with the shapes that make up the patchwork
     tiles = [None] * size ** 2
 
-    # initialise list tracking the
-    # current colour of each tile
+    # initialise a list tracking the current colour of each tile
     colour_tracker = [0] * size ** 2
 
-    # only need to supply colour_tracker to the second and third patches as
-    # by default all values of the colour_tracker start with the first colour
+    # colour_tracker initialised to first patch colour so don't need to supply as arg
     first_patch(win, size, colours[0], tiles)
     second_patch(win, size, colours[1], colour_tracker, tiles)
     third_patch(win, size, colours[2], colour_tracker, tiles)
@@ -77,7 +72,7 @@ def create_patchwork(size, colours):
 
 
 def first_patch(win, size, colour, tiles):
-    """Calls net_design to draw a perimeter of net tiles at the specified positions using the first chosen colour."""
+    """Calls net_design() to draw a perimeter of net tiles at the specified positions. Uses the first chosen colour."""
     for row in range(1, size + 1):
         net_design(win, size, colour, 1, row, tiles)  # left column of tiles
         net_design(win, size, colour, size, row, tiles)  # right column of tiles
@@ -88,7 +83,7 @@ def first_patch(win, size, colour, tiles):
 
 
 def second_patch(win, size, colour, colour_tracker, tiles):
-    """Calls circle_design to draw an inverted staircase of circle tiles at the specified positions using the second 
+    """Calls circle_design() to draw an inverted staircase of circle tiles at the specified positions. Uses the second 
     chosen colour."""
     stop_col = size - 1
     for row in range(2, size):
@@ -100,7 +95,8 @@ def second_patch(win, size, colour, colour_tracker, tiles):
 
 
 def third_patch(win, size, colour, colour_tracker, tiles):
-    """Calls circle_design to draw a staircase of circle tiles at the specified positions using the third chosen colour."""
+    """Calls circle_design() to draw a staircase of circle tiles at the specified positions in the remaining space. Uses 
+    the third chosen colour."""
     stop_col = 2
     for row in range(size - 1, 2, -1):
         for col in range(size - 1, stop_col, -1):
@@ -211,14 +207,15 @@ def get_current_tile_pos(size, col, row):
 
 
 def undraw_shapes(win, current_tile_pos, tiles):
-    """Undraw the shapes that make up the provided tile index."""
+    """Undraw the shapes that make up a tile using the provided tile position."""
     current_tile = tiles[current_tile_pos]
     for shape in current_tile:
         shape.undraw()
 
 
 def redraw_shapes(win, size, colour, col, row, tiles):
-    """Redraw the shapes that make up the previously undrawn tile using the next colour in the list of chosen colours."""
+    """Determine what tile design needs to be drawn then call the relevant design function. Supply the design function
+    with the next colour in the list of chosen colours."""
     if row == 1 or row == size or col == 1 or col == size:
         net_design(win, size, colour, col, row, tiles)
     else:
