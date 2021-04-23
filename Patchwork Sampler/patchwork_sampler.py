@@ -47,7 +47,7 @@ def get_inputs():
 
 def concat_list(lst, conjunction):
     """Takes a list and returns a concatenated string of comma separated values. The conjuction is a string which is 
-    used as the separator for the final element."""
+    used as the separator for the last list value."""
     return ", ".join(lst[:-1]) + f", {conjunction} {lst[-1]}"
 
 
@@ -156,8 +156,7 @@ def cycle_colours(win, size, colours, colour_tracker, tiles):
     program."""
     while True:
         cursor = win.getMouse()
-        col = int(cursor.getX())
-        row = int(cursor.getY())
+        col, row = int(cursor.getX()), int(cursor.getY())
         current_tile_pos = get_current_tile_pos(size, col, row)
 
         if 1 <= row <= size and 1 <= col <= size:
