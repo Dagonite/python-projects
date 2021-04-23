@@ -17,19 +17,18 @@ def main():
 
 def get_inputs():
     """Ask user for the patchwork size and colours."""
-    sizes = ["4", "5", "6", "7", "8"]
+    sizes = list("45678")
     size = ""
 
     while size not in sizes:
-        size = input("\nEnter how many tiles long the square patchwork should be (" + concat_list(sizes, "or") + ")\n> ").strip()
+        size = input("\nEnter one of the following sizes for the patchwork (" + concat_list(sizes, "or") + ")\n> ").strip()
         print(f"The patchwork will be a {size} x {size} grid" if size in sizes else "Error: invalid size")
 
     valid_colours = ["red", "green", "blue", "orange", "brown", "pink"]
     colours = []
 
     while len(colours) < 3:
-        print("\nThe available colours are:", concat_list(valid_colours, "and"))
-        colour = input("Enter one of the above colours\n> ").lower().strip()
+        colour = input("\nEnter one of the following colours (" + concat_list(valid_colours, "and") + ")\n> ").lower().strip()
 
         if colour in valid_colours:
             colours.append(colour)
