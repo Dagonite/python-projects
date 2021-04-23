@@ -28,8 +28,8 @@ def main():
     player_chips = Chips(START_CHIPS)
 
     while True:  # main game loop
-        if player_chips.total < 1:  # check if the player has run out of chips
-            print("You've run out of chips. Thanks for playing!")
+        if player_chips.total < 1:  # check if the player is out of chips
+            print("You're out of chips. Thanks for playing!")
             sys.exit()
 
         # prompt the player for their intitial bet
@@ -139,7 +139,12 @@ def get_bet(player_chips, initial_bet=None):
         bet = input(f"Enter an amount to bet (1-{max_bet}, or (Q)uit)> ").upper().strip()
 
         if bet == "Q":
-            print("Thanks for playing!")
+            print(
+                f"You've retired on {player_chips.total} chips."
+                if player_chips.total > 1
+                else f"You've retired on {player_chips.total} chip.",
+                "Thanks for playing!",
+            )
             sys.exit()
 
         if not bet.isdecimal():
