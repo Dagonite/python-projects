@@ -1,6 +1,6 @@
 # archery_game.py
 """Game where a user has to shoot arrows at a target. The arrows are offset by wind so the user has to take this into 
-account before each shot. After 5 arrows the user gets a score and a grade."""
+account before each shot. After firing all arrows, the user gets a score and a grade."""
 
 import random
 
@@ -102,13 +102,13 @@ def archery_game():
 
         score_text.setText("Score: {}".format(score))
 
-    if score > 44:
+    if score > 220 / arrows:
         grade = 0
-    elif score > 34:
+    elif score > 170 / arrows:
         grade = 1
-    elif score > 24:
+    elif score > 120 / arrows:
         grade = 2
-    elif score > 19:
+    elif score > 95 / arrows:
         grade = 3
     else:
         grade = 4
