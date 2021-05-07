@@ -141,8 +141,6 @@ def process_csv(path="traced_walks.csv"):
     for stat_key, stat_value in stats.items():
         print(f"On average it has taken {stat_value[0]/stat_value[1]:.1f} steps to leave a grid of size {stat_key}")
 
-    print(stats)
-
 
 if __name__ == "__main__":
     process_csv()
