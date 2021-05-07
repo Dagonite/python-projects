@@ -8,9 +8,13 @@ from random import random
 from graphics import Circle, GraphWin, Line, Point, Rectangle, Text
 
 
-def main(squares=0):
-    if squares % 2 == 0:
-        squares = get_inputs()
+def main(squares=None):
+    if squares is None:
+        squares = get_input()
+    elif squares % 2 == 0:
+        squares += 1
+
+    squares = min(19, squares)
 
     squares_with_border = squares + 1
     win, person, square_texts = draw_grid(squares_with_border)
@@ -19,14 +23,18 @@ def main(squares=0):
     win.close()
 
 
-def get_inputs():
+def get_input():
     while True:
         try:
-            squares = int(input("\nEnter the grid size (must be an odd number and more than 2): > ").strip())
+            squares = int(
+                input("\nEnter the grid size (must be an odd number more than 2 and less than 20): > ").strip()
+            )
             if squares % 2 == 0:
                 raise ValueError("please enter an odd number")
             elif squares < 3:
-                raise ValueError("please enter a number larger than 2")
+                raise ValueError("please enter a number greater than 2")
+            elif squares > 19:
+                raise ValueError("please enter a number less than 20")
             break
         except ValueError as error:
             print(error)
@@ -104,7 +112,7 @@ def simulate_steps(win, person, squares, square_texts):
 
 def draw_step(win, person, x, y):
     person.move(x, y)
-    time.sleep(0.25)
+    time.sleep(0.1)
 
 
 def write_to_csv(*data, path="traced_walks.csv"):
@@ -131,7 +139,9 @@ def process_csv(path="traced_walks.csv"):
             stats[stat_key][1] += 1
 
     for stat_key, stat_value in stats.items():
-        print(f"On average it has taken {stat_value[0]/stat_value[1]} steps to leave a grid of size {stat_key}")
+        print(f"On average it has taken {stat_value[0]/stat_value[1]:.1f} steps to leave a grid of size {stat_key}")
+
+    print(stats)
 
 
 if __name__ == "__main__":
