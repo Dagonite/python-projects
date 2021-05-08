@@ -13,8 +13,7 @@ def main(squares=None):
         squares = get_input()
     elif squares % 2 == 0:
         squares += 1
-
-    squares = min(19, squares)
+        squares = min(19, squares)
 
     squares_with_border = squares + 1
     win, person, square_texts = draw_grid(squares_with_border)
