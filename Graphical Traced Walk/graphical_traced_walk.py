@@ -105,7 +105,7 @@ def simulate_steps(win, person, squares, square_texts):
         grid[current_row][current_col] += 1
         square_texts[current_row][current_col].setText(grid[current_row][current_col])
 
-    print(f"\nIt took {total_steps} steps to leave a grid of size {squares}")
+    print(f"\nIt took {total_steps} steps to leave a grid of size {squares}\n")
 
     return total_steps
 
@@ -134,13 +134,20 @@ def process_csv(path="traced_walks.csv"):
         for row in reader:
             stat_key = row[1]
             if stat_key not in stats:
-                stats[stat_key] = [0, 0]
-            stats[stat_key][0] += int(row[0])
-            stats[stat_key][1] += 1
+                stats[stat_key] = [int(row[0]), 1, int(row[0]), int(row[0])]
+            else:
+                stats[stat_key][0] += int(row[0])
+                stats[stat_key][1] += 1
+                stats[stat_key][2] = max(stats[stat_key][2], int(row[0]))
+                stats[stat_key][3] = min(stats[stat_key][3], int(row[0]))
 
-    for stat_key, stat_value in stats.items():
-        print(f"On average it has taken {stat_value[0]/stat_value[1]:.1f} steps to leave a grid of size {stat_key}")
+    print(("{}" + "{:>10}" * 5).format("Size", "Walks", "Steps", "Avg", "Max", "Min"))
+    for size, stat_value in stats.items():
+        walks, steps, max_steps, min_steps = stat_value[1], stat_value[0], stat_value[2], stat_value[3]
+        ronded_avg = round(steps / walks, 1)
+        print(("{:>4}" + "{:>10}" * 5).format(size, walks, steps, ronded_avg, max_steps, min_steps))
 
 
 if __name__ == "__main__":
+    main()
     process_csv()
