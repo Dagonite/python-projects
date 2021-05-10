@@ -2,8 +2,7 @@
 
 import sys
 
-from blackjack import FACE_CARDS, RANKS, SUITS, Card, Deck, Hand, Chips
-
+from blackjack import Chips, Deck, Hand
 
 START_CHIPS = 1000
 
