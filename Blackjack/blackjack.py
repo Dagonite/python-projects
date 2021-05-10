@@ -1,7 +1,5 @@
 # blackjack.py
 
-import random
-
 # set up the constants
 FACE_CARDS = ("Jack", "Queen", "King", "Ace")
 RANKS = tuple(range(2, 11)) + FACE_CARDS
@@ -14,6 +12,7 @@ class Card:
         self.rank = rank
 
     def __str__(self):
+        # if face card, use whole name
         for face in FACE_CARDS:
             if self.rank == face[0]:
                 rank = face
@@ -21,8 +20,10 @@ class Card:
         else:
             rank = self.rank
 
+        # use suit name instead of symbol
         suit = SUITS[self.suit]
 
+        # determine what article to use
         article = "a"
         if rank == "8" or rank == "Ace":
             article += "n"
@@ -48,6 +49,8 @@ class Deck:
         self.deck = [Card(suit, str(rank)[0]) if rank != 10 else Card(suit, "10") for rank in RANKS for suit in SUITS]
 
     def shuffle_deck(self):
+        import random
+
         random.shuffle(self.deck)
 
     def deal(self):
