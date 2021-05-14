@@ -20,6 +20,10 @@ University coursework where I had to write a program that displays a patchwork s
 ---
 A program that solves any given Sudoku puzzle by using a backtracking algorithm and then prints out the solution. Currently, working on a playable GUI.
 
+[Turtle Race](https://github.com/Dagonite/python-projects/tree/main/Sudoku%20Solver)
+---
+Watch a wide selection of different turtles race it out.
+
 Requirements
 ---
 A few of these projects will require John Zelle's simple object oriented graphics library [graphics.py](https://mcsp.wartburg.edu/zelle/python/graphics.py) to work. To install the library, enter the following into a command-line interpreter (will require pip to be installed as well):
