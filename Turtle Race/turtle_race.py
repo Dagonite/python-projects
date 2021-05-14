@@ -6,14 +6,14 @@ from turtle import Turtle, Screen
 # name: [color, headstart, min_forward, max_forward, deviation]
 TURTLE_STATS = {
     "Lugo": ["red", 60, 11, 14, 9],
-    "Pyson": ["green", 100, 8, 12, 13],
-    "Steady": ["blue", 50, 12, 12, 0],
+    "Pyson": ["green", 100, 9, 16, 16],
+    "Steady": ["blue", 50, 13, 13, 0],
     "Lars": ["orange", 10, 12, 16, 14],
     "Dagon": ["gray", 0, 9, 21, 11],
     "Kelp": ["yellow", 10, 8, 28, 23],
-    "Dizzy": ["purple", 70, 4, 22, 28],
-    "Selwyn": ["pink", 10, 5, 22, 14],
-    "Knight": ["brown", 5, 10, 17, 4],
+    "Dizzy": ["purple", 70, 4, 36, 28],
+    "Selwyn": ["pink", 20, 5, 24, 14],
+    "Knight": ["brown", 10, 10, 17, 4],
     "Shade": ["black", 0, 1, 45, 18],
 }
 
@@ -31,8 +31,8 @@ def main():
 
 
 def select_turtles():
-    turtle_count = 6  # number of turtles in the race
-    turtle_names = sample(TURTLE_STATS.keys(), turtle_count)  # list of randomly selected turtles
+    TURTLE_COUNT = 6  # number of turtles in the race
+    turtle_names = sample(TURTLE_STATS.keys(), TURTLE_COUNT)  # list of randomly selected turtles
 
     track_lines_count = len(turtle_names) + 1  # number of track dividers
     v_spacing = HEIGHT // track_lines_count  # the spacing between the turtles and the track dividers
