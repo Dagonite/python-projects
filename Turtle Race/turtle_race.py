@@ -13,7 +13,7 @@ TURTLE_STATS = {
     "Kelp": ["yellow", 10, 8, 28, 23],
     "Dizzy": ["purple", 70, 4, 36, 28],
     "Selwyn": ["pink", 20, 5, 24, 14],
-    "Knight": ["brown", 10, 10, 17, 4],
+    "Knight": ["brown", 40, 10, 17, 4],
     "Shade": ["black", 0, 1, 45, 18],
 }
 
