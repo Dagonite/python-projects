@@ -20,7 +20,7 @@ University coursework where I had to write a program that displays a patchwork s
 ---
 A program that solves any given Sudoku puzzle by using a backtracking algorithm and then prints out the solution. Currently, working on a playable GUI.
 
-[Turtle Race](https://github.com/Dagonite/python-projects/tree/main/Sudoku%20Solver)
+[Turtle Race](https://github.com/Dagonite/python-projects/tree/main/Turtle%20Race)
 ---
 Watch a wide selection of different turtles race it out.
 
