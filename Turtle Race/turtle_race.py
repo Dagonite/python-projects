@@ -16,11 +16,11 @@ WIDTH, HEIGHT = 1000, 500
 
 
 def main():
-    v_spacing, pen = draw_screen(len(TURTLES))
+    win, v_spacing, pen = draw_screen(len(TURTLES))
     turtle_objs = place_turtles(v_spacing)
     WINNER, moves = race(turtle_objs, pen)
     write_to_csv(WINNER.name, moves)
-    sleep(5)
+    win.exitonclick()
 
 
 def draw_screen(RACERS_COUNT):
@@ -46,7 +46,7 @@ def draw_screen(RACERS_COUNT):
         pen.pendown()
         pen.forward(WIDTH)
 
-    return v_spacing, pen
+    return win, v_spacing, pen
 
 
 def place_turtles(v_spacing):
