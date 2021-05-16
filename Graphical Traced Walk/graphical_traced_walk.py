@@ -140,7 +140,7 @@ def process_csv(path="traced_walks.csv"):
                 stats[stat_key][2] = max(stats[stat_key][2], int(row[0]))
                 stats[stat_key][3] = min(stats[stat_key][3], int(row[0]))
 
-    print(("{}" + "{:>10}" * 5).format("Size", "Walks", "Steps", "Avg", "Max", "Min"))
+    print(("{}" + "{:>10}" * 5).format("Size", "Walks", "Steps", "Avg", "High", "Low"))
     for size, stat_value in stats.items():
         walks, steps, max_steps, min_steps = stat_value[1], stat_value[0], stat_value[2], stat_value[3]
         ronded_avg = round(steps / walks, 1)
