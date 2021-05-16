@@ -1,3 +1,5 @@
+# turtle_race.py
+
 from turtle import Turtle, Screen
 from random import randint
 from time import sleep
@@ -18,7 +20,7 @@ def main():
     turtle_objs = place_turtles(v_spacing)
     WINNER, moves = race(turtle_objs, pen)
     write_to_csv(WINNER.name, moves)
-    sleep(10)
+    sleep(5)
 
 
 def draw_screen(RACERS_COUNT):
@@ -97,5 +99,42 @@ def write_to_csv(*data, path="races.csv"):
         writer.writerow(data)
 
 
+def process_csv(path="races.csv"):
+    from collections import Counter
+    from operator import itemgetter
+    import csv
+
+    with open(path) as csvfile:
+        reader = csv.reader(csvfile)
+        moves = []
+        for row in reader:
+            moves.append((row[0], int(row[1])))
+
+    stats = {}
+    longest_win = moves[0]
+    shortest_win = moves[0]
+    total_moves = 0
+    for move in moves:
+        if move[1] > longest_win[1]:
+            longest_win = move
+        if move[1] < shortest_win[1]:
+            shortest_win = move
+        if move[0] not in stats:
+            stats[move[0]] = 1
+        else:
+            stats[move[0]] += 1
+        total_moves += move[1]
+
+    stats = dict(sorted(stats.items(), key=itemgetter(1), reverse=True))
+
+    for stat in stats.items():
+        print(stat[0], "has", stat[1], "win(s)")
+
+    print(longest_win[0], "has the longest win with", longest_win[1], "moves")
+    print(shortest_win[0], "has the shorted win with", shortest_win[1], "moves")
+    print(f"On average a turtle wins in {total_moves // len(moves)} moves")
+
+
 if __name__ == "__main__":
     main()
+    process_csv()
