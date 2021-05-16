@@ -65,16 +65,16 @@ def draw_screen(RACERS_COUNT):
     OFFSET_Y = HEIGHT - HEIGHT // 50 - 21.5
 
     for i in range(HEIGHT // 40):
-        # first row of white squares
+        # first column of white squares
         stamp_square(white_square, FIRST_ROW_X, BASE_Y - 43 * i)
 
-        # second row of black squares
+        # second column of black squares
         stamp_square(black_square, SECOND_ROW_X, BASE_Y - 43 * i)
 
-        # first row of black squares
+        # first column of black squares
         stamp_square(black_square, FIRST_ROW_X, OFFSET_Y - 43 * i)
 
-        # second row of white squares
+        # second column of white squares
         stamp_square(white_square, SECOND_ROW_X, OFFSET_Y - 43 * i)
 
     return win, v_spacing, pen
