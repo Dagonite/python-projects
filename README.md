@@ -22,7 +22,7 @@ A program that solves any given Sudoku puzzle by using a backtracking algorithm 
 
 [Turtle Race](https://github.com/Dagonite/python-projects/tree/main/Turtle%20Race)
 ---
-Watch a variety of turtles race it out.
+Watch turtles race it out.
 
 Requirements
 ---
