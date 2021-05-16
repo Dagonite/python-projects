@@ -5,11 +5,13 @@ from random import randint
 from time import sleep
 
 TURTLES = {
+    "Blood": "red",
+    "Citrus": "orange",
+    "Lemon": "yellow",
     "Verdant": "green",
-    "Lapis": "blue",
-    "Selwyn": "purple",
-    "Knight": "yellow",
-    "Shade": "black",
+    "Sky": "blue",
+    "Lapis": "indigo",
+    "Amethyst": "violet",
 }
 
 WIDTH, HEIGHT = 1000, 500
@@ -46,7 +48,41 @@ def draw_screen(RACERS_COUNT):
         pen.pendown()
         pen.forward(WIDTH)
 
+    # draw finish line
+    white_square = Turtle("square")
+    white_square.color("white")
+    white_square.penup()
+    white_square.speed(0)
+
+    black_square = Turtle("square")
+    black_square.color("black")
+    black_square.penup()
+    black_square.speed(0)
+
+    FIRST_ROW_X = WIDTH - WIDTH // 20
+    SECOND_ROW_X = FIRST_ROW_X + 21.5
+    BASE_Y = HEIGHT - HEIGHT // 50
+    OFFSET_Y = HEIGHT - HEIGHT // 50 - 21.5
+
+    for i in range(HEIGHT // 40):
+        # first row of white squares
+        stamp_square(white_square, FIRST_ROW_X, BASE_Y - 43 * i)
+
+        # second row of black squares
+        stamp_square(black_square, SECOND_ROW_X, BASE_Y - 43 * i)
+
+        # first row of black squares
+        stamp_square(black_square, FIRST_ROW_X, OFFSET_Y - 43 * i)
+
+        # second row of white squares
+        stamp_square(white_square, SECOND_ROW_X, OFFSET_Y - 43 * i)
+
     return win, v_spacing, pen
+
+
+def stamp_square(square, x, y):
+    square.goto(x, y)
+    square.stamp()
 
 
 def place_turtles(v_spacing):
@@ -86,7 +122,7 @@ def race(turtle_objs, pen):
     pen.penup()
     pen.goto(WIDTH // 2, HEIGHT // 2)
     pen.down()
-    pen.write("The winner is " + WINNER.name, align="center", font=("Roman", 30, "bold"))
+    pen.write("The winner is " + WINNER.name, align="center", font=("Calibri", 30, "bold"))
 
     return WINNER, moves
 
@@ -106,9 +142,7 @@ def process_csv(path="races.csv"):
 
     with open(path) as csvfile:
         reader = csv.reader(csvfile)
-        moves = []
-        for row in reader:
-            moves.append((row[0], int(row[1])))
+        moves = [(row[0], int(row[1])) for row in reader]
 
     stats = {}
     longest_win = moves[0]
