@@ -25,7 +25,7 @@ def main():
     win.exitonclick()
 
 
-def draw_screen(RACERS_COUNT):
+def draw_screen(TURTLE_COUNT):
     # create window
     win = Screen()
     win.setup(WIDTH, HEIGHT)
@@ -40,7 +40,7 @@ def draw_screen(RACERS_COUNT):
     pen.hideturtle()
     pen.speed(0)
     pen.color("white")
-    WHITE_LINES = RACERS_COUNT + 1
+    WHITE_LINES = TURTLE_COUNT + 1
     v_spacing = HEIGHT // WHITE_LINES
     for i in range(WHITE_LINES):
         pen.penup()
