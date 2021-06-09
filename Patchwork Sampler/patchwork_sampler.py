@@ -21,14 +21,14 @@ def get_inputs():
     size = ""
 
     while size not in sizes:
-        size = input("\nEnter one of the following sizes for the patchwork (" + concat_list(sizes, "or") + ")\n> ").strip()
+        size = input(f"\nEnter one of the following sizes for the patchwork ({concat_list(sizes, 'or')})\n> ").strip()
         print(f"The patchwork will be a {size} x {size} grid" if size in sizes else "Error: invalid size")
 
     valid_colours = ["red", "green", "blue", "orange", "brown", "pink"]
     colours = []
 
     while len(colours) < 3:
-        colour = input("\nEnter one of the following colours (" + concat_list(valid_colours, "and") + ")\n> ").lower().strip()
+        colour = input(f"\nEnter one of the following colours ({concat_list(valid_colours, 'and')})\n> ").lower().strip()
 
         if colour in valid_colours:
             colours.append(colour)
