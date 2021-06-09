@@ -200,7 +200,7 @@ def draw_rectangle(win, colour, point1, point2, current_tile, fill):
 
 
 def get_current_tile_pos(size, col, row):
-    """Return the position within the patchwork of the current tile."""
+    """Return the position within the patchwork of a tile using its coords."""
     return (row - 1) * (size - 1) + (col - 1) + (row - 1)
 
 
