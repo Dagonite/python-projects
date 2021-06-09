@@ -47,7 +47,7 @@ def get_inputs():
 def concat_list(lst, conjunction):
     """Takes a list and returns a concatenated string of comma separated values. The conjuction is a string which is 
     used as the separator for the last list value."""
-    return ", ".join(lst[:-1]) + f", {conjunction} {lst[-1]}"
+    return f"{', '.join(lst[:-1])}, {conjunction} {lst[-1]}"
 
 
 def create_patchwork(size, colours):
