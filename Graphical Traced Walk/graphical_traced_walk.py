@@ -18,8 +18,8 @@ def main(squares=None):
     squares_with_border = squares + 1
     win, person, square_texts = draw_grid(squares_with_border)
     total_steps = simulate_steps(win, person, squares, square_texts)
-    write_to_csv(total_steps, squares)
     win.close()
+    return total_steps, squares
 
 
 def get_input():
@@ -148,5 +148,6 @@ def process_csv(path="traced_walks.csv"):
 
 
 if __name__ == "__main__":
-    main()
+    total_steps, squares = main()
+    write_to_csv(total_steps, squares)
     process_csv()
