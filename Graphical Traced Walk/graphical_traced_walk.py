@@ -1,10 +1,12 @@
 # graphical_traced_walk.py
-"""Program which asks the user to pick a grid size and then draws a grid on a graphics window. A person is drawn in the 
-centre and they will move in random directions until they leave the grid."""
+"""Program which draws a grid on a graphics window using a specified size. A person is drawn in the centre of the grid 
+and they will move in random directions until they leave the grid."""
 
 import time
 from random import random
 
+import matplotlib.pyplot as plt
+import numpy as np
 from graphics import Circle, GraphWin, Line, Point, Rectangle, Text
 
 
@@ -133,7 +135,8 @@ def process_csv(path="traced_walks.csv"):
         for row in reader:
             stat_key = row[1]
             if stat_key not in stats:
-                stats[stat_key] = [int(row[0]), 1, int(row[0]), int(row[0])]
+                # [steps, walks, max_steps, min_steps, average]
+                stats[stat_key] = [int(row[0]), 1, int(row[0]), int(row[0]), int(row[0])]
             else:
                 stats[stat_key][0] += int(row[0])
                 stats[stat_key][1] += 1
@@ -144,10 +147,24 @@ def process_csv(path="traced_walks.csv"):
     for size, stat_value in stats.items():
         walks, steps, max_steps, min_steps = stat_value[1], stat_value[0], stat_value[2], stat_value[3]
         ronded_avg = round(steps / walks, 1)
+        stats[size][4] = ronded_avg
         print(("{:>4}" + "{:>10}" * 5).format(size, walks, steps, ronded_avg, max_steps, min_steps))
+
+    return stats
+
+
+def display_results(stats):
+    x = stats.keys()
+    y = [y[4] for y in stats.values()]
+    plt.bar(x, y)
+    plt.title("Average Steps to Leave a Grid of a Certain Size")
+    plt.show(block=False)
+    plt.waitforbuttonpress()
+    plt.close()
 
 
 if __name__ == "__main__":
     total_steps, squares = main()
     write_to_csv(total_steps, squares)
-    process_csv()
+    stats = process_csv()
+    display_results(stats)
