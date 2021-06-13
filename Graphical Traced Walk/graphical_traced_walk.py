@@ -135,19 +135,19 @@ def process_csv(path="traced_walks.csv"):
         for row in reader:
             stat_key = row[1]
             if stat_key not in stats:
-                # [steps, walks, max_steps, min_steps, average]
-                stats[stat_key] = [int(row[0]), 1, int(row[0]), int(row[0]), int(row[0])]
+                # [walks, steps, average, high, low]
+                stats[stat_key] = [1, int(row[0]), int(row[0]), int(row[0]), int(row[0])]
             else:
-                stats[stat_key][0] += int(row[0])
-                stats[stat_key][1] += 1
-                stats[stat_key][2] = max(stats[stat_key][2], int(row[0]))
-                stats[stat_key][3] = min(stats[stat_key][3], int(row[0]))
+                stats[stat_key][0] += 1  # walks
+                stats[stat_key][1] += int(row[0])  # steps
+                stats[stat_key][3] = max(stats[stat_key][3], int(row[0]))  # high
+                stats[stat_key][4] = min(stats[stat_key][4], int(row[0]))  # low
 
     print(("{}" + "{:>10}" * 5).format("Size", "Walks", "Steps", "Avg", "High", "Low"))
     for size, stat_value in stats.items():
-        walks, steps, max_steps, min_steps = stat_value[1], stat_value[0], stat_value[2], stat_value[3]
+        walks, steps, max_steps, min_steps = stat_value[0], stat_value[1], stat_value[3], stat_value[4]
         ronded_avg = round(steps / walks, 1)
-        stats[size][4] = ronded_avg
+        stats[size][2] = ronded_avg  # avg
         print(("{:>4}" + "{:>10}" * 5).format(size, walks, steps, ronded_avg, max_steps, min_steps))
 
     return stats
@@ -155,11 +155,38 @@ def process_csv(path="traced_walks.csv"):
 
 def display_results(stats):
     x = stats.keys()
+
+    # high and low steps
+    plt.title("Highest and Lowest Number of Steps it has Taken to Leave a Grid of a Certain Size")
+    plt.xlabel("Grid Size")
+    plt.ylabel("# of steps")
+
+    y = [y[3] for y in stats.values()]
+    plt.plot(x, y, label="Highest steps", marker="o")
+
     y = [y[4] for y in stats.values()]
+    plt.plot(x, y, label="Lowest steps", marker="o")
+
+    plt.legend()
+    display_graph("high-low.png")
+
+    # avg steps
+    plt.title("Average Number of Steps it takes Leave a Grid of a Certain Size")
+    plt.ylabel("Average # of steps")
+    plt.xlabel("Grid Size")
+
+    y = [y[2] for y in stats.values()]
     plt.bar(x, y)
-    plt.title("Average Steps to Leave a Grid of a Certain Size")
+
+    display_graph("average.png")
+
+
+def display_graph(out_file):
+    plt.grid(True)
+    plt.tight_layout()
     plt.show(block=False)
     plt.waitforbuttonpress()
+    plt.savefig(out_file)
     plt.close()
 
 
