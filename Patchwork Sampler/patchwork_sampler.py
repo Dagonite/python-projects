@@ -117,7 +117,7 @@ def net_design(win, size, colour, col, row, tiles):
         draw_line(win, colour, (col, row + distance), (col + 1 - distance, row + 1), current_tile)
 
     # draw black border for current tile
-    draw_rectangle(win, "black", (col, row), (col + 1, row + 1), current_tile, False)
+    draw_rectangle(win, "black", (col, row), (col + 1, row + 1), current_tile)
 
     # store current_tile in a list of ordered tiles
     current_tile_pos = get_current_tile_pos(size, col, row)
@@ -130,20 +130,20 @@ def circle_design(win, size, colour, col, row, tiles):
     for width in (0.1, 0.3, 0.5, 0.7, 0.9):
         for height in (0.1, 0.3, 0.5, 0.7, 0.9):
             # draw filled circle
-            draw_circle(win, colour, (width + col, height + row), 0.1, current_tile, True)
+            draw_circle(win, colour, (width + col, height + row), 0.1, current_tile, fill=True)
 
             if width in (0.3, 0.7):
                 # draw horizontal white rectangle
-                draw_rectangle(win, "white", (width + col - 0.1, height + row), (width + col + 0.1, height + row + 0.1), current_tile, True)
+                draw_rectangle(win, "white", (width + col - 0.1, height + row), (width + col + 0.1, height + row + 0.1), current_tile, fill=True)
             else:
                 # draw vertical white rectangle
-                draw_rectangle(win, "white", (width + col - 0.1, height + row - 0.1), (width + col, height + row + 0.1), current_tile, True)
+                draw_rectangle(win, "white", (width + col - 0.1, height + row - 0.1), (width + col, height + row + 0.1), current_tile, fill=True)
 
             # draw outlined circle
-            draw_circle(win, colour, (width + col, height + row), 0.1, current_tile, False)
+            draw_circle(win, colour, (width + col, height + row), 0.1, current_tile)
 
     # draw black border for current tile
-    draw_rectangle(win, "black", (col, row), (col + 1, row + 1), current_tile, False)
+    draw_rectangle(win, "black", (col, row), (col + 1, row + 1), current_tile)
 
     # store current_tile in a list of ordered tiles
     current_tile_pos = get_current_tile_pos(size, col, row)
@@ -177,7 +177,7 @@ def draw_line(win, colour, point1, point2, current_tile):
     current_tile.append(current_line)
 
 
-def draw_circle(win, colour, centre, radius, current_tile, fill):
+def draw_circle(win, colour, centre, radius, current_tile, fill=False):
     "Helper function for drawing circles."
     current_circle = Circle(Point(centre[0], centre[1]), radius)
     if fill:
@@ -189,7 +189,7 @@ def draw_circle(win, colour, centre, radius, current_tile, fill):
     current_tile.append(current_circle)
 
 
-def draw_rectangle(win, colour, point1, point2, current_tile, fill):
+def draw_rectangle(win, colour, point1, point2, current_tile, fill=False):
     "Helper function for drawing rectangles."
     current_rectangle = Rectangle(Point(point1[0], point1[1]), Point(point2[0], point2[1]))
     if fill:
