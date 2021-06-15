@@ -13,7 +13,11 @@ MAGIC_SQUARE = [6, 7, 2, 1, 5, 9, 8, 3, 4]
 def main():
     while True:
         # generate starting grid
-        squares = [["•" for _ in range(3)] for _ in range(3)]
+        squares = [
+            ["1", "2", "3"],
+            ["4", "5", "6"],
+            ["7", "8", "9"],
+        ]
 
         # track player squares
         human_squares = []
@@ -83,7 +87,7 @@ def main():
         ans = ""
         while ans not in ("y", "n"):
             try:
-                ans = input("Play again (y)es or (n)o? > ")[0]
+                ans = input("Play again, (y)es or (n)o? > ")[0]
             except:
                 pass
         if ans == "n":
@@ -127,7 +131,7 @@ def computer_input(squares, computer_squares, computer_symbol):
 
 
 def find_available_squares(squares):
-    return [i * 3 + j + 1 for i, row in enumerate(squares) for j, item in enumerate(row) if item == "•"]
+    return [i * 3 + j + 1 for i, row in enumerate(squares) for j, item in enumerate(row) if item.isnumeric()]
 
 
 def find_square_pos(num):
