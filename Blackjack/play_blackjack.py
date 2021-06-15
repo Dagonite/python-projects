@@ -1,4 +1,18 @@
 # play_blackjack.py
+"""
+A game of Blackjack
+
+Rules:
+    Try to beat the dealer's hand by without going over 21.
+    Cards 2 through 10 are worth their face value.
+    Kings, Queens, and Jacks are worth 10 points. 
+    Each Ace is worth 11 points but are reduced to 1 individually if the hand goes over 21.
+    (H)it to take another card. (S)tand to stop taking cards.
+    On the first play of a round, you can (D)ouble down to increase your bet.
+    By doubling down you commit to one hit followed by a stand (assuming you don't go over 21).
+    In case of a tie, the bet is returned to the player.
+    The dealer must hit until they reach 17 or over.
+"""
 
 import sys
 
@@ -8,21 +22,6 @@ START_CHIPS = 1000
 
 
 def main():
-    print(
-        """\nA game of Blackjack
-
-    Rules:
-      Try to beat the dealer's hand by without going over 21.
-      Cards 2 through 10 are worth their face value.
-      Kings, Queens, and Jacks are worth 10 points. 
-      Each Ace is worth 11 points but are reduced to 1 individually if the hand goes over 21.
-      (H)it to take another card. (S)tand to stop taking cards.
-      On the first play of a round, you can (D)ouble down to increase your bet.
-      By doubling down you commit to one hit followed by a stand (assuming you don't go over 21).
-      In case of a tie, the bet is returned to the player.
-      The dealer must hit until they reach 17 or over.\n"""
-    )
-
     # give the player their starting chips
     player_chips = Chips(START_CHIPS)
 
