@@ -1,4 +1,4 @@
-# blackjack.py
+"""Objects and constants for Blackjack."""
 
 # set up the constants
 FACE_CARDS = ("Jack", "Queen", "King", "Ace")

@@ -1,4 +1,3 @@
-# archery_game.py
 """Game where a user has to shoot arrows at a target. The arrows are offset by wind so the user has to take this into 
 account before each shot. After firing all arrows, the user gets a score and a grade."""
 

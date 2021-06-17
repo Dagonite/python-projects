@@ -1,6 +1,4 @@
-# play_blackjack.py
-"""
-A game of Blackjack
+"""A game of Blackjack
 
 Rules:
     Try to beat the dealer's hand by without going over 21.

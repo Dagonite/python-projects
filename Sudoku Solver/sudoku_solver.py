@@ -1,4 +1,3 @@
-# sudoku_solver.py
 """Program which solves Sudoku puzzles using backtracking."""
 
 from typing import Union, Tuple, List

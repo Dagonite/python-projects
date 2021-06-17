@@ -1,8 +1,11 @@
-# turtle_race.py
+"""Watch turtles race it out."""
 
-from turtle import Turtle, Screen
+import csv
+from collections import Counter
+from operator import itemgetter
 from random import randint
 from time import sleep
+from turtle import Screen, Turtle
 
 TURTLES = {
     "Blood": "red",
@@ -21,8 +24,8 @@ def main():
     win, v_spacing, pen = draw_screen(len(TURTLES))
     turtle_objs = place_turtles(v_spacing)
     WINNER, moves = race(turtle_objs, pen)
-    write_to_csv(WINNER.name, moves)
     win.exitonclick()
+    return WINNER, moves
 
 
 def draw_screen(TURTLE_COUNT):
@@ -122,24 +125,18 @@ def race(turtle_objs, pen):
     pen.penup()
     pen.goto(WIDTH // 2, HEIGHT // 2)
     pen.down()
-    pen.write("The winner is " + WINNER.name, align="center", font=("Calibri", 30, "bold"))
+    pen.write(f"The winner is {WINNER.name}", align="center", font=("Calibri", 30, "bold"))
 
     return WINNER, moves
 
 
 def write_to_csv(*data, path="races.csv"):
-    import csv
-
     with open(path, "a", newline="") as csvfile:
         writer = csv.writer(csvfile, delimiter=",")
         writer.writerow(data)
 
 
 def process_csv(path="races.csv"):
-    from collections import Counter
-    from operator import itemgetter
-    import csv
-
     with open(path) as csvfile:
         reader = csv.reader(csvfile)
         moves = [(row[0], int(row[1])) for row in reader]
@@ -161,14 +158,15 @@ def process_csv(path="races.csv"):
 
     stats = dict(sorted(stats.items(), key=itemgetter(1), reverse=True))
 
-    for stat in stats.items():
-        print(stat[0], "has", stat[1], "win(s)")
+    for turtle, wins in stats.items():
+        print(f"{turtle} has {wins} win(s)")
 
-    print(longest_win[0], "has the longest win with", longest_win[1], "moves")
-    print(shortest_win[0], "has the shorted win with", shortest_win[1], "moves")
+    print(f"{longest_win[0]} has the longest win with {longest_win[1]} moves")
+    print(f"{shortest_win[0]} has the shorted win with {shortest_win[1]} moves")
     print(f"On average a turtle wins in {total_moves // len(moves)} moves")
 
 
 if __name__ == "__main__":
-    main()
+    WINNER, moves = main()
+    write_to_csv(WINNER.name, moves)
     process_csv()

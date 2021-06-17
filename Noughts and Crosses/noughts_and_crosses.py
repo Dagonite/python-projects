@@ -1,4 +1,3 @@
-# noughts_and_crosses.py
 """A game of Noughts and Crosses."""
 
 from random import choice, randint, shuffle
