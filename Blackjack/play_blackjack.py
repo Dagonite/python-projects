@@ -191,7 +191,7 @@ def get_move(player_hand, player_chips):
             moves.append("(D)ouble down")
 
         # prompt the player for a move
-        move_prompt = ", ".join(moves) + "> "
+        move_prompt = f"', '.join(moves) > "
         move = input(move_prompt).upper()
 
         if move in ("H", "S") or (move == "D" and "(D)ouble down" in moves):
