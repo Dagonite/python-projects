@@ -16,6 +16,10 @@ Program that draws a two-dimensional grid with a person at the centre. Every ten
 ---
 Guess a randomly selected number within a certain amount of tries.
 
+[Guess the Number](https://github.com/Dagonite/python-projects/tree/main/Hangman)
+---
+A game of Hangman. Select a difficulty then try to guess the hidden word.
+
 [Noughts and Crosses](https://github.com/Dagonite/python-projects/tree/main/Noughts%20and%20Crosses)
 ---
 A game of Noughts and Crosses. This makes use of a magic square to determine if there are three of the same symbol in a line.
