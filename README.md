@@ -16,7 +16,7 @@ Program that draws a two-dimensional grid with a person at the centre. Every ten
 ---
 Guess a randomly selected number within a certain amount of tries.
 
-[Guess the Number](https://github.com/Dagonite/python-projects/tree/main/Hangman)
+[Hangman](https://github.com/Dagonite/python-projects/tree/main/Hangman)
 ---
 A game of Hangman. Select a difficulty then try to guess the hidden word.
 
