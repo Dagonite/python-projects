@@ -12,6 +12,10 @@ A game of Blackjack between a user and a computer. This project makes use of obj
 ---
 Program that draws a two-dimensional grid with a person at the centre. Every tenth of a second, the person takes a random step up, down, left, or right. Every square of the grid displays how many times the person has visited it. The walk ends once the person leaves the grid. Data from the traced walk is then appended to a CSV file. This data is then used to generate graphs. This is an adaption of my tracedwalk2d.py from Pract09 of the Worksheets found within my `python-exercises` repo.
 
+[Guess the Number](https://github.com/Dagonite/python-projects/tree/main/Guess%20the%20Number)
+---
+Guess a randomly selected number within a certain amount of tries.
+
 [Noughts and Crosses](https://github.com/Dagonite/python-projects/tree/main/Noughts%20and%20Crosses)
 ---
 A game of Noughts and Crosses. This makes use of a magic square to determine if there are three of the same symbol in a line.
