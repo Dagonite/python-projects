@@ -8,6 +8,7 @@ from graphics import Circle, GraphWin, Line, Point, Polygon, Rectangle, Text
 from pract05 import distance_between_points
 from pract06 import draw_circle
 
+# constants
 GRADES = [
     "amazing at this game",
     "pretty good at this game",
