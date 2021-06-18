@@ -10,7 +10,9 @@ ORDINAL_INDICATORS = ["st", "nd", "rd", "th"]  # used to display 1st, 2nd, 3rd, 
 
 def guess_the_number(UPPER_LIMIT=UPPER_LIMIT, GUESSES=GUESSES):
     SECRET_NUMBER = random.randint(1, UPPER_LIMIT)  # pick a random number
-    print(f"\nI am thinking of a number between 1 and {UPPER_LIMIT}")
+    print(
+        f"\nI am thinking of a number between 1 and {UPPER_LIMIT}. You have {GUESSES} guess{'es' if GUESSES != '1' else ''}"
+    )
 
     won = False
     for attempt in range(1, GUESSES + 1):
@@ -44,9 +46,7 @@ def guess_the_number(UPPER_LIMIT=UPPER_LIMIT, GUESSES=GUESSES):
             break
 
     if won:
-        print(
-            f"\nYes! The number was {SECRET_NUMBER}. You got it in {attempt} guess{'es' if attempt != '1' else ''}!\n"
-        )
+        print(f"\nYes! The number was {SECRET_NUMBER}. You got it in {attempt} guess{'es' if attempt != '1' else ''}\n")
     else:
         print(f"\nYou lose! The number I was thinking of was {SECRET_NUMBER}\n")
 
