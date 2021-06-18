@@ -1,5 +1,5 @@
 """Game where a user has to shoot arrows at a target. The arrows are offset by wind so the user has to take this into 
-account before each shot. After firing all arrows, the user gets a score and a grade."""
+account before each shot. After firing all arrows the user gets a score and a grade."""
 
 import random
 
@@ -7,6 +7,14 @@ from graphics import Circle, GraphWin, Line, Point, Polygon, Rectangle, Text
 
 from pract05 import distance_between_points
 from pract06 import draw_circle
+
+GRADES = [
+    "amazing at this game",
+    "pretty good at this game",
+    "average at this game",
+    "below average at this game",
+    "awful at this game",
+]
 
 
 def archery_game():
@@ -29,14 +37,6 @@ def archery_game():
     draw_circle(win, centre, 0.3, "blue")
     draw_circle(win, centre, 0.2, "red")
     draw_circle(win, centre, 0.1, "yellow")
-
-    grades = [
-        "amazing at this game",
-        "pretty good at this game",
-        "average at this game",
-        "below average at this game",
-        "awful at this game",
-    ]
 
     score = 0
     score_text = Text(Point(0.5, 0.04), "Score: {}".format(score)).draw(win)
@@ -112,8 +112,8 @@ def archery_game():
     else:
         grade = 4
 
-    grade_text = grades[grade]
-    wind_text.setText("You scored {}, meaning you're {}".format(score, grade_text))
+    grade_text = GRADES[grade]
+    wind_text.setText(f"You scored {score}, meaning you're {grade_text}")
 
     score_text.setSize(10)
     score_text.setText("Click on the target to play again\nClick anywhere else to quit")
