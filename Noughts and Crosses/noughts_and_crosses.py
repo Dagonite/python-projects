@@ -100,13 +100,11 @@ def player_input(squares, player_squares, player_symbol, player):
     ans = 0
     if player == "Computer":
         for i in available_squares:
-            print(player_sums(player_squares + [i]))
-            if MAGIC_VALUE in player_sums(player_squares + [i]):
+            if MAGIC_VALUE in player_sums(computer_squares + [i]):
                 ans = i
                 break
         if ans == 0:
             for i in available_squares:
-                print(player_sums(player_squares + [i]))
                 if MAGIC_VALUE in player_sums(human_squares + [i]):
                     ans = i
                     break
