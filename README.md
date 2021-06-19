@@ -18,7 +18,7 @@ Guess a randomly selected number within a certain amount of tries.
 
 [Hangman](https://github.com/Dagonite/python-projects/tree/main/Hangman)
 ---
-A game of Hangman. Select a difficulty then try to guess the hidden word.
+A game of Hangman. Select a difficulty then try to win as many rounds as possible without losing all of your lives.
 
 [Noughts and Crosses](https://github.com/Dagonite/python-projects/tree/main/Noughts%20and%20Crosses)
 ---
