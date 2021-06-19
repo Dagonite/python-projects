@@ -1,8 +1,10 @@
-"A game of Hangman. Select a difficulty then try to guess the hidden word."
+"A game of Hangman. Select a difficulty then try to win as many rounds as possible without losing all of your lives."
 # pylint: disable=anomalous-backslash-in-string
 
 import json
 import random
+import csv
+import datetime
 
 HANGMAN_STAGES = [
     """
@@ -83,80 +85,111 @@ HANGMAN_STAGES = [
 
     """,
 ]
-
+BASE_LIVES = len(HANGMAN_STAGES) - 1
+DIFFICULTIES = {
+    "e": BASE_LIVES,
+    "m": BASE_LIVES - 1,
+    "h": BASE_LIVES - 2,
+    "i": BASE_LIVES - 3,
+    "q": 0,
+}
 used_letters = []
 
 
 def main():
-    select_difficulty()
-    LIVES = len(HANGMAN_STAGES) - 1
-    category, phrase = choose_random_word()
-    hidden_phrase = ["_"] * len(phrase)
+    starting_lives, difficulty = select_difficulty()
+    lives = starting_lives
 
-    for i, ch in enumerate(phrase):
-        if ch in (" ", "'", "-"):
-            hidden_phrase[i] = ch
+    total_score = 0
+    score_mult = 500 - starting_lives * 40
 
-    prompt_user_for_letters(LIVES, category, phrase, hidden_phrase)
+    rounds = 0
+    while lives:
+        category, phrase = choose_random_word()
+        hidden_phrase = ["_"] * len(phrase)
+
+        for i, ch in enumerate(phrase):
+            if ch in (" ", "'", "-"):
+                hidden_phrase[i] = ch
+
+        lives, score = prompt_user_for_letters(starting_lives, category, phrase, hidden_phrase)
+        total_score += score * score_mult
+        rounds += 1
+
+    total_score = f"{total_score:.2f}"
+    print(f"\nYour score is {total_score}\nGoobye!")
+
+    if rounds:
+        write_to_csv(total_score, rounds, difficulty, datetime.datetime.now().date())
 
 
 def select_difficulty():
-    while True:
-        difficulty = input("Enter a difficulty, (e)asy, (m)edium, or (h)ard: > ")
-        if difficulty in ("e", "m", "h"):
-            break
+    difficulty = ""
+    while difficulty not in DIFFICULTIES.keys():
+        difficulty = input("\nEnter a difficulty or (q)uit:\n(e)asy, (m)edium, (h)ard, or (i)mpossible: > ")
 
-    if difficulty in ("m", "h"):
-        del HANGMAN_STAGES[-1]
-        del HANGMAN_STAGES[-1]
-
-    if difficulty == "h":
-        del HANGMAN_STAGES[-1]
-        del HANGMAN_STAGES[-1]
+    return DIFFICULTIES[difficulty], difficulty
 
 
-def prompt_user_for_letters(LIVES, category, phrase, hidden_phrase):
-    win = False
-    while LIVES > 0:
+def prompt_user_for_letters(lives, category, phrase, hidden_phrase):
+    starting_lives = lives
+    hint = ""
+    while lives > 0:
         while True:
-            print(f"Category: {category:<8} Lives: {LIVES:<4} Used letters: {used_letters}\n")
-            print_hidden_phrase(hidden_phrase)
-            print(f"\n{HANGMAN_STAGES[LIVES]}\n")
+            display_hangman(category, hidden_phrase, lives, hint)
             try:
-                letter = input("Enter a letter > ").upper()
+                letter = input("Enter a letter: > ").upper()
 
                 if not letter.isalpha():
                     raise ValueError(f"input has to be a letter")
+                elif len(letter) > 1:
+                    raise ValueError(f"input has to be only one letter")
                 elif letter in used_letters:
-                    raise ValueError(f"'{letter}' has already been used, enter a different letter")
+                    raise ValueError(f"'{letter}' has already been used")
                 elif letter in phrase:
+                    hint = f"{letter} is in the phrase"
                     indices = [i for i, ch in enumerate(phrase) if ch == letter]
                     for i in indices:
                         hidden_phrase[i] = letter
                     break
                 elif letter not in phrase:
-                    LIVES -= 1
+                    hint = f"{letter} is NOT in the phrase"
+                    lives -= 1
                     break
 
             except ValueError as error:
-                print(error)
+                hint = error
 
         used_letters.append(letter)
+        used_letters.sort()
 
         if "_" not in hidden_phrase:
-            win = True
             break
 
-    print(f"\n{HANGMAN_STAGES[LIVES]}\n")
+    display_hangman(category, hidden_phrase, lives, hint)
 
-    if win:
-        print(f"You win! The word was {phrase}")
+    score = lives / starting_lives
+
+    if lives:
+        print(f"\nYou win! The word was {phrase}\n")
+        option = ""
+        while option not in ("c", "q"):
+            option = input("Enter an option, (c)ontinue or (q)uit: > ")
+        if option == "q":
+            lives = 0
     else:
-        print(f"You lose! The word was {phrase}")
+        print(f"\nYou lose! The word was {phrase}")
+
+    used_letters.clear()
+
+    return lives, score
 
 
-def print_hidden_phrase(hidden_phrase):
+def display_hangman(category, hidden_phrase, LIVES, hint=""):
+    letters = str(used_letters)
+    print(f"\nCategory: {category:<8} Lives: {LIVES:<4} Used letters: {letters:<{len(letters) + 2}} Hint: {hint}\n")
     print(" ".join(hidden_phrase))
+    print(f"{HANGMAN_STAGES[LIVES]}\n")
 
 
 def choose_random_word():
@@ -169,14 +202,11 @@ def choose_random_word():
     return category, phrase
 
 
+def write_to_csv(*data, path="scores.csv"):
+    with open(path, "a", newline="") as csvfile:
+        writer = csv.writer(csvfile, delimiter=",")
+        writer.writerow(data)
+
+
 if __name__ == "__main__":
     main()
-
-    while True:
-        play_again = input("Play again, (y)es or (n)o? > ")
-        if play_again == "y":
-            main()
-        elif play_again == "n":
-            break
-
-    print("Goobye!")
