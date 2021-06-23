@@ -2,10 +2,13 @@
 
 import random
 
-# constants
 UPPER_LIMIT = 100  # highest number the secret number can be
 GUESSES = 7  # number of guesses the player has
-ORDINAL_INDICATORS = ["st", "nd", "rd", "th"]  # used to display 1st, 2nd, 3rd, etc
+
+
+def ordinal(n):
+    """Code golf way of returning a number and it's ordinal suffix as a string."""
+    return str(n) + "tsnrhtdd"[(n // 10 % 10 != 1) * (n % 10 < 4) * n % 10 :: 4]
 
 
 def guess_the_number(UPPER_LIMIT=UPPER_LIMIT, GUESSES=GUESSES):
@@ -16,16 +19,9 @@ def guess_the_number(UPPER_LIMIT=UPPER_LIMIT, GUESSES=GUESSES):
 
     won = False
     for attempt in range(1, GUESSES + 1):
-        last_digit = int(str(attempt)[-1]) - 1
-
-        if last_digit < 3:
-            ordinal_indicator = ORDINAL_INDICATORS[last_digit]
-        else:
-            ordinal_indicator = ORDINAL_INDICATORS[3]
-
         while True:
             try:
-                guess = int(input(f"\nWhat is your {attempt}{ordinal_indicator} guess? > "))
+                guess = int(input(f"\nWhat is your {ordinal(attempt)} guess? > "))
 
                 if guess > UPPER_LIMIT:
                     raise ValueError(f"number beyond upper-limit: {guess} > {UPPER_LIMIT}")
