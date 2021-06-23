@@ -109,7 +109,7 @@ def main():
         hidden_phrase = ["_"] * len(phrase)
 
         for i, ch in enumerate(phrase):
-            if ch in (" ", "'", "-"):
+            if ch in (" ", "'", "-", ":"):
                 hidden_phrase[i] = ch
 
         lives, score = prompt_user_for_letters(starting_lives, category, phrase, hidden_phrase)
@@ -133,10 +133,10 @@ def select_difficulty():
 
 def prompt_user_for_letters(lives, category, phrase, hidden_phrase):
     starting_lives = lives
-    hint = ""
+    note = ""
     while lives > 0:
         while True:
-            display_hangman(category, hidden_phrase, lives, hint)
+            display_hangman(category, hidden_phrase, lives, note)
             try:
                 letter = input("Enter a letter: > ").upper()
 
@@ -147,18 +147,18 @@ def prompt_user_for_letters(lives, category, phrase, hidden_phrase):
                 elif letter in used_letters:
                     raise ValueError(f"'{letter}' has already been used")
                 elif letter in phrase:
-                    hint = f"{letter} is in the phrase"
+                    note = f"{letter} is in the phrase"
                     indices = [i for i, ch in enumerate(phrase) if ch == letter]
                     for i in indices:
                         hidden_phrase[i] = letter
                     break
                 elif letter not in phrase:
-                    hint = f"{letter} is NOT in the phrase"
+                    note = f"{letter} is NOT in the phrase"
                     lives -= 1
                     break
 
             except ValueError as error:
-                hint = error
+                note = error
 
         used_letters.append(letter)
         used_letters.sort()
@@ -166,7 +166,7 @@ def prompt_user_for_letters(lives, category, phrase, hidden_phrase):
         if "_" not in hidden_phrase:
             break
 
-    display_hangman(category, hidden_phrase, lives, hint)
+    display_hangman(category, hidden_phrase, lives, note)
 
     score = lives / starting_lives
 
@@ -185,9 +185,8 @@ def prompt_user_for_letters(lives, category, phrase, hidden_phrase):
     return lives, score
 
 
-def display_hangman(category, hidden_phrase, LIVES, hint=""):
-    letters = str(used_letters)
-    print(f"\nCategory: {category:<8} Lives: {LIVES:<4} Used letters: {letters:<{len(letters) + 2}} Hint: {hint}\n")
+def display_hangman(category, hidden_phrase, LIVES, note=""):
+    print(f"\nCategory: {category}   Lives: {LIVES}   Used letters: {used_letters}   Note: {note}\n")
     print(" ".join(hidden_phrase))
     print(f"{HANGMAN_STAGES[LIVES]}\n")
 
