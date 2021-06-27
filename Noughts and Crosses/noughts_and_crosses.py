@@ -5,7 +5,7 @@ from time import sleep
 from itertools import combinations
 
 # globals
-SYMBOLS = {"O": "Noughts", "X": "Crosses"}
+SYMBOLS = {"O": "Noughts", "X": "Crosses", "T": "Junctions", "H": "Ladders"}
 MAGIC_SQUARE = [6, 7, 2, 1, 5, 9, 8, 3, 4]
 MAGIC_VALUE = 15
 human_squares = []
@@ -52,7 +52,7 @@ def main():
         while not drawn and not gameover:
             for player, player_squares, player_symbol in players_data:
                 # simulate wait time for computer to make move
-                if player is "Computer":
+                if player == "Computer":
                     sleep(1.5)
 
                 # prompt player for a move then draw the updated grid
