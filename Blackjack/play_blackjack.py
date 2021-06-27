@@ -191,7 +191,7 @@ def get_move(player_hand, player_chips):
             moves.append("(D)ouble down")
 
         # prompt the player for a move
-        move_prompt = f"', '.join(moves) > "
+        move_prompt = f"{', '.join(moves)} > "
         move = input(move_prompt).upper()
 
         if move in ("H", "S") or (move == "D" and "(D)ouble down" in moves):
@@ -212,7 +212,7 @@ def process_dealer_moves(deck, dealer_hand, player_hand):
         input("Press Enter to continue... ")
 
     # return True if dealer has bust
-    return True if dealer_hand.value > 21 else False
+    return dealer_hand.value > 21
 
 
 if __name__ == "__main__":
