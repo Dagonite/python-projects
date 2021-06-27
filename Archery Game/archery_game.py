@@ -18,9 +18,9 @@ GRADES = [
 ]
 
 WSD = 0.25  # wind start deviation
-WD = 0.1  # max wind deviation per subsequent arrow
-WTH = 0.08  # wind threshold (determines what direction the wind is going)
-ARROWS = 5  # number of arrow to shoot
+WD = 0.1  # wind deviation after an arrow is shot
+WTH = 0.08  # wind threshold (determines wind direction threshold for the wind direction message)
+ARROWS = 5  # number of arrows to shoot
 
 
 def archery_game():
