@@ -4,7 +4,6 @@ and they will move in random directions until they leave the grid."""
 import time
 from random import random
 
-import matplotlib.pyplot as plt
 import numpy as np
 from graphics import Circle, GraphWin, Line, Point, Rectangle, Text
 
@@ -20,6 +19,7 @@ def main(squares=None):
     win, person, square_texts = draw_grid(squares_with_border)
     total_steps = simulate_steps(win, person, squares, square_texts)
     win.close()
+
     return total_steps, squares
 
 
@@ -126,71 +126,31 @@ def write_to_csv(*data, path="traced_walks.csv"):
 def process_csv(path="traced_walks.csv"):
     import csv
 
-    stats = {}
-
     with open(path) as csvfile:
         reader = csv.reader(csvfile)
+        data = [*reader]
 
-        for row in reader:
-            stat_key = row[1]
-            if stat_key not in stats:
-                # [walks, steps, average, high, low]
-                stats[stat_key] = [1, int(row[0]), int(row[0]), int(row[0]), int(row[0])]
-            else:
-                stats[stat_key][0] += 1  # walks
-                stats[stat_key][1] += int(row[0])  # steps
-                stats[stat_key][3] = max(stats[stat_key][3], int(row[0]))  # high
-                stats[stat_key][4] = min(stats[stat_key][4], int(row[0]))  # low
+    stats = {}
+    for steps, size in data:
+        steps = int(steps)
+        if size not in stats:
+            # [walks, steps, high, low]
+            stats[size] = [1] + [steps] * 3
+        else:
+            stats[size][0] += 1  # walks
+            stats[size][1] += steps  # steps
+            stats[size][2] = max(stats[size][2], steps)  # high
+            stats[size][3] = min(stats[size][3], steps)  # low
 
     print(("{}" + "{:>10}" * 5).format("Size", "Walks", "Steps", "Avg", "High", "Low"))
-    for size, stat_value in stats.items():
-        walks, steps, max_steps, min_steps = stat_value[0], stat_value[1], stat_value[3], stat_value[4]
+    for size, (walks, steps, max_steps, min_steps) in stats.items():
         ronded_avg = round(steps / walks, 1)
-        stats[size][2] = ronded_avg  # avg
         print(("{:>4}" + "{:>10}" * 5).format(size, walks, steps, ronded_avg, max_steps, min_steps))
 
     return stats
-
-
-def display_results(stats):
-    x = stats.keys()
-
-    # high and low steps
-    plt.title("Highest and Lowest Number of Steps it has Taken to Leave a Grid of a Certain Size")
-    plt.xlabel("Grid Size")
-    plt.ylabel("# of steps")
-
-    y = [y[3] for y in stats.values()]
-    plt.plot(x, y, label="Highest steps", marker="o")
-
-    y = [y[4] for y in stats.values()]
-    plt.plot(x, y, label="Lowest steps", marker="o")
-
-    plt.legend()
-    display_graph("high-low.png")
-
-    # avg steps
-    plt.title("Average Number of Steps it takes Leave a Grid of a Certain Size")
-    plt.ylabel("Average # of steps")
-    plt.xlabel("Grid Size")
-
-    y = [y[2] for y in stats.values()]
-    plt.bar(x, y)
-
-    display_graph("average.png")
-
-
-def display_graph(out_file):
-    plt.grid(True)
-    plt.tight_layout()
-    plt.show(block=False)
-    plt.waitforbuttonpress()
-    plt.savefig(out_file)
-    plt.close()
 
 
 if __name__ == "__main__":
     total_steps, squares = main()
     write_to_csv(total_steps, squares)
     stats = process_csv()
-    display_results(stats)
