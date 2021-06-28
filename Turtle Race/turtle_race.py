@@ -4,8 +4,10 @@ import csv
 from collections import Counter
 from operator import itemgetter
 from random import randint
-from time import sleep
+from time import perf_counter, sleep
 from turtle import Screen, Turtle
+
+import matplotlib.pyplot as plt
 
 TURTLES = {
     "Blood": "red",
@@ -23,9 +25,9 @@ WIDTH, HEIGHT = 1000, 500
 def main():
     win, v_spacing, pen = draw_screen(len(TURTLES))
     turtle_objs = place_turtles(v_spacing)
-    WINNER, moves = race(turtle_objs, pen)
+    WINNER, duration = race(turtle_objs, pen)
     win.exitonclick()
-    return WINNER, moves
+    return WINNER, duration
 
 
 def draw_screen(TURTLE_COUNT):
@@ -107,7 +109,7 @@ def place_turtles(v_spacing):
 
 def race(turtle_objs, pen):
     # simulate race
-    moves = 0
+    start = perf_counter()
     racing = True
     while racing:
         for turtle in turtle_objs:
@@ -118,16 +120,31 @@ def race(turtle_objs, pen):
             if x >= WIDTH - WIDTH // 25:
                 WINNER = turtle
                 racing = False
-        moves += 1
+
+    end = perf_counter()
+
+    # draw black rectangle backdrop for winner's name
+    pen.penup()
+    pen.goto(-10, HEIGHT // 2 + 60)
+    pen.color("black")
+    pen.begin_fill()
+    pen.forward(WIDTH + 10)
+    pen.right(90)
+    pen.forward(70)
+    pen.right(90)
+    pen.forward(WIDTH + 10)
+    pen.right(90)
+    pen.forward(70)
+    pen.end_fill()
 
     # write winner's name
-    pen.color(WINNER.color_str)
     pen.penup()
     pen.goto(WIDTH // 2, HEIGHT // 2)
     pen.down()
-    pen.write(f"The winner is {WINNER.name}", align="center", font=("Calibri", 30, "bold"))
+    pen.color(WINNER.color_str)
+    pen.write(f"The winner is {WINNER.name}", align="center", font=("Deja Vu Sans Mono", 30, "normal"))
 
-    return WINNER, moves
+    return WINNER, end - start
 
 
 def write_to_csv(*data, path="races.csv"):
@@ -139,34 +156,66 @@ def write_to_csv(*data, path="races.csv"):
 def process_csv(path="races.csv"):
     with open(path) as csvfile:
         reader = csv.reader(csvfile)
-        moves = [(row[0], int(row[1])) for row in reader]
+        data = [(turtle, float(duration)) for turtle, duration in reader]
 
+    # populate dict with data
     stats = {}
-    longest_win = moves[0]
-    shortest_win = moves[0]
-    total_moves = 0
-    for move in moves:
-        if move[1] > longest_win[1]:
-            longest_win = move
-        if move[1] < shortest_win[1]:
-            shortest_win = move
-        if move[0] not in stats:
-            stats[move[0]] = 1
+    for turtle, duration in data:
+        duration = duration
+        if turtle not in stats:
+            stats[turtle] = [duration]
         else:
-            stats[move[0]] += 1
-        total_moves += move[1]
+            stats[turtle].append(duration)
 
-    stats = dict(sorted(stats.items(), key=itemgetter(1), reverse=True))
+    create_graphs(stats)
 
-    for turtle, wins in stats.items():
-        print(f"{turtle} has {wins} win(s)")
 
-    print(f"{longest_win[0]} has the longest win with {longest_win[1]} moves")
-    print(f"{shortest_win[0]} has the shorted win with {shortest_win[1]} moves")
-    print(f"On average a turtle wins in {total_moves // len(moves)} moves")
+def create_graphs(stats):
+    # text size constants
+    MEDIUM_SIZE = 14
+    BIGGER_SIZE = 20
+
+    # set style
+    plt.style.use("seaborn")
+
+    # create subplots
+    _, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 6))
+
+    # create scatter graph
+    for turtle in stats:
+        ax1.scatter(stats[turtle], [" "] * len(stats[turtle]), label=turtle, marker="x", c=TURTLES[turtle], s=80)
+
+    # scatter graph design changes
+    ax1.invert_xaxis()
+    ax1.set_title("Winning Time for Each Race", fontsize=BIGGER_SIZE)
+    ax1.set_xlabel("Time (s)", fontsize=MEDIUM_SIZE)
+    ax1.legend()
+
+    # create pie chart
+    _, texts, autotexts = ax2.pie(
+        [len(stats[turtle]) for turtle in stats],
+        labels=stats.keys(),
+        autopct="%1.1f%%",
+        radius=1.2,
+        colors=[TURTLES[turtle] for turtle in stats],
+        center=(0, 40),
+        textprops={"fontsize": MEDIUM_SIZE, "weight": "bold"},
+        wedgeprops={"linewidth": 1.5, "edgecolor": "black"},
+    )
+
+    # make pie % values white unless turtle is Lemon
+    for text, autotext in zip(texts, autotexts):
+        if text.get_text() != "Lemon":
+            autotext.set_color("white")
+
+    # pie chart design changes
+    ax2.set_title("Win Distribution", fontsize=BIGGER_SIZE, y=1.08)
+
+    # export as image
+    plt.savefig("stats_graphs.png", bbox_inches="tight")
 
 
 if __name__ == "__main__":
-    WINNER, moves = main()
-    write_to_csv(WINNER.name, moves)
+    winner, duration = main()
+    write_to_csv(winner.name, duration)
     process_csv()
