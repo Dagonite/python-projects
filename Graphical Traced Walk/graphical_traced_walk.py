@@ -147,10 +147,8 @@ def process_csv(path="traced_walks.csv"):
         ronded_avg = round(steps / walks, 1)
         print(("{:>4}" + "{:>10}" * 5).format(size, walks, steps, ronded_avg, max_steps, min_steps))
 
-    return stats
-
 
 if __name__ == "__main__":
     total_steps, squares = main()
     write_to_csv(total_steps, squares)
-    stats = process_csv()
+    process_csv()
