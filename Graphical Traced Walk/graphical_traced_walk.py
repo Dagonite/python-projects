@@ -4,7 +4,6 @@ and they will move in random directions until they leave the grid."""
 import time
 from random import random
 
-import numpy as np
 from graphics import Circle, GraphWin, Line, Point, Rectangle, Text
 
 
