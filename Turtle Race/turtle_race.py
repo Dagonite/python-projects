@@ -6,6 +6,7 @@ from operator import itemgetter
 from random import randint
 from time import perf_counter, sleep
 from turtle import Screen, Turtle
+from itertools import chain
 
 import matplotlib.pyplot as plt
 
@@ -209,7 +210,8 @@ def create_graphs(stats):
             autotext.set_color("white")
 
     # pie chart design changes
-    ax2.set_title("Win Distribution", fontsize=BIGGER_SIZE, y=1.08)
+    no_of_races = len(list(chain.from_iterable(stats.values())))
+    ax2.set_title(f"Win Distribution of {no_of_races} races", fontsize=BIGGER_SIZE, y=1.08)
 
     # export as image
     plt.savefig("stats_graphs.png", bbox_inches="tight")
