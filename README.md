@@ -38,7 +38,7 @@ Watch turtles race it out.
 
 Requirements
 ---
-Install the requirements by entering this into a terminal:
+Install the requirements by entering this command in a terminal:
 
 ```
 pip install -r requirements.txt
