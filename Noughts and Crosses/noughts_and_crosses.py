@@ -1,151 +1,198 @@
 """A game of Noughts and Crosses."""
 
-from random import choice, randint, shuffle
+from random import shuffle, choice
 from time import sleep
 from itertools import combinations
+from copy import deepcopy
 
 # globals
-SYMBOLS = {"O": "Noughts", "X": "Crosses", "T": "Junctions", "H": "Ladders"}
-MAGIC_SQUARE = [6, 7, 2, 1, 5, 9, 8, 3, 4]
+MARKS = {"O": "Noughts", "X": "Crosses"}
+GRID_SIZE = 3
 MAGIC_VALUE = 15
-human_squares = []
-computer_squares = []
+MAGIC_SQUARE = [
+    [6, 7, 2],
+    [1, 5, 9],
+    [8, 3, 4],
+]
 
 
 def main():
+    """Entry point for the program."""
+    # determine if player 2 is cpu or human
+    cpu_is_player2 = cpu_or_human()
+    play_game(cpu_is_player2)
+
+
+def cpu_or_human():
+    """Ask user if they want to play against another player of the computer."""
+    ans = ""
+    while ans not in ("y", "n"):
+        ans = input("Play again, y/n? > ")
+    return ans == "n"
+
+
+def play_game(cpu_is_player2):
+    """Play a game of Noughts and Crosses."""
     while True:
         # generate starting grid
-        squares = [[" " for _ in range(3)] for _ in range(3)]
+        squares = [[" " for _ in range(GRID_SIZE)] for _ in range(GRID_SIZE)]
 
-        # give computer and human a random symbol
-        symbol_keys = list(SYMBOLS.keys())
-        shuffle(symbol_keys)
-        human_symbol = symbol_keys.pop()
-        computer_symbol = symbol_keys[0]
+        # give player 1 and 2 random marks
+        mark_keys = list(MARKS.keys())
+        shuffle(mark_keys)
+        player1_mark = mark_keys.pop()
+        player2_mark = mark_keys.pop()
 
-        # determine if human will go first or second
+        # determine who will go first
         turns = ["first", "second"]
         shuffle(turns)
-        human_turn = turns.pop()
+        player1_turn = turns.pop()
+        player2_turn = turns.pop()
 
-        print(f"\nYou are playing as {SYMBOLS[human_symbol]}. You will go {human_turn}\n")
-
-        players_data = [
-            ["Computer", "Human"],
-            [computer_squares, human_squares],
-            [computer_symbol, human_symbol],
+        # container for some player specific data
+        data = [
+            ["player 1", "computer" if cpu_is_player2 else "player 2"],
+            [player1_mark, player2_mark],
         ]
 
-        # reverse element order if human has the first turn
-        if human_turn == "first":
-            players_data = [data[::-1] for data in players_data]
+        # reverse the data if player 1 is going second
+        if player1_turn == "second":
+            data = [data[::-1] for data in data]
 
-        # zip data for both computer and human
-        players_data = list(zip(*players_data))
+        # zip the data so the columns can be iterated over
+        data = list(zip(*data))
 
-        # draw initial empty grid
+        if cpu_is_player2:
+            print(f"\nYou are playing as {MARKS[player1_mark]}. You will go {player1_turn}\n")
+        else:
+            print(f"\nPlayer 1 has {MARKS[player1_mark]} - they will go {player1_turn}")
+            print(f"Player 2 has {MARKS[player2_mark]} - they will go {player2_turn}\n")
+
         draw_grid(squares)
 
         # main gameplay loop
         drawn = False
         gameover = False
         while not drawn and not gameover:
-            for player, player_squares, player_symbol in players_data:
-                # prompt player for a move then draw the updated grid
-                player_input(squares, player_squares, player_symbol, player)
+            for player, player_mark in data:
+                # determine whether to prompt cpu or human for a move
+                if player == "computer":
+                    print(f"The computer is thinking...")
+                    prompt_cpu_for_move(squares, player_mark, player1_mark)
+                else:
+                    prompt_player_for_move(squares, player, player_mark)
+
                 draw_grid(squares)
 
-                # a win can be determined using a magic square where all lines add up to 15
-                if MAGIC_VALUE in player_sums(player_squares):
-                    print(f"{player} wins with {SYMBOLS[player_symbol]}")
+                # check if the current player has won
+                player_has_won = check_for_win(squares, player_mark)
+                if player_has_won:
+                    print(f"{player.title()} wins with {MARKS[player_mark]}")
                     gameover = True
-                    sleep(3)
                     break
 
                 # check if it is a drawn game
-                if len(find_available_squares(squares)) == 0:
+                if len(get_available_squares(squares)) == 0:
                     print("It's a draw")
                     drawn = True
-                    sleep(3)
                     break
 
-        human_squares.clear()
-        computer_squares.clear()
+        sleep(2)
+        print()
 
-        # ask human if they want to play again
+        # prompt user if they want to play again
         ans = ""
         while ans not in ("y", "n"):
-            ans = input("Play again, (y)es or (n)o? > ")
+            ans = input("Play again, y/n? > ")
         if ans == "n":
-            print("Goodbye!")
+            print("\nGoodbye!")
             break
 
 
-def draw_grid(squares):
-    """Print the current grid layout."""
-    print(f"{squares[0][0]}|{squares[0][1]}|{squares[0][2]}")
-    print("-+-+-")
-    print(f"{squares[1][0]}|{squares[1][1]}|{squares[1][2]}")
-    print("-+-+-")
-    print(f"{squares[2][0]}|{squares[2][1]}|{squares[2][2]}\n")
+def prompt_cpu_for_move(squares, cpu_mark, player_mark):
+    """Prompt computer for a square to put their mark in."""
+    # generate list of available moves for the cpu
+    available_squares = get_available_squares(squares)
 
+    # create a copy of the grid
+    tmp_squares = deepcopy(squares)
 
-def player_input(squares, player_squares, player_symbol, player):
-    """Prompt the player for a square to put their symbol in."""
-    available_squares = tuple(find_available_squares(squares))
+    sleep(1.5)
+
+    # cpu looks for a winning move first
     ans = 0
-    if player == "Computer":
-        # simulate wait time for computer to make move
-        sleep(1.5)
-        # computer will always go for winning squares as a first resort
-        for i in available_squares:
-            if MAGIC_VALUE in player_sums(computer_squares + [i]):
-                ans = i
+    for square in available_squares:
+        row, col = get_square_pos(square)
+        tmp_squares[row][col] = cpu_mark
+
+        if check_for_win(tmp_squares, cpu_mark):
+            print("Performing winning move")
+            ans = square
+            break
+
+        tmp_squares[row][col] = " "
+
+    # cpu looks for a blocking move
+    if ans == 0:
+        for square in available_squares:
+            row, col = get_square_pos(square)
+            tmp_squares[row][col] = player_mark
+            if check_for_win(tmp_squares, player_mark):
+                print("Performing blocking move")
+                ans = square
                 break
-        # computer will go for blocking squares as a second resort
-        if ans == 0:
-            for i in available_squares:
-                if MAGIC_VALUE in player_sums(human_squares + [i]):
-                    ans = i
-                    break
-            else:
-                # otherwise computer will pick a random square
-                ans = choice(available_squares)
-        print(f"The computer has chosen square {ans}")
-    elif player == "Human":
-        while ans not in available_squares:
-            try:
-                ans = int(input(f"Choose a square {available_squares}: > "))
-            except ValueError:
-                print("Invalid: enter one of the shown numbers")
 
-    make_move(squares, player_squares, player_symbol, ans)
+            tmp_squares[row][col] = " "
+        else:
+            # otherwise goes for a random move
+            ans = choice(available_squares)
+
+    make_move(squares, cpu_mark, ans)
 
 
-def make_move(squares, player_squares, player_symbol, ans):
+def prompt_player_for_move(squares, player, player_mark):
+    """Prompt player for a square to put their mark in."""
+    available_squares = tuple(get_available_squares(squares))
+    ans = 0
+
+    while ans not in available_squares:
+        try:
+            ans = int(input(f"{player.title()} choose a square {available_squares}: > "))
+        except ValueError:
+            print("Invalid: enter one of the shown numbers")
+
+    make_move(squares, player_mark, ans)
+
+
+def make_move(squares, player_mark, ans):
     """Modify the grid by inserting the player's symbol."""
-    row, col = find_square_pos(ans)
-    squares[row][col] = player_symbol
-    player_squares.append(ans)
+    row, col = get_square_pos(ans)
+    squares[row][col] = player_mark
     print()
 
 
-def find_available_squares(squares):
-    """Rerturn a list of available squares in the grid."""
-    return [i * 3 + j + 1 for i, row in enumerate(squares) for j, item in enumerate(row) if item == " "]
+def draw_grid(squares):
+    """Print the current grid."""
+    print("\n-+-+-\n".join("|".join(row) for row in squares) + "\n")
 
 
-def find_square_pos(square):
-    """Rerturn the (row, column) of the supplied square."""
-    return (square - 1) // 3, square % 3 - 1
+def get_available_squares(squares):
+    """Return a list of available squares in the grid."""
+    return [i * GRID_SIZE + j + 1 for i, row in enumerate(squares) for j, item in enumerate(row) if item == " "]
 
 
-def player_sums(player_squares):
-    """Return a list of sums generated by 3 value combinations using the magic values which correspond to the squares
-    the supplied player has put their symbol in."""
-    player_values = [MAGIC_SQUARE[i - 1] for i in player_squares]
+def get_square_pos(square):
+    """Return the (row, column) of the supplied square."""
+    return (square - 1) // GRID_SIZE, square % GRID_SIZE - 1
+
+
+def check_for_win(squares, player_mark):
+    """Return whether the MAGIC_VALUE is in the list of combinations which are generated using the magic square."""
+    player_values = [
+        MAGIC_SQUARE[i][j] for i, row in enumerate(squares) for j, square in enumerate(row) if square == player_mark
+    ]
     value_combos = list(combinations(player_values, 3))
-    return list(map(sum, value_combos))
+    return MAGIC_VALUE in list(map(sum, value_combos))
 
 
 if __name__ == "__main__":
