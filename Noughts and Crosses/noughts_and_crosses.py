@@ -51,10 +51,6 @@ def main():
         gameover = False
         while not drawn and not gameover:
             for player, player_squares, player_symbol in players_data:
-                # simulate wait time for computer to make move
-                if player == "Computer":
-                    sleep(1.5)
-
                 # prompt player for a move then draw the updated grid
                 player_input(squares, player_squares, player_symbol, player)
                 draw_grid(squares)
@@ -99,12 +95,14 @@ def player_input(squares, player_squares, player_symbol, player):
     available_squares = tuple(find_available_squares(squares))
     ans = 0
     if player == "Computer":
-        # computer will always go for winning squares first
+        # simulate wait time for computer to make move
+        sleep(1.5)
+        # computer will always go for winning squares as a first resort
         for i in available_squares:
             if MAGIC_VALUE in player_sums(computer_squares + [i]):
                 ans = i
                 break
-        # computer will go for blocking squares second
+        # computer will go for blocking squares as a second resort
         if ans == 0:
             for i in available_squares:
                 if MAGIC_VALUE in player_sums(human_squares + [i]):
