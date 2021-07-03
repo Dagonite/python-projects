@@ -27,7 +27,7 @@ def cpu_or_human():
     """Ask user if they want to play against another player of the computer."""
     ans = ""
     while ans not in ("y", "n"):
-        ans = input("Play again, y/n? > ")
+        ans = input("Do you want to be against another human, y/n? > ")
     return ans == "n"
 
 
@@ -97,7 +97,7 @@ def play_game(cpu_is_player2):
                     drawn = True
                     break
 
-        sleep(2)
+        sleep(1.5)
         print()
 
         # prompt user if they want to play again
@@ -126,19 +126,17 @@ def prompt_cpu_for_move(squares, cpu_mark, player_mark):
         tmp_squares[row][col] = cpu_mark
 
         if check_for_win(tmp_squares, cpu_mark):
-            print("Performing winning move")
             ans = square
             break
 
         tmp_squares[row][col] = " "
 
-    # cpu looks for a blocking move
+    # cpu looks for a blocking move second
     if ans == 0:
         for square in available_squares:
             row, col = get_square_pos(square)
             tmp_squares[row][col] = player_mark
             if check_for_win(tmp_squares, player_mark):
-                print("Performing blocking move")
                 ans = square
                 break
 
