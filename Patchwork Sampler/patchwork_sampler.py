@@ -63,6 +63,8 @@ def create_patchwork(size, colours):
 
     # colour_tracker initialised to first patch colour so don't need to supply as arg
     first_patch(win, size, colours[0], tiles)
+
+    # call the second and third patch designs
     second_patch(win, size, colours[1], colour_tracker, tiles)
     third_patch(win, size, colours[2], colour_tracker, tiles)
 
