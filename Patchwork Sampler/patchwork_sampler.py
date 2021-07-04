@@ -55,7 +55,7 @@ def create_patchwork(size, colours):
     win.setBackground("white")
     win.setCoords(0, size + 2, size + 2, 0)
 
-    # initialise a list of length size^2 which will be filled up with the shapes that make up the patchwork
+    # initialise a list of length size ** 2 which will be filled up with the shapes that make up the patchwork
     tiles = [None] * size ** 2
 
     # initialise a list tracking the current colour of each tile
