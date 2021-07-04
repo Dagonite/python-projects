@@ -150,7 +150,7 @@ def circle_design(win, size, colour, col, row, tiles):
 
 
 def cycle_colours(win, size, colours, colour_tracker, tiles):
-    """User can endlessly click tiles to cycle their colour. Clicking the whitespace outside the patchwork will exit the
+    """User can endlessly click tiles to cycle the colours. Clicking the whitespace outside the patchwork will exit the
     program."""
     while True:
         cursor = win.getMouse()
