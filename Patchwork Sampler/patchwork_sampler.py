@@ -5,6 +5,8 @@ Python interpreter (REPL)."""
 
 from graphics import GraphWin, Line, Circle, Point, Rectangle, Text
 
+SIZES = list("45678")
+VALID_COLOURS = ["red", "green", "blue", "orange", "brown", "pink"]
 
 def main():
     size, colours = get_inputs()
@@ -16,22 +18,18 @@ def main():
 
 def get_inputs():
     """Ask user for the patchwork size and colours."""
-    sizes = list("45678")
     size = ""
+    while size not in SIZES:
+        size = input(f"\nEnter one of the following sizes for the patchwork ({concat_list(SIZES, 'or')})\n> ").strip()
+        print(f"The patchwork will be a {size} x {size} grid" if size in SIZES else "Error: invalid size")
 
-    while size not in sizes:
-        size = input(f"\nEnter one of the following sizes for the patchwork ({concat_list(sizes, 'or')})\n> ").strip()
-        print(f"The patchwork will be a {size} x {size} grid" if size in sizes else "Error: invalid size")
-
-    valid_colours = ["red", "green", "blue", "orange", "brown", "pink"]
     colours = []
-
     while len(colours) < 3:
-        colour = input(f"\nEnter one of the following colours ({concat_list(valid_colours, 'and')})\n> ").lower().strip()
+        colour = input(f"\nEnter one of the following colours ({concat_list(VALID_COLOURS, 'and')})\n> ").lower().strip()
 
-        if colour in valid_colours:
+        if colour in VALID_COLOURS:
             colours.append(colour)
-            valid_colours.remove(colour)
+            VALID_COLOURS.remove(colour)
             print(colour.capitalize(), "is valid")
         elif colour in colours:
             print("Error:", colour, "already chosen")
