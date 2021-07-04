@@ -63,7 +63,7 @@ def play_game(cpu_is_player2):
         data = list(zip(*data))
 
         if cpu_is_player2:
-            print(f"\nYou are playing as {MARKS[player1_mark]}. You will go {player1_turn}\n")
+            print(f"\nYou are playing as {MARKS[player1_mark]} - you will go {player1_turn}\n")
         else:
             print(f"\nPlayer 1 has {MARKS[player1_mark]} - they will go {player1_turn}")
             print(f"Player 2 has {MARKS[player2_mark]} - they will go {player2_turn}\n")
