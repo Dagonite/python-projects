@@ -169,7 +169,7 @@ def cycle_colours(win, size, colours, colour_tracker, tiles):
 
 def draw_line(win, colour, point1, point2, current_tile):
     "Helper function for drawing lines."
-    current_line = Line(Point(point1[0], point1[1]), Point(point2[0], point2[1]))
+    current_line = Line(Point(*point1), Point(*point2))
     current_line.setWidth(2)
     current_line.setFill(colour)
     current_line.draw(win)
@@ -178,7 +178,7 @@ def draw_line(win, colour, point1, point2, current_tile):
 
 def draw_circle(win, colour, centre, radius, current_tile, fill=False):
     "Helper function for drawing circles."
-    current_circle = Circle(Point(centre[0], centre[1]), radius)
+    current_circle = Circle(Point(*centre), radius)
     if fill:
         current_circle.setFill(colour)
     else:
@@ -190,7 +190,7 @@ def draw_circle(win, colour, centre, radius, current_tile, fill=False):
 
 def draw_rectangle(win, colour, point1, point2, current_tile, fill=False):
     "Helper function for drawing rectangles."
-    current_rectangle = Rectangle(Point(point1[0], point1[1]), Point(point2[0], point2[1]))
+    current_rectangle = Rectangle(Point(*point1), Point(*point2))
     if fill:
         current_rectangle.setFill(colour)
     current_rectangle.setOutline(colour)
