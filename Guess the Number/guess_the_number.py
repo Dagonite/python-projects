@@ -1,7 +1,8 @@
 """Guess a randomly selected number within a certain amount of tries."""
 
-import random
 import os
+import random
+import argparse
 
 UPPER_LIMIT = 100  # highest number the secret number can be
 GUESSES = 7  # number of guesses the player has
@@ -12,7 +13,7 @@ def ordinal(n):
     return str(n) + "tsnrhtdd"[(n // 10 % 10 != 1) * (n % 10 < 4) * n % 10 :: 4]
 
 
-def guess_the_number(UPPER_LIMIT=UPPER_LIMIT, GUESSES=GUESSES):
+def guess_the_number(UPPER_LIMIT, GUESSES):
     SECRET_NUMBER = random.randint(1, UPPER_LIMIT)  # pick a random number
     print(
         f"I am thinking of a number between 1 and {UPPER_LIMIT}. You have {GUESSES} guess{'es' if GUESSES != '1' else ''}"
@@ -49,13 +50,16 @@ def guess_the_number(UPPER_LIMIT=UPPER_LIMIT, GUESSES=GUESSES):
 
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--guesses", type=int)
+    parser.add_argument("--upper", type=int)
+    args = parser.parse_args()
+
     play_again = "y"
-    while True:
+    while play_again != "n":
         if play_again == "y":
             os.system("cls" if os.name == "nt" else "clear")
-            guess_the_number()
-        elif play_again == "n":
-            break
+            guess_the_number(args.upper or UPPER_LIMIT, args.guesses or GUESSES)
         play_again = input("Play again, (y)es or (n)o? > ")
 
     print("Goobye!")
