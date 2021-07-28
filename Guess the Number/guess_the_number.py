@@ -1,6 +1,7 @@
 """Guess a randomly selected number within a certain amount of tries."""
 
 import random
+import os
 
 UPPER_LIMIT = 100  # highest number the secret number can be
 GUESSES = 7  # number of guesses the player has
@@ -47,14 +48,18 @@ def guess_the_number(UPPER_LIMIT=UPPER_LIMIT, GUESSES=GUESSES):
         print(f"\nYou lose! The number I was thinking of was {SECRET_NUMBER}\n")
 
 
-if __name__ == "__main__":
-    guess_the_number()
-
+def main():
+    play_again = "y"
     while True:
-        play_again = input("Play again, (y)es or (n)o? > ")
         if play_again == "y":
+            os.system("cls" if os.name == "nt" else "clear")
             guess_the_number()
         elif play_again == "n":
             break
+        play_again = input("Play again, (y)es or (n)o? > ")
 
     print("Goobye!")
+
+
+if __name__ == "__main__":
+    main()
