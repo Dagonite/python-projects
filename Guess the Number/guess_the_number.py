@@ -52,14 +52,14 @@ def guess_the_number(UPPER_LIMIT, GUESSES):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--guesses", type=int)
-    parser.add_argument("--upper", type=int)
+    parser.add_argument("--limit", type=int)
     args = parser.parse_args()
 
     play_again = "y"
     while play_again != "n":
         if play_again == "y":
             os.system("cls" if os.name == "nt" else "clear")
-            guess_the_number(args.upper or UPPER_LIMIT, args.guesses or GUESSES)
+            guess_the_number(args.limit or UPPER_LIMIT, args.guesses or GUESSES)
         play_again = input("Play again, (y)es or (n)o? > ")
 
     print("Goobye!")
