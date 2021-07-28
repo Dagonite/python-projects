@@ -16,7 +16,7 @@ def ordinal(n):
 def guess_the_number(UPPER_LIMIT, GUESSES):
     SECRET_NUMBER = random.randint(1, UPPER_LIMIT)  # pick a random number
     print(
-        f"I am thinking of a number between 1 and {UPPER_LIMIT}. You have {GUESSES} guess{'es' if GUESSES != '1' else ''}"
+        f"I am thinking of a number between 1 and {UPPER_LIMIT}. You have {GUESSES} guess{'es' if GUESSES != 1 else ''}"
     )
 
     won = False
@@ -44,7 +44,7 @@ def guess_the_number(UPPER_LIMIT, GUESSES):
             break
 
     if won:
-        print(f"\nYes! The number was {SECRET_NUMBER}. You got it in {attempt} guess{'es' if attempt != '1' else ''}\n")
+        print(f"\nYes! The number was {SECRET_NUMBER}. You got it in {attempt} guess{'es' if attempt != 1 else ''}\n")
     else:
         print(f"\nYou lose! The number I was thinking of was {SECRET_NUMBER}\n")
 
