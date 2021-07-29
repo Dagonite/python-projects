@@ -185,7 +185,7 @@ def prompt_user_for_letters(lives, category, phrase, hidden_phrase):
     return lives, score
 
 
-def display_hangman(category, hidden_phrase, LIVES, note=""):
+def display_hangman(category, hidden_phrase, LIVES, note):
     print(f"\nCategory: {category}   Lives: {LIVES}   Used letters: {used_letters}   Note: {note}\n")
     print(" ".join(hidden_phrase))
     print(f"{HANGMAN_STAGES[LIVES]}\n")
