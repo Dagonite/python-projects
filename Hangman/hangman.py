@@ -88,11 +88,10 @@ HANGMAN_STAGES = [
 ]
 BASE_LIVES = len(HANGMAN_STAGES) - 1
 DIFFICULTIES = {
-    "e": BASE_LIVES,
-    "m": BASE_LIVES - 1,
-    "h": BASE_LIVES - 2,
-    "i": BASE_LIVES - 3,
-    "q": 0,
+    "(e)asy": BASE_LIVES,
+    "(m)edium": BASE_LIVES - 1,
+    "(h)ard": BASE_LIVES - 2,
+    "(i)mpossible": BASE_LIVES - 3,
 }
 used_letters = []
 
@@ -122,10 +121,18 @@ def main():
 
 def select_difficulty():
     difficulty = ""
-    while difficulty not in DIFFICULTIES.keys():
-        difficulty = input("\nEnter a difficulty or (q)uit:\n(e)asy, (m)edium, (h)ard, or (i)mpossible: > ")
+    shortened_difficulties = [tmp_difficulty[1:2] for tmp_difficulty in DIFFICULTIES.keys()]
 
-    starting_lives = DIFFICULTIES[difficulty]
+    while difficulty not in shortened_difficulties + ["q"]:
+        difficulty = input(f"\nEnter a difficulty or (q)uit:\n{' - '.join(DIFFICULTIES.keys())} > ")
+
+    if difficulty == "q":
+        starting_lives = 0
+    else:
+        for key in DIFFICULTIES.keys():
+            if key[1:2] == difficulty:
+                starting_lives = DIFFICULTIES[key]
+                break
 
     return starting_lives, difficulty
 
