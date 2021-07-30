@@ -114,7 +114,7 @@ def main():
         rounds += 1
 
     if rounds:
-        print(f"\nYou lasted {rounds} round{'s' if round != 1 else ''}\nGoobye!")
+        print(f"\nYou lasted {rounds} round{'s' if rounds != 1 else ''}\nGoobye!")
         write_to_csv(rounds, difficulty, datetime.datetime.now().date())
     else:
         print("\nGoodbye!")
