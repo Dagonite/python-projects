@@ -19,6 +19,8 @@ def guess_the_number(UPPER_LIMIT, GUESSES):
         f"I am thinking of a number between 1 and {UPPER_LIMIT}. You have {GUESSES} guess{'es' if GUESSES != 1 else ''}"
     )
 
+    prev_guesses = []
+
     won = False
     for attempt in range(1, GUESSES + 1):
         while True:
@@ -29,7 +31,10 @@ def guess_the_number(UPPER_LIMIT, GUESSES):
                     raise ValueError(f"number beyond upper-limit: {guess} > {UPPER_LIMIT}")
                 elif guess < 1:
                     raise ValueError(f"number below lower-limit: {guess} < 1")
+                elif guess in prev_guesses:
+                    raise ValueError(f"number entered previously: {guess}")
                 else:
+                    prev_guesses.append(guess)
                     break
 
             except ValueError as error:
