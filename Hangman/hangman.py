@@ -100,9 +100,6 @@ def main():
     starting_lives, difficulty = select_difficulty()
     lives = starting_lives
 
-    total_score = 0
-    score_mult = 500 - starting_lives * 40
-
     rounds = 0
     while lives:
         category, phrase = choose_random_word()
@@ -112,15 +109,14 @@ def main():
             if ch in (" ", "'", "-", ":"):
                 hidden_phrase[i] = ch
 
-        lives, score = prompt_user_for_letters(starting_lives, category, phrase, hidden_phrase)
-        total_score += score * score_mult
+        lives = prompt_user_for_letters(starting_lives, category, phrase, hidden_phrase)
         rounds += 1
 
-    total_score = f"{total_score:.2f}"
-    print(f"\nYour score is {total_score}\nGoobye!")
-
     if rounds:
-        write_to_csv(total_score, rounds, difficulty, datetime.datetime.now().date())
+        print(f"\nYour lasted {rounds} round{'s' if round != 1 else ''}\nGoobye!")
+        write_to_csv(rounds, difficulty, datetime.datetime.now().date())
+    else:
+        print("\nGoodbye!")
 
 
 def select_difficulty():
@@ -134,7 +130,6 @@ def select_difficulty():
 
 
 def prompt_user_for_letters(lives, category, phrase, hidden_phrase):
-    starting_lives = lives
     note = ""
     while lives > 0:
         while True:
@@ -170,8 +165,6 @@ def prompt_user_for_letters(lives, category, phrase, hidden_phrase):
 
     display_hangman(category, hidden_phrase, lives, note)
 
-    score = lives / starting_lives
-
     if lives:
         print(f"\nYou win! The word was {phrase}\n")
         option = ""
@@ -184,7 +177,7 @@ def prompt_user_for_letters(lives, category, phrase, hidden_phrase):
 
     used_letters.clear()
 
-    return lives, score
+    return lives
 
 
 def display_hangman(category, hidden_phrase, LIVES, note):
