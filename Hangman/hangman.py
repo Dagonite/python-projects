@@ -167,14 +167,14 @@ def prompt_user_for_letters(lives, category, phrase, hidden_phrase):
     display_hangman(category, hidden_phrase, lives, note)
 
     if lives:
-        print(f"\nYou win! The word was {phrase}\n")
+        print(f"You win! The word was {phrase}\n")
         option = ""
         while option not in ("c", "q"):
             option = input("Enter an option, (c)ontinue or (q)uit: > ")
         if option == "q":
             lives = 0
     else:
-        print(f"\nYou lose! The word was {phrase}")
+        print(f"You lose! The word was {phrase}")
 
     used_letters.clear()
 
