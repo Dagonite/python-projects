@@ -32,11 +32,11 @@ def get_inputs():
             VALID_COLOURS.remove(colour)
             print(colour.capitalize(), "is valid")
         elif colour in colours:
-            print("Error:", colour, "already chosen")
+            print(f"Error: {colour} already chosen")
         else:
             print("Error: invalid colour")
 
-    print("\nYou have chosen...", concat_list(colours, "and"))
+    print(f"\nYou have chosen... {concat_list(colours, conjunction='and')}")
 
     return int(size), colours
 
