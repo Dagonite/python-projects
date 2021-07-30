@@ -20,12 +20,12 @@ def get_inputs():
     """Ask user for the patchwork size and colours."""
     size = ""
     while size not in SIZES:
-        size = input(f"\nEnter one of the following sizes for the patchwork ({concat_list(SIZES, 'or')})\n> ").strip()
+        size = input(f"\nEnter one of the following sizes for the patchwork ({concat_list(SIZES, conjunction='or')})\n> ").strip()
         print(f"The patchwork will be a {size} x {size} grid" if size in SIZES else "Error: invalid size")
 
     colours = []
     while len(colours) < 3:
-        colour = input(f"\nEnter one of the following colours ({concat_list(VALID_COLOURS, 'and')})\n> ").lower().strip()
+        colour = input(f"\nEnter one of the following colours ({concat_list(VALID_COLOURS, conjunction='and')})\n> ").lower().strip()
 
         if colour in VALID_COLOURS:
             colours.append(colour)
@@ -41,7 +41,7 @@ def get_inputs():
     return int(size), colours
 
 
-def concat_list(lst, conjunction):
+def concat_list(lst, *, conjunction):
     """Takes a list and returns a concatenated string of comma separated values. The conjuction is a string which is 
     used as the separator for the last list value."""
     return f"{', '.join(lst[:-1])}, {conjunction} {lst[-1]}"
