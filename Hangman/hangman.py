@@ -128,7 +128,9 @@ def select_difficulty():
     while difficulty not in DIFFICULTIES.keys():
         difficulty = input("\nEnter a difficulty or (q)uit:\n(e)asy, (m)edium, (h)ard, or (i)mpossible: > ")
 
-    return DIFFICULTIES[difficulty], difficulty
+    starting_lives = DIFFICULTIES[difficulty]
+
+    return starting_lives, difficulty
 
 
 def prompt_user_for_letters(lives, category, phrase, hidden_phrase):
