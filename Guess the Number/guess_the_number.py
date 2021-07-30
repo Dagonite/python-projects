@@ -14,6 +14,9 @@ def ordinal(n):
 
 
 def guess_the_number(UPPER_LIMIT, GUESSES):
+    if UPPER_LIMIT < GUESSES:
+        raise ValueError(f"upper limit can't be less than guesses: {UPPER_LIMIT} < {GUESSES}")
+
     SECRET_NUMBER = random.randint(1, UPPER_LIMIT)  # pick a random number
     print(
         f"I am thinking of a number between 1 and {UPPER_LIMIT}. You have {GUESSES} guess{'es' if GUESSES != 1 else ''}"
