@@ -168,7 +168,7 @@ def prompt_dealer_for_moves(deck, hands, chips, bet):
     dealer_hand, _ = hands
     new_cards = []
 
-    while dealer_hand.value <= 17:
+    while dealer_hand.value < 17:
         input("\nPress Enter to continue... ")
 
         new_card = hit(deck, dealer_hand)
