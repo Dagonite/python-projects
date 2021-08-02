@@ -20,19 +20,19 @@ MAGIC_SQUARE = [
 def main():
     """Entry point for the program."""
     # determine if player 2 is cpu or human
-    cpu_is_player2 = cpu_or_human()
-    play_game(cpu_is_player2)
+    player2_is_cpu = cpu_or_human()
+    play_game(player2_is_cpu)
 
 
 def cpu_or_human():
     """Ask user if they want to play against another player of the computer."""
     ans = ""
     while ans not in ("y", "n"):
-        ans = input("Do you want to be against another human, y/n? > ")
+        ans = input("Do you want to play against another human, y/n? > ")
     return ans == "n"
 
 
-def play_game(cpu_is_player2):
+def play_game(player2_is_cpu):
     """Play a game of Noughts and Crosses."""
     while True:
         # generate starting grid
@@ -52,7 +52,7 @@ def play_game(cpu_is_player2):
 
         # container for some player specific data
         data = [
-            ["player 1", "computer" if cpu_is_player2 else "player 2"],
+            ["player 1", "computer" if player2_is_cpu else "player 2"],
             [player1_mark, player2_mark],
         ]
 
@@ -63,13 +63,14 @@ def play_game(cpu_is_player2):
         # zip the data so the columns can be iterated over
         data = list(zip(*data))
 
-        if cpu_is_player2:
+        if player2_is_cpu:
             print(f"\nYou are playing as {MARKS[player1_mark]} - you will go {player1_turn}\n")
         else:
             print(f"\nPlayer 1 has {MARKS[player1_mark]} - they will go {player1_turn}")
             print(f"Player 2 has {MARKS[player2_mark]} - they will go {player2_turn}\n")
 
-        draw_grid(squares)
+        input("Press Enter to continue... ")
+        print_grid(squares)
 
         # main gameplay loop
         drawn = False
@@ -83,7 +84,7 @@ def play_game(cpu_is_player2):
                 else:
                     prompt_player_for_move(squares, player, player_mark)
 
-                draw_grid(squares)
+                print_grid(squares)
 
                 # check if the current player has won
                 player_has_won = check_for_win(squares, player_mark)
@@ -170,7 +171,7 @@ def make_move(squares, player_mark, ans):
     print()
 
 
-def draw_grid(squares):
+def print_grid(squares):
     """Print the current grid."""
     print("\n-+-+-\n".join("|".join(row) for row in squares) + "\n")
 
