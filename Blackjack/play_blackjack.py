@@ -44,7 +44,7 @@ def main(chips=CHIPS):
 
         # dealer has bust
         if dealer_hand.value > 21:
-            print(f"\nDealer has bust, you win {bet} chips!")
+            print(f"\nDealer has gone over 21, you win {bet} chips!")
             chips += bet
             continue
 
