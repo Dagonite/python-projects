@@ -12,7 +12,7 @@ class Card:
         self.rank = rank
 
     def __str__(self):
-        # if face card, use whole name
+        # if face card, use whole rank name
         for face in FACE_CARDS:
             if self.rank == face[0]:
                 rank = face
@@ -23,32 +23,31 @@ class Card:
         # use suit name instead of symbol
         suit = SUITS[self.suit]
 
-        # determine what article to use
-        article = "a"
-        if rank == "8" or rank == "Ace":
-            article += "n"
+        return f"{rank} of {suit}"
 
-        return f"{article} {rank} of {suit}"
+    def get_card_graphic(self, hidden=False):
+        # top line of a card
+        row_one = " ___  "
 
-    def format_card(self, rows, hidden=False):
-        rows[0] += " ___  "  # top line of a card
         if hidden:
             # backside of a card
-            rows[1] += "|## | "
-            rows[2] += "|###| "
-            rows[3] += "|_##| "
+            row_two = "|## | "
+            row_three = "|###| "
+            row_four = "|_##| "
         else:
             # frontside of a card
-            rows[1] += "|{} | ".format(self.rank.ljust(2))
-            rows[2] += "| {} | ".format(self.suit)
-            rows[3] += "|_{}| ".format(self.rank.rjust(2, "_"))
+            row_two = "|{} | ".format(self.rank.ljust(2))
+            row_three = "| {} | ".format(self.suit)
+            row_four = "|_{}| ".format(self.rank.rjust(2, "_"))
+
+        return [row_one, row_two, row_three, row_four]
 
 
 class Deck:
     def __init__(self):
         self.deck = [Card(suit, str(rank)[0]) if rank != 10 else Card(suit, "10") for rank in RANKS for suit in SUITS]
 
-    def shuffle_deck(self):
+    def shuffle(self):
         import random
 
         random.shuffle(self.deck)
@@ -63,11 +62,14 @@ class Hand:
         self.value = 0
         self.aces = 0
 
-    def format_hand(self, hidden=False):
-        rows = ["", "", "", "", ""]
+    def print_hand(self, hidden=False):
+        rows = ["", "", "", ""]
+
         for card in self.cards:
-            card.format_card(rows, hidden)
+            for i, row in enumerate(card.get_card_graphic(hidden)):
+                rows[i] += row
             hidden = False
+
         for row in rows:
             print(row)
 
@@ -81,29 +83,7 @@ class Hand:
             self.value += 11
             self.aces += 1
 
-    def adjust_for_ace(self):
+    def adjust_for_aces(self):
         while self.value > 21 and self.aces:
             self.value -= 10
             self.aces -= 1
-
-
-class Chips:
-    def __init__(self, total):
-        self.total = total
-        self.full_bet = 0
-
-    def __str__(self):
-        return str(self.total)
-
-    def take_bet(self, additional_bet):
-        self.full_bet += additional_bet
-        self.total -= additional_bet
-
-    def win_bet(self):
-        self.total += self.full_bet * 2
-
-    def draw_bet(self):
-        self.total += self.full_bet
-
-    def clear_bet(self):
-        self.full_bet = 0
