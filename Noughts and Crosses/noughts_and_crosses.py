@@ -173,6 +173,7 @@ def make_move(squares, player_mark, ans):
 
 def print_grid(squares):
     """Print the current grid."""
+    os.system("cls" if os.name == "nt" else "clear")
     print("\n-+-+-\n".join("|".join(row) for row in squares) + "\n")
 
 
