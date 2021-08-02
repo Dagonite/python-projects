@@ -1,9 +1,10 @@
 """A game of Noughts and Crosses."""
 
-from random import shuffle, choice
-from time import sleep
-from itertools import combinations
+import os
 from copy import deepcopy
+from itertools import combinations
+from random import choice, shuffle
+from time import sleep
 
 # globals
 MARKS = {"O": "Noughts", "X": "Crosses"}
