@@ -27,20 +27,24 @@ def main(chips=CHIPS):
         # get player moves
         prompt_player_for_moves(deck, (dealer_hand, player_hand), chips, bet)
 
-        # player has bust
+        # redisplay the board to hide player's previous actions
+        display_hands(deck, (dealer_hand, player_hand), hidden=True)
+
+        # player has bust - move onto next round
         if player_hand.value > 21:
             print(f"\nYou have gone over 21, you lose!")
             chips -= bet
             continue
-
-        # redisplay the board to hide player's previous actions
-        display_hands(deck, (dealer_hand, player_hand), hidden=False)
-
-        # describe the dealer's hidden card
-        print(f"\nDealer has revealed the {dealer_hand.cards[0]}")
+        # player has not bust - reveal dealer's hidden card
+        else:
+            display_hands(deck, (dealer_hand, player_hand))
+            print(f"\nDealer has revealed the {dealer_hand.cards[0]}")
 
         # get the dealer's moves
         prompt_dealer_for_moves(deck, (dealer_hand, player_hand), chips, bet)
+
+        # redisplay the board to hide dealer's previous actions
+        display_hands(deck, (dealer_hand, player_hand))
 
         # dealer has bust
         if dealer_hand.value > 21:
@@ -152,13 +156,16 @@ def prompt_player_for_moves(deck, hands, chips, bet):
 
         if move == "h":
             new_card = hit(deck, player_hand)
+            new_cards.append(new_card)
         elif move == "s":
             break
         elif move == "d" and "d" in [i[1:2] for i in moves]:
             bet += get_bet(chips, initial_bet=bet)
             new_card = hit(deck, player_hand)
-
-        new_cards.append(new_card)
+            new_cards.append(new_card)
+            display_hands(deck, hands, hidden=True)
+            print(f"\nYou have drawn the {new_card}")
+            break
 
     input("\nPress Enter to continue... ")
 
@@ -173,11 +180,13 @@ def prompt_dealer_for_moves(deck, hands, chips, bet):
 
         new_card = hit(deck, dealer_hand)
         new_cards.append(new_card)
-        display_hands(deck, hands, hidden=False)
+        display_hands(deck, hands)
 
         print(f"\nDealer has revealed the {dealer_hand.cards[0]}")
         for new_card in new_cards:
             print(f"\nDealer has drawn the {new_card}")
+
+    input("\nPress Enter to continue... ")
 
 
 if __name__ == "__main__":
