@@ -1,5 +1,8 @@
-"""Game where a user gets to shoot arrows at a target. The arrows are offset by wind so this needs to be taken into 
-account before each shot. After shooting all arrows a score and a grade are given."""
+"""
+Game where a user gets to shoot arrows at a target. The arrows are offset by 
+wind so this needs to be taken into account before each shot. After shooting all 
+arrows a score and a grade are given.
+"""
 
 import random
 
