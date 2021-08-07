@@ -1,5 +1,8 @@
-"""Program which draws a grid on a graphics window using a specified size. A person is drawn in the centre of the grid 
-and they will move in random directions until they leave the grid."""
+"""
+Program which draws a grid on a graphics window using a specified size. A person 
+is drawn in the centre of the grid and they will move in random directions until 
+they leave the grid.
+"""
 
 import time
 from random import random
