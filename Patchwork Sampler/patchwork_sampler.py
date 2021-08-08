@@ -180,7 +180,7 @@ def cycle_colours(win, size, colours, colour_tracker, tiles):
             colour_n = (colour_tracker[current_tile_pos] + 1) % 3
             colour_tracker[current_tile_pos] = colour_n
 
-            undraw_shapes(win, current_tile_pos, tiles)
+            undraw_shapes(current_tile_pos, tiles)
             redraw_shapes(win, size, colours[colour_n], col, row, tiles)
         else:
             break
@@ -222,7 +222,7 @@ def get_current_tile_pos(size, col, row):
     return (row - 1) * (size - 1) + (col - 1) + (row - 1)
 
 
-def undraw_shapes(win, current_tile_pos, tiles):
+def undraw_shapes(current_tile_pos, tiles):
     """Undraw the shapes that make up a tile using the provided tile position."""
     current_tile = tiles[current_tile_pos]
     for shape in current_tile:
