@@ -12,18 +12,18 @@ from pract05 import distance_between_points
 from pract06 import draw_circle
 
 # constants
-GRADES = [
-    "amazing at this game",
-    "pretty good at this game",
-    "average at this game",
-    "below average at this game",
-    "awful at this game",
-]
-
 WSD = 0.25  # wind start deviation
 WD = 0.1  # wind deviation after an arrow is shot
 WTH = 0.08  # wind threshold (determines wind direction threshold for the wind direction message)
-ARROWS = 5  # number of arrows to shoot
+ARROWS = 8  # number of arrows to shoot
+GRADES = {
+    9 * ARROWS: "amazing at this game",
+    8 * ARROWS: "pretty good at this game",
+    6 * ARROWS: "average at this game",
+    4 * ARROWS: "below average at this game",
+    2 * ARROWS: "bad at this game",
+    0: "terrible at this game",
+}
 
 
 def archery_game():
@@ -141,16 +141,10 @@ def shoot_arrows(win, wind_text, zone_text, score_text, score):
 
 def give_grade(wind_text, score_text, score):
     """Display what score and grade the user has received."""
-    if score > 220 / ARROWS:
-        grade = 0
-    elif score > 170 / ARROWS:
-        grade = 1
-    elif score > 120 / ARROWS:
-        grade = 2
-    elif score > 95 / ARROWS:
-        grade = 3
-    else:
-        grade = 4
+    for grade in GRADES:
+        if score >= grade:
+            grade_text = GRADES[grade]
+            break
 
     grade_text = GRADES[grade]
     wind_text.setText(f"You scored {score}, meaning you're {grade_text}")
@@ -160,7 +154,7 @@ def give_grade(wind_text, score_text, score):
 
 
 def draw_arrow(win, arrow_x, arrow_y):
-    """Draw arrow onto the given graphics window."""
+    """Draw an arrow onto the given graphics window."""
     arrow_shaft = Circle(Point(arrow_x, arrow_y), 0.008).draw(win)
     arrow_shaft.setFill("brown")
 
