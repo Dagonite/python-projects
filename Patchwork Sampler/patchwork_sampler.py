@@ -12,6 +12,7 @@ SIZES = list("45678")
 VALID_COLOURS = ["red", "green", "blue", "orange", "brown", "pink"]
 
 def main():
+    """Program entry point."""
     size, colours = get_inputs()
     win, colour_tracker, tiles = create_patchwork(size, colours)
     cycle_colours(win, size, colours, colour_tracker, tiles)
