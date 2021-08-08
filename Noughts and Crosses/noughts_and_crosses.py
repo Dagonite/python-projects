@@ -188,7 +188,10 @@ def get_square_pos(square):
 
 
 def check_for_win(squares, player_mark):
-    """Return whether the MAGIC_VALUE is in the list of combinations which are generated using the magic square."""
+    """
+    Return whether the MAGIC_VALUE is in the list of combinations which are
+    generated using the magic square.
+    """
     player_values = [
         MAGIC_SQUARE[i][j] for i, row in enumerate(squares) for j, square in enumerate(row) if square == player_mark
     ]
