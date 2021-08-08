@@ -46,13 +46,19 @@ def get_inputs():
 
 
 def concat_list(lst, *, conjunction):
-    """Takes a list and returns a concatenated string of comma separated values. The conjuction is a string which is 
-    used as the separator for the last list value."""
+    """
+    Takes a list and returns a concatenated string of comma separated values.
+    The conjuction is a string which is used as the separator for the last list 
+    value.
+    """
     return f"{', '.join(lst[:-1])}, {conjunction} {lst[-1]}"
 
 
 def create_patchwork(size, colours):
-    """Creates the graphics window and calls the three different patches that make up the patchwork."""
+    """
+    Creates the graphics window and calls the three different patches that make 
+    up the patchwork.
+    """
     win = GraphWin("Patchwork sampler", 100 * (size + 2), 100 * (size + 2))
     win.setBackground("white")
     win.setCoords(0, size + 2, size + 2, 0)
@@ -74,7 +80,10 @@ def create_patchwork(size, colours):
 
 
 def first_patch(win, size, colour, tiles):
-    """Calls net_design() to draw a perimeter of net tiles at the specified positions. Uses the first chosen colour."""
+    """
+    Calls net_design() to draw a perimeter of net tiles at the specified 
+    positions. Uses the first chosen colour.
+    """
     for row in range(1, size + 1):
         net_design(win, size, colour, 1, row, tiles)  # left column of tiles
         net_design(win, size, colour, size, row, tiles)  # right column of tiles
@@ -85,8 +94,10 @@ def first_patch(win, size, colour, tiles):
 
 
 def second_patch(win, size, colour, colour_tracker, tiles):
-    """Calls circle_design() to draw an inverted staircase of circle tiles at the specified positions. Uses the second 
-    chosen colour."""
+    """
+    Calls circle_design() to draw an inverted staircase of circle tiles at the 
+    specified positions. Uses the second chosen colour.
+    """
     stop_col = size - 1
     for row in range(2, size):
         for col in range(2, stop_col + 1):
@@ -97,8 +108,10 @@ def second_patch(win, size, colour, colour_tracker, tiles):
 
 
 def third_patch(win, size, colour, colour_tracker, tiles):
-    """Calls circle_design() to draw a staircase of circle tiles at the specified positions in the remaining space. Uses 
-    the third chosen colour."""
+    """
+    Calls circle_design() to draw a staircase of circle tiles at the specified 
+    positions in the remaining space. Uses the third chosen colour.
+    """
     stop_col = 2
     for row in range(size - 1, 2, -1):
         for col in range(size - 1, stop_col, -1):
@@ -154,8 +167,10 @@ def circle_design(win, size, colour, col, row, tiles):
 
 
 def cycle_colours(win, size, colours, colour_tracker, tiles):
-    """User can endlessly click tiles to cycle the colours. Clicking the whitespace outside the patchwork will exit the
-    program."""
+    """
+    User can endlessly click tiles to cycle the colours. Clicking the whitespace
+    outside the patchwork will exit the program.
+    """
     while True:
         cursor = win.getMouse()
         col, row = int(cursor.getX()), int(cursor.getY())
@@ -215,8 +230,11 @@ def undraw_shapes(win, current_tile_pos, tiles):
 
 
 def redraw_shapes(win, size, colour, col, row, tiles):
-    """Determine what tile design needs to be drawn then call the relevant design function. Supply the design function
-    with the next colour in the list of chosen colours."""
+    """
+    Determine what tile design needs to be drawn then call the relevant 
+    design function. Supply the design function with the next colour in the list 
+    of chosen colours.
+    """
     if row == 1 or row == size or col == 1 or col == size:
         net_design(win, size, colour, col, row, tiles)
     else:
