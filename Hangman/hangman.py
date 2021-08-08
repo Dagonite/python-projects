@@ -4,11 +4,11 @@ possible without losing all of your lives.
 """
 # pylint: disable=anomalous-backslash-in-string
 
-import json
-import random
 import csv
 import datetime
+import json
 import os
+import random
 
 HANGMAN_STAGES = [
     """
