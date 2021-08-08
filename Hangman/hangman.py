@@ -193,7 +193,7 @@ def prompt_user_for_letters(lives, category, phrase, hidden_phrase):
 
 def display_hangman(category, hidden_phrase, LIVES, note):
     os.system("cls" if os.name == "nt" else "clear")
-    print(f"Category: {category}\tLives: {LIVES}\tUsed letters: {used_letters}\tNote: {note}\n")
+    print(f"Category: {category}    Lives: {LIVES}    Used letters: {used_letters}    Note: {note}\n")
     print(" ".join(hidden_phrase))
     print(f"{HANGMAN_STAGES[LIVES]}\n")
 
