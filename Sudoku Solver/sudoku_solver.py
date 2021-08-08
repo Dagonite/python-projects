@@ -1,16 +1,28 @@
 """Program which solves Sudoku puzzles using backtracking."""
 
-from typing import Union, Tuple, List
+from typing import Tuple, List
 
 
-def main(puzzle: list) -> None:
+def main(puzzle: List) -> None:
+    """Program entry point."""
     print_formatted(puzzle)
     print("_____________________\n")
     solve(puzzle)
     print_formatted(puzzle)
 
 
-def solve(puzzle: list) -> bool:
+def solve(puzzle: List) -> bool:
+    """
+    Call a helper function to find an empty puzzle square then recursively
+    insert numbers into the puzzle until it is solved.
+
+    Args:
+      puzzle:
+        A 2d list containing 81 ints.
+
+    Returns:
+      A bool indicating if the puzzle is solved.
+    """
     # co-ords of empty square unless puzzle solved
     current_coords = find_empty_coords(puzzle)
 
@@ -34,7 +46,19 @@ def solve(puzzle: list) -> bool:
     return False
 
 
-def find_empty_coords(puzzle: list) -> Tuple[int, int]:
+def find_empty_coords(puzzle: List) -> Tuple[int, int]:
+    """
+    Search the puzzle for the first empty square.
+
+    Args:
+      puzzle:
+        A 2d list containing 81 ints.
+
+    Returns:
+      A tuple of ints indicating the (row, col) of an empty square. If no
+      empty square is found, return (-1, -1), indicating that the puzzle is
+      solved.
+    """
     # searches co-ords from left-to-right, top-to-bottom
     for y in range(9):
         for x in range(9):
@@ -44,7 +68,25 @@ def find_empty_coords(puzzle: list) -> Tuple[int, int]:
     return -1, -1  # there are no empty squares (puzzle solved)
 
 
-def valid(puzzle: list, row: int, col: int, n: int) -> bool:
+def valid(puzzle: List, row: int, col: int, n: int) -> bool:
+    """
+    Insert n into the puzzle at the supplied row and col then check if the
+    puzzle is still valid.
+
+    Args:
+      puzzle:
+        A 2d list containing 81 ints.
+      row:
+        An int for the outer index of the 2d puzzle list.
+      col:
+        An int for the inner index of the 2d puzzle list.
+      n:
+        The current int being inserted into the puzzle.
+
+    Returns:
+      A bool indicating if n is currently a valid value at the supplied (row,
+      col) in the puzzle.
+    """
     for y in range(9):
         if puzzle[y][col] == n:
             return False  # n exists in row y and column col
@@ -65,7 +107,14 @@ def valid(puzzle: list, row: int, col: int, n: int) -> bool:
     return True  # valid if another n not found in same row, column, or box
 
 
-def print_formatted(puzzle: list) -> None:
+def print_formatted(puzzle: List) -> None:
+    """
+    Print a formatted display of a supplied puzzle.
+
+    Args:
+      puzzle:
+        A 2d list containing 81 ints.
+    """
     for y in range(9):
         if not y % 3 and y:
             print("- - - - - - - - - - - ")
