@@ -4,12 +4,12 @@ patterns are specific to my student number but a user can stipulate the grid
 size and colours. This code uses input() functions so must be ran using the
 Python interpreter (REPL).
 """
-# fmt: off
 
 from graphics import GraphWin, Line, Circle, Point, Rectangle, Text
 
 SIZES = list("45678")
 VALID_COLOURS = ["red", "green", "blue", "orange", "brown", "pink"]
+
 
 def main():
     """Program entry point."""
@@ -153,10 +153,24 @@ def circle_design(win, size, colour, col, row, tiles):
 
             if width in (0.3, 0.7):
                 # draw horizontal white rectangle
-                draw_rectangle(win, "white", (width + col - 0.1, height + row), (width + col + 0.1, height + row + 0.1), current_tile, fill=True)
+                draw_rectangle(
+                    win,
+                    "white",
+                    (width + col - 0.1, height + row),
+                    (width + col + 0.1, height + row + 0.1),
+                    current_tile,
+                    fill=True,
+                )
             else:
                 # draw vertical white rectangle
-                draw_rectangle(win, "white", (width + col - 0.1, height + row - 0.1), (width + col, height + row + 0.1), current_tile, fill=True)
+                draw_rectangle(
+                    win,
+                    "white",
+                    (width + col - 0.1, height + row - 0.1),
+                    (width + col, height + row + 0.1),
+                    current_tile,
+                    fill=True,
+                )
 
             # draw outlined circle
             draw_circle(win, colour, (width + col, height + row), 0.1, current_tile)
