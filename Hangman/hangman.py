@@ -149,9 +149,9 @@ def prompt_user_for_letters(lives, category, phrase, hidden_phrase):
                 letter = input("Enter a letter: > ").upper()
 
                 if not letter.isalpha():
-                    raise ValueError(f"input has to be a letter")
+                    raise ValueError("input has to be a letter")
                 elif len(letter) > 1:
-                    raise ValueError(f"input has to be only one letter")
+                    raise ValueError("input has to be only one letter")
                 elif letter in used_letters:
                     raise ValueError(f"'{letter}' has already been used")
                 elif letter in phrase:
