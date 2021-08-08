@@ -49,29 +49,30 @@ def get_inputs():
 
 def list_of_items(lst, *, conjunction):
     """
-    Takes a list and returns a concatenated string of comma separated values.
-    The conjuction is a string which is used as the separator for the last list 
-    value.
+    Return a concatenated string of comma separated items. The conjuction is a
+    string which is used as the separator for the last list item.
     """
     return f"{', '.join(lst[:-1])}, {conjunction} {lst[-1]}"
 
 
 def create_patchwork(size, colours):
     """
-    Creates the graphics window and calls the three different patches that make 
-    up the patchwork.
+    Createa a graphics window and call the three different patches that make up
+    the patchwork.
     """
     win = GraphWin("Patchwork sampler", 100 * (size + 2), 100 * (size + 2))
     win.setBackground("white")
     win.setCoords(0, size + 2, size + 2, 0)
 
-    # initialise a list of length size ** 2 which will be filled up with the shapes that make up the patchwork
+    # initialise a list of length size ** 2 which will be filled up with the
+    # shapes that make up the patchwork
     tiles = [None] * size ** 2
 
     # initialise a list tracking the current colour of each tile
     colour_tracker = [0] * size ** 2
 
-    # colour_tracker initialised to first patch colour so don't need to supply as arg
+    # colour_tracker initialised to first patch colour so don't need to supply
+    # as arg
     first_patch(win, size, colours[0], tiles)
 
     # call the second and third patch designs
@@ -83,8 +84,8 @@ def create_patchwork(size, colours):
 
 def first_patch(win, size, colour, tiles):
     """
-    Calls net_design() to draw a perimeter of net tiles at the specified 
-    positions. Uses the first chosen colour.
+    Calls net_design() to draw a perimeter of net tiles at the specified
+    positions.
     """
     for row in range(1, size + 1):
         net_design(win, size, colour, 1, row, tiles)  # left column of tiles
@@ -97,8 +98,8 @@ def first_patch(win, size, colour, tiles):
 
 def second_patch(win, size, colour, colour_tracker, tiles):
     """
-    Calls circle_design() to draw an inverted staircase of circle tiles at the 
-    specified positions. Uses the second chosen colour.
+    Calls circle_design() to draw an inverted staircase of circle tiles at the
+    specified positions.
     """
     stop_col = size - 1
     for row in range(2, size):
@@ -111,8 +112,8 @@ def second_patch(win, size, colour, colour_tracker, tiles):
 
 def third_patch(win, size, colour, colour_tracker, tiles):
     """
-    Calls circle_design() to draw a staircase of circle tiles at the specified 
-    positions in the remaining space. Uses the third chosen colour.
+    Calls circle_design() to draw a staircase of circle tiles at the specified
+    positions in the remaining space.
     """
     stop_col = 2
     for row in range(size - 1, 2, -1):
@@ -233,8 +234,8 @@ def undraw_shapes(current_tile_pos, tiles):
 
 def redraw_shapes(win, size, colour, col, row, tiles):
     """
-    Determine what tile design needs to be drawn then call the relevant 
-    design function. Supply the design function with the next colour in the list 
+    Determine what tile design needs to be drawn then call the relevant
+    design function. Supply the design function with the next colour in the list
     of chosen colours.
     """
     if row == 1 or row == size or col == 1 or col == size:
