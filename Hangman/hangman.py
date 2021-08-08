@@ -150,20 +150,20 @@ def prompt_user_for_letters(lives, category, phrase, hidden_phrase):
 
                 if not letter.isalpha():
                     raise ValueError("input has to be a letter")
-                elif len(letter) > 1:
+                if len(letter) > 1:
                     raise ValueError("input has to be only one letter")
-                elif letter in used_letters:
+                if letter in used_letters:
                     raise ValueError(f"'{letter}' has already been used")
-                elif letter in phrase:
-                    note = f"{letter} is in the phrase"
-                    indices = [i for i, ch in enumerate(phrase) if ch == letter]
-                    for i in indices:
-                        hidden_phrase[i] = letter
-                    break
-                elif letter not in phrase:
+                if letter not in phrase:
                     note = f"{letter} is NOT in the phrase"
                     lives -= 1
                     break
+
+                note = f"{letter} is in the phrase"
+                indices = [i for i, ch in enumerate(phrase) if ch == letter]
+                for i in indices:
+                    hidden_phrase[i] = letter
+                break
 
             except ValueError as error:
                 note = error
