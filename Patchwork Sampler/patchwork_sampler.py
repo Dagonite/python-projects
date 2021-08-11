@@ -24,13 +24,13 @@ def get_inputs():
     """Ask user for the patchwork size and colours."""
     size = ""
     while size not in SIZES:
-        print(f"\nEnter one of the following sizes for the patchwork ({list_of_items(SIZES, conjunction='or')})")
+        print(f"\nEnter one of the following sizes for the patchwork: {list_of_items(SIZES, conjunction='or')}")
         size = input("> ").strip()
         print(f"The patchwork will be a {size} x {size} grid" if size in SIZES else "Error: invalid size")
 
     colours = []
     while len(colours) < 3:
-        print(f"\nEnter one of the following colours ({list_of_items(VALID_COLOURS, conjunction='and')})")
+        print(f"\nEnter one of the following colours: {list_of_items(VALID_COLOURS, conjunction='or')}")
         colour = input("> ").lower().strip()
 
         if colour in VALID_COLOURS:
