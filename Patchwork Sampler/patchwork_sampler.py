@@ -101,9 +101,9 @@ def second_patch(win, size, colour, colour_tracker, tiles):
     Calls circle_design() to draw an inverted staircase of circle tiles at the
     specified positions.
     """
-    stop_col = size - 1
+    stop_col = size
     for row in range(2, size):
-        for col in range(2, stop_col + 1):
+        for col in range(2, stop_col):
             circle_design(win, size, colour, col, row, tiles)
             current_tile_pos = get_current_tile_pos(size, col, row)
             colour_tracker[current_tile_pos] = 1
