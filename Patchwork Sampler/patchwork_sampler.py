@@ -57,7 +57,7 @@ def list_of_items(lst, *, conjunction):
 
 def create_patchwork(size, colours):
     """
-    Createa a graphics window and call the three different patches that make up
+    Create a graphics window and call the three different patches that make up
     the patchwork.
     """
     win = GraphWin("Patchwork sampler", 100 * (size + 2), 100 * (size + 2))
@@ -84,7 +84,7 @@ def create_patchwork(size, colours):
 
 def first_patch(win, size, colour, tiles):
     """
-    Calls net_design() to draw a perimeter of net tiles at the specified
+    Call net_design() to draw a perimeter of net tiles at the specified
     positions.
     """
     for row in range(1, size + 1):
@@ -98,7 +98,7 @@ def first_patch(win, size, colour, tiles):
 
 def second_patch(win, size, colour, colour_tracker, tiles):
     """
-    Calls circle_design() to draw an inverted staircase of circle tiles at the
+    Call circle_design() to draw an inverted staircase of circle tiles at the
     specified positions.
     """
     stop_col = size
@@ -112,7 +112,7 @@ def second_patch(win, size, colour, colour_tracker, tiles):
 
 def third_patch(win, size, colour, colour_tracker, tiles):
     """
-    Calls circle_design() to draw a staircase of circle tiles at the specified
+    Call circle_design() to draw a staircase of circle tiles at the specified
     positions in the remaining space.
     """
     stop_col = 2
@@ -125,7 +125,7 @@ def third_patch(win, size, colour, colour_tracker, tiles):
 
 
 def net_design(win, size, colour, col, row, tiles):
-    """Draws the net design using the supplied position and colour."""
+    """Draw the net design using the supplied position and colour."""
     current_tile = []
     for distance in (0.2, 0.4, 0.6, 0.8, 1):
         draw_line(win, colour, (col, distance + row), (col + distance, row), current_tile)
@@ -144,7 +144,7 @@ def net_design(win, size, colour, col, row, tiles):
 
 
 def circle_design(win, size, colour, col, row, tiles):
-    """Draws the circle design using the supplied position and colour."""
+    """Draw the circle design using the supplied position and colour."""
     current_tile = []
     for width in (0.1, 0.3, 0.5, 0.7, 0.9):
         for height in (0.1, 0.3, 0.5, 0.7, 0.9):
@@ -248,9 +248,9 @@ def undraw_shapes(current_tile_pos, tiles):
 
 def redraw_shapes(win, size, colour, col, row, tiles):
     """
-    Determine what tile design needs to be drawn then call the relevant
-    design function. Supply the design function with the next colour in the list
-    of chosen colours.
+    Determine what tile design needs to be drawn then call the relevant design
+    function. Supply the design function with the next colour in the list of
+    chosen colours.
     """
     if row == 1 or row == size or col == 1 or col == size:
         net_design(win, size, colour, col, row, tiles)
