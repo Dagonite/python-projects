@@ -28,7 +28,7 @@ def main(chips=CHIPS):
         prompt_player_for_moves(deck, (dealer_hand, player_hand), chips, bet)
 
         # redisplay the board to hide player's previous actions
-        display_hands(deck, (dealer_hand, player_hand), hidden=True)
+        display_hands((dealer_hand, player_hand), hidden=True)
 
         # player has bust - move onto next round
         if player_hand.value > 21:
@@ -41,10 +41,10 @@ def main(chips=CHIPS):
             print(f"\nDealer has revealed the {dealer_hand.cards[0]}")
 
         # get the dealer's moves
-        prompt_dealer_for_moves(deck, (dealer_hand, player_hand), chips, bet)
+        prompt_dealer_for_moves(deck, (dealer_hand, player_hand))
 
         # redisplay the board to hide dealer's previous actions
-        display_hands(deck, (dealer_hand, player_hand))
+        display_hands((dealer_hand, player_hand))
 
         # dealer has bust
         if dealer_hand.value > 21:
@@ -118,7 +118,7 @@ def hit(deck, hand):
     return new_card
 
 
-def display_hands(deck, hands, hidden=False):
+def display_hands(hands, hidden=False):
     """Clear the screen and print out the cards in each hand."""
     os.system("cls" if os.name == "nt" else "clear")
 
@@ -138,7 +138,7 @@ def prompt_player_for_moves(deck, hands, chips, bet):
 
     while True:
         moves = ["(h)it", "(s)tand"]
-        display_hands(deck, hands, hidden=True)
+        display_hands(hands, hidden=True)
 
         for new_card in new_cards:
             print(f"\nYou have drawn the {new_card}")
@@ -163,14 +163,14 @@ def prompt_player_for_moves(deck, hands, chips, bet):
             bet += get_bet(chips, initial_bet=bet)
             new_card = hit(deck, player_hand)
             new_cards.append(new_card)
-            display_hands(deck, hands, hidden=True)
+            display_hands(hands, hidden=True)
             print(f"\nYou have drawn the {new_card}")
             break
 
     input("\nPress Enter to continue... ")
 
 
-def prompt_dealer_for_moves(deck, hands, chips, bet):
+def prompt_dealer_for_moves(deck, hands):
     """Prompt dealer for moves until they go bust or go over 16."""
     dealer_hand, _ = hands
     new_cards = []
