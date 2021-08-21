@@ -71,13 +71,12 @@ def main():
     boxes = {randomised_values[i]: BOX_UNOPENED for i in range(BOXES_COUNT)}
 
     # Prompt user to pick a box to keep
+    print_boxes(boxes)
     chosen_box = choose_a_box()
 
     # Mark user box as chosen
     chosen_box_value = randomised_values[chosen_box - 1]
     boxes[chosen_box_value] = BOX_CHOSEN
-
-    # Display the boxes
     print_boxes(boxes)
 
     # Play the game
