@@ -137,7 +137,7 @@ def gameplay_loop(boxes, chosen_box, randomised_values):
 
 
 def choose_a_box():
-    """User is prompted to a box to keep by supplying the box's number."""
+    """User is prompted to choose a box to keep by inputting the box's number."""
     while True:
         try:
             chosen_box = int(input("\nEnter the number of the box you want to keep > "))
@@ -151,7 +151,7 @@ def choose_a_box():
 
 
 def open_boxes(boxes, opens, chosen_box, randomised_values):
-    """User is prompted to open boxes by supplying their box number."""
+    """User is prompted to open boxes by inputting their numbers."""
     for _ in range(opens):
         while True:
             try:
@@ -175,8 +175,7 @@ def open_boxes(boxes, opens, chosen_box, randomised_values):
 
 def dealio_or_no_dealio(offer, chosen_box):
     """
-    Prompt user whether they want to accept the banker's off for their box or
-    not.
+    Prompt user whether they want to accept the banker's offer for their box.
     """
     print(ASCII_PHONE)
     input("The banker is calling. Press the Enter key to answer... ")
