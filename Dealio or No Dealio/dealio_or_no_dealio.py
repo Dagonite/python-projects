@@ -90,7 +90,7 @@ def main():
 
 def gameplay_loop(boxes, chosen_box, randomised_values):
     """The game's main loop."""
-    for opens, multiplier in ((5, 0.25), (3, 0.3), (3, 0.35), (3, 0.45), (3, 0.55), (3, 0.7)):
+    for opens, multiplier in ((5, 0.28), (3, 0.29), (3, 0.32), (3, 0.36), (3, 0.48), (3, 0.7)):
         # Prompt the user to pick boxes
         open_boxes(boxes, opens, chosen_box, randomised_values)
 
