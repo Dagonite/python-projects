@@ -8,6 +8,10 @@ Simple game where the user has to take the wind direction into account before sh
 ---
 A game of Blackjack between a user and a computer. This project makes use of object-oriented programming.
 
+[Deal or No Deal](https://github.com/Dagonite/python-projects/tree/main/Deal%20or%20No%20Deal)
+---
+Open boxes and try to win as much money as possible.
+
 [Graphical Traced Walk](https://github.com/Dagonite/python-projects/tree/main/Graphical%20Traced%20Walk)
 ---
 Program that draws a two-dimensional grid with a person at the centre. Every tenth of a second, the person takes a random step up, down, left, or right. Every square of the grid displays how many times the person has visited it. The walk ends once the person leaves the grid. Data from the traced walk is then appended to a CSV file. This data is then used to generate graphs. This is an adaption of my tracedwalk2d.py from Pract09 of the Worksheets found within my `python-exercises` repo.
