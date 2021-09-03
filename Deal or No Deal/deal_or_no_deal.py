@@ -272,7 +272,7 @@ def print_box(row_of_boxes, centre=False):
         print(f"{BOX_LEFT_MARGIN if centre else ''}{row}")
 
 
-def write_to_csv(*data, path="deals.csv"):
+def write_to_csv(*data, path=".\deals.csv"):
     """Store supplied data in a CSV file."""
     import csv
 
