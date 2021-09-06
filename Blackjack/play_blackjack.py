@@ -111,7 +111,10 @@ def deal_initial_hands(deck):
 
 
 def hit(deck, hand):
-    """Remove a card from the deck and add it to the supplied hand. Also return the card"""
+    """
+    Remove a card from the deck and add it to the supplied hand. Also return
+    the card.
+    """
     new_card = deck.deal()
     hand.add_card(new_card)
     hand.adjust_for_aces()
@@ -132,7 +135,10 @@ def display_hands(hands, hidden=False):
 
 
 def prompt_player_for_moves(deck, hands, chips, bet):
-    """Prompt the player for moves until they go bust, get 21, stand, or have doubled down."""
+    """
+    Prompt the player for moves until they go bust, get 21, stand, or have
+    doubled down.
+    """
     _, player_hand = hands
     new_cards = []
 
