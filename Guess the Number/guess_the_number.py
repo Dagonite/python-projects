@@ -1,4 +1,10 @@
-"""Guess a randomly selected number within a certain amount of tries."""
+"""
+Guess a randomly selected number within a certain amount of tries.
+
+Can alter the number of guesses and the upper limit by using command line 
+arguments, e.g:
+`py guess_the_number.py --guesses 9 --limit 1000`
+"""
 
 import os
 import random
