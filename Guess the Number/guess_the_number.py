@@ -29,7 +29,6 @@ def guess_the_number(UPPER_LIMIT, GUESSES):
     )
 
     prev_guesses = []
-
     won = False
     for attempt in range(1, GUESSES + 1):
         while True:
