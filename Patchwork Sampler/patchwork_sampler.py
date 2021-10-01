@@ -5,7 +5,7 @@ size and colours. This code uses input() functions so must be ran using the
 Python interpreter (REPL).
 """
 
-from graphics import GraphWin, Line, Circle, Point, Rectangle, Text
+from graphics import GraphWin, Line, Circle, Point, Rectangle
 
 SIZES = ["4", "5", "6", "7", "8"]
 VALID_COLOURS = ["red", "green", "blue", "orange", "brown", "pink"]
