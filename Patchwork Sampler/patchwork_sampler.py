@@ -7,7 +7,7 @@ Python interpreter (REPL).
 
 from graphics import GraphWin, Line, Circle, Point, Rectangle, Text
 
-SIZES = list("45678")
+SIZES = ["4", "5", "6", "7", "8"]
 VALID_COLOURS = ["red", "green", "blue", "orange", "brown", "pink"]
 
 
