@@ -1,10 +1,8 @@
 """Watch turtles race it out."""
 
 import csv
-from collections import Counter
-from operator import itemgetter
 from random import randint
-from time import perf_counter, sleep
+from time import perf_counter
 from turtle import Screen, Turtle
 
 import matplotlib.pyplot as plt
