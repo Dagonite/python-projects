@@ -1,9 +1,10 @@
 """
-Program which displays a patchwork using user inputs. The patchwork layout and 
-patterns are specific to my student number but a user can stipulate the grid 
+Program which displays a patchwork using user inputs. The patchwork layout and
+patterns are specific to my student number but a user can stipulate the grid
 size and colours. This code uses input() functions so must be ran using the
 Python interpreter (REPL).
 """
+# pylint:disable=too-many-arguments
 
 from graphics import GraphWin, Line, Circle, Point, Rectangle
 

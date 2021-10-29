@@ -23,9 +23,10 @@ WIDTH, HEIGHT = 1000, 500
 def main():
     win, v_spacing, pen = draw_screen(len(TURTLES))
     turtle_objs = place_turtles(v_spacing)
-    WINNER, duration = race(turtle_objs, pen)
+    winner, duration = race(turtle_objs, pen)
     win.exitonclick()
-    return WINNER, duration
+    write_to_csv(winner.name, duration)
+    process_csv()
 
 
 def draw_screen(TURTLE_COUNT):
@@ -146,20 +147,19 @@ def race(turtle_objs, pen):
 
 
 def write_to_csv(*data, path="races.csv"):
-    with open(path, "a", newline="") as csvfile:
+    with open(path, "a", newline="", encoding="utf_8") as csvfile:
         writer = csv.writer(csvfile, delimiter=",")
         writer.writerow(data)
 
 
 def process_csv(path="races.csv"):
-    with open(path) as csvfile:
+    with open(path, encoding="utf_8") as csvfile:
         reader = csv.reader(csvfile)
         data = [(turtle, float(duration)) for turtle, duration in reader]
 
     # populate dict with data
     stats = {}
     for turtle, duration in data:
-        duration = duration
         if turtle not in stats:
             stats[turtle] = [duration]
         else:
@@ -215,6 +215,4 @@ def create_graphs(stats):
 
 
 if __name__ == "__main__":
-    winner, duration = main()
-    write_to_csv(winner.name, duration)
-    process_csv()
+    main()
