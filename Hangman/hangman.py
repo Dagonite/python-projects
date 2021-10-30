@@ -1,5 +1,5 @@
 """
-A game of Hangman. Select a difficulty then try to win as many rounds as 
+A game of Hangman. Select a difficulty then try to win as many rounds as
 possible without losing all of your lives.
 """
 # pylint: disable=anomalous-backslash-in-string
@@ -199,7 +199,7 @@ def display_hangman(category, hidden_phrase, LIVES, note):
 
 
 def choose_random_word():
-    with open("words.json") as fh:
+    with open("words.json", encoding="utf_8") as fh:
         j_obj = json.load(fh)
 
     category = random.choice(list(j_obj.keys()))
@@ -209,7 +209,7 @@ def choose_random_word():
 
 
 def write_to_csv(*data, path="scores.csv"):
-    with open(path, "a", newline="") as csvfile:
+    with open(path, "a", newline="", encoding="utf_8") as csvfile:
         writer = csv.writer(csvfile, delimiter=",")
         writer.writerow(data)
 

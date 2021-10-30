@@ -1,7 +1,7 @@
 """
 Guess a randomly selected number within a certain amount of tries.
 
-Can alter the number of guesses and the upper limit by using command line 
+Can alter the number of guesses and the upper limit by using command line
 arguments, e.g:
 `py guess_the_number.py --guesses 9 --limit 1000`
 """
@@ -10,8 +10,8 @@ import os
 import random
 import argparse
 
-UPPER_LIMIT = 100  # highest number the secret number can be
-GUESSES = 7  # number of guesses the player has
+_UPPER_LIMIT = 100  # highest number the secret number can be
+_GUESSES = 7  # number of guesses the player has
 
 
 def ordinal(n):
@@ -34,16 +34,15 @@ def guess_the_number(UPPER_LIMIT, GUESSES):
         while True:
             try:
                 guess = int(input(f"\nWhat is your {ordinal(attempt)} guess? > "))
-
                 if guess > UPPER_LIMIT:
                     raise ValueError(f"number beyond upper-limit: {guess} > {UPPER_LIMIT}")
-                elif guess < 1:
+                if guess < 1:
                     raise ValueError(f"number below lower-limit: {guess} < 1")
-                elif guess in prev_guesses:
+                if guess in prev_guesses:
                     raise ValueError(f"number entered previously: {guess}")
-                else:
-                    prev_guesses.append(guess)
-                    break
+
+                prev_guesses.append(guess)
+                break
 
             except ValueError as error:
                 print(error)
@@ -72,7 +71,7 @@ def main():
     while play_again != "n":
         if play_again == "y":
             os.system("cls" if os.name == "nt" else "clear")
-            guess_the_number(args.limit or UPPER_LIMIT, args.guesses or GUESSES)
+            guess_the_number(args.limit or _UPPER_LIMIT, args.guesses or _GUESSES)
         play_again = input("Play again, (y)es or (n)o? > ")
 
     print("Goobye!")

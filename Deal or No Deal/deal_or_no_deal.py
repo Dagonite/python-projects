@@ -1,6 +1,8 @@
 """Try to win as much money as possible."""
 # pylint: disable = anomalous-backslash-in-string
 
+import csv
+import datetime
 import os
 from dataclasses import dataclass
 from operator import attrgetter
@@ -162,7 +164,7 @@ def main():
     print("\n", *messages, sep="\n")
     print(f"\nYou leave with £{winnings:,.2f}")
 
-    return winnings
+    write_to_csv(winnings, datetime.datetime.now().date())
 
 
 def swap_or_no_swap(boxes):
@@ -197,7 +199,7 @@ def deal_or_no_deal(offer):
 
     while True:
         try:
-            accepted = input(f"\nDo you accept the offer? (y/n) > ")
+            accepted = input("\nDo you accept the offer? (y/n) > ")
 
             if accepted not in YES_RESPONSES + NO_RESPONSES:
                 raise ValueError("invalid: answer must be 'y' or 'n'")
@@ -274,15 +276,10 @@ def print_box(row_of_boxes, centre=False):
 
 def write_to_csv(*data, path=".\deals.csv"):
     """Store supplied data in a CSV file."""
-    import csv
-
-    with open(path, "a", newline="") as csvfile:
+    with open(path, "a", newline="", encoding="utf_8") as csvfile:
         writer = csv.writer(csvfile, delimiter=",")
         writer.writerow(data)
 
 
 if __name__ == "__main__":
-    import datetime
-
-    winnings = main()
-    write_to_csv(winnings, datetime.datetime.now().date())
+    main()

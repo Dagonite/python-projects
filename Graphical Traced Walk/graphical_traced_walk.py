@@ -1,9 +1,10 @@
 """
-Program which draws a grid on a graphics window using a specified size. A person 
-is drawn in the centre of the grid and they will move in random directions until 
+Program which draws a grid on a graphics window using a specified size. A person
+is drawn in the centre of the grid and they will move in random directions until
 they leave the grid.
 """
 
+import csv
 import time
 from random import random
 
@@ -19,10 +20,10 @@ def main(squares=None):
 
     squares_with_border = squares + 1
     win, person, square_texts = draw_grid(squares_with_border)
-    total_steps = simulate_steps(win, person, squares, square_texts)
+    total_steps = simulate_steps(person, squares, square_texts)
     win.close()
-
-    return total_steps, squares
+    write_to_csv(total_steps, squares)
+    process_csv()
 
 
 def get_input():
@@ -78,7 +79,7 @@ def draw_grid(squares_with_border):
     return win, person, square_texts
 
 
-def simulate_steps(win, person, squares, square_texts):
+def simulate_steps(person, squares, square_texts):
     total_steps = 0
     grid = [[0] * squares for _ in range(squares)]
     current_col = current_row = int(squares / 2)
@@ -89,16 +90,16 @@ def simulate_steps(win, person, squares, square_texts):
         total_steps += 1
         if random_step < 0.25:
             current_row -= 1  # go up
-            draw_step(win, person, 0, -1)
+            draw_step(person, 0, -1)
         elif random_step >= 0.25 and random_step < 0.5:
             current_col += 1  # go right
-            draw_step(win, person, 1, 0)
+            draw_step(person, 1, 0)
         elif random_step >= 0.5 and random_step < 0.75:
             current_row += 1  # go down
-            draw_step(win, person, 0, 1)
+            draw_step(person, 0, 1)
         else:
             current_col -= 1  # go left
-            draw_step(win, person, -1, 0)
+            draw_step(person, -1, 0)
 
         # break if person leaves the grid
         if current_row == -1 or current_row == squares or current_col == -1 or current_col == squares:
@@ -112,23 +113,19 @@ def simulate_steps(win, person, squares, square_texts):
     return total_steps
 
 
-def draw_step(win, person, x, y):
+def draw_step(person, x, y):
     person.move(x, y)
     time.sleep(0.1)
 
 
 def write_to_csv(*data, path="traced_walks.csv"):
-    import csv
-
-    with open(path, "a", newline="") as csvfile:
+    with open(path, "a", newline="", encoding="utf_8") as csvfile:
         writer = csv.writer(csvfile, delimiter=",")
         writer.writerow(data)
 
 
 def process_csv(path="traced_walks.csv"):
-    import csv
-
-    with open(path) as csvfile:
+    with open(path, encoding="utf_8") as csvfile:
         reader = csv.reader(csvfile)
         data = [*reader]
 
@@ -151,6 +148,4 @@ def process_csv(path="traced_walks.csv"):
 
 
 if __name__ == "__main__":
-    total_steps, squares = main()
-    write_to_csv(total_steps, squares)
-    process_csv()
+    main()

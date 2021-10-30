@@ -32,13 +32,13 @@ def main(chips=CHIPS):
 
         # player has bust - move onto next round
         if player_hand.value > 21:
-            print(f"\nYou have gone over 21, you lose!")
+            print("\nYou have gone over 21, you lose!")
             chips -= bet
             continue
+
         # player has not bust - reveal dealer's hidden card
-        else:
-            display_hands(deck, (dealer_hand, player_hand))
-            print(f"\nDealer has revealed the {dealer_hand.cards[0]}")
+        display_hands(deck, (dealer_hand, player_hand))
+        print(f"\nDealer has revealed the {dealer_hand.cards[0]}")
 
         # get the dealer's moves
         prompt_dealer_for_moves(deck, (dealer_hand, player_hand))
@@ -60,7 +60,7 @@ def main(chips=CHIPS):
             print("\nYou have the weaker hand, you lose!")
             chips -= bet
         else:
-            print(f"\nIt's a draw!")
+            print("\nIt's a draw!")
 
 
 def get_deck():

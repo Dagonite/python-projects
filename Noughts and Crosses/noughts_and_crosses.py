@@ -79,7 +79,7 @@ def play_game(player2_is_cpu):
             for player, player_mark in data:
                 # determine whether to prompt cpu or human for a move
                 if player == "computer":
-                    print(f"The computer is thinking...")
+                    print("The computer is thinking...")
                     prompt_cpu_for_move(squares, player_mark, player1_mark)
                 else:
                     prompt_player_for_move(squares, player, player_mark)
