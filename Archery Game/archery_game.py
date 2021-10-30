@@ -1,15 +1,14 @@
 """
-Game where a user gets to shoot arrows at a target. The arrows are offset by 
-wind so this needs to be taken into account before each shot. After shooting all 
+Game where a user gets to shoot arrows at a target. The arrows are offset by
+wind so this needs to be taken into account before each shot. After shooting all
 arrows a score and a grade are given.
 """
 
+import math
 import random
 
 from graphics import Circle, GraphWin, Line, Point, Polygon, Rectangle, Text
 
-from pract05 import distance_between_points
-from pract06 import draw_circle
 
 # constants
 WSD = 0.25  # wind start deviation
@@ -27,6 +26,7 @@ GRADES = {
 
 
 def archery_game():
+    """Program entry point."""
     win, wind_text, zone_text, score_text, score = draw_gui()
     score = shoot_arrows(win, wind_text, zone_text, score_text, score)
     give_grade(wind_text, score_text, score)
@@ -141,12 +141,11 @@ def shoot_arrows(win, wind_text, zone_text, score_text, score):
 
 def give_grade(wind_text, score_text, score):
     """Display what score and grade the user has received."""
-    for grade in GRADES:
+    for grade, desc in GRADES.items():
         if score >= grade:
-            grade_text = GRADES[grade]
+            grade_text = desc
             break
 
-    grade_text = GRADES[grade]
     wind_text.setText(f"You scored {score}, meaning you're {grade_text}")
 
     score_text.setSize(10)
@@ -162,6 +161,23 @@ def draw_arrow(win, arrow_x, arrow_y):
         fletching = Line(Point(arrow_x + 0.02, arrow_y + 0.02 * x), Point(arrow_x - 0.02, arrow_y - 0.02 * x)).draw(win)
         fletching.setWidth(2)
         fletching.setFill("gray")
+
+
+def draw_circle(win, centre, radius, colour):
+    """Helper function for drawing a circle."""
+    circle = Circle(centre, radius)
+    circle.setFill(colour)
+    circle.setWidth(2)
+    circle.draw(win)
+
+
+def distance_between_points(p1, p2):
+    """Helper function for finding the distance between two points."""
+    p1X = p1.getX()
+    p1Y = p1.getY()
+    p2X = p2.getX()
+    p2Y = p2.getY()
+    return math.sqrt((p2X - p1X) ** 2 + (p2Y - p1Y) ** 2)
 
 
 if __name__ == "__main__":
