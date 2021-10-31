@@ -12,11 +12,8 @@ from graphics import Circle, GraphWin, Line, Point, Rectangle, Text
 
 
 def main(squares=None):
-    if squares is None:
+    if squares is None or squares % 2 == 0:
         squares = get_input()
-    elif squares % 2 == 0:
-        squares += 1
-        squares = min(19, squares)
 
     squares_with_border = squares + 1
     win, person, square_texts = draw_grid(squares_with_border)
@@ -34,9 +31,9 @@ def get_input():
             )
             if squares % 2 == 0:
                 raise ValueError("please enter an odd number")
-            elif squares < 3:
+            if squares < 3:
                 raise ValueError("please enter a number greater than 2")
-            elif squares > 19:
+            if squares > 19:
                 raise ValueError("please enter a number less than 20")
             break
         except ValueError as error:
