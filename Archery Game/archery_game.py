@@ -4,10 +4,11 @@ wind so this needs to be taken into account before each shot. After shooting all
 arrows a score and a grade are given.
 """
 
-import math
 import random
 
 from graphics import Circle, GraphWin, Line, Point, Polygon, Rectangle, Text
+
+from Pract05.pract05 import distance_between_points, draw_circle
 
 
 # constants
@@ -161,23 +162,6 @@ def draw_arrow(win, arrow_x, arrow_y):
         fletching = Line(Point(arrow_x + 0.02, arrow_y + 0.02 * x), Point(arrow_x - 0.02, arrow_y - 0.02 * x)).draw(win)
         fletching.setWidth(2)
         fletching.setFill("gray")
-
-
-def draw_circle(win, centre, radius, colour):
-    """Helper function for drawing a circle."""
-    circle = Circle(centre, radius)
-    circle.setFill(colour)
-    circle.setWidth(2)
-    circle.draw(win)
-
-
-def distance_between_points(p1, p2):
-    """Helper function for finding the distance between two points."""
-    p1X = p1.getX()
-    p1Y = p1.getY()
-    p2X = p2.getX()
-    p2Y = p2.getY()
-    return math.sqrt((p2X - p1X) ** 2 + (p2Y - p1Y) ** 2)
 
 
 if __name__ == "__main__":
