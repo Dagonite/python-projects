@@ -42,23 +42,23 @@ def get_input():
     return squares
 
 
-def draw_grid(squares_with_border):
-    squares = squares_with_border - 1
-    win = GraphWin("Graphical traced walk", 50 * squares_with_border, 50 * squares_with_border)
-    win.setCoords(0, squares_with_border, squares_with_border, 0)
+def draw_grid(size):
+    squares = size - 1
+    win = GraphWin("Graphical traced walk", 50 * size, 50 * size)
+    win.setCoords(0, size, size, 0)
 
-    border_rectangle = Rectangle(Point(0.5, 0.5), Point(squares_with_border - 0.5, squares_with_border - 0.5)).draw(win)
+    border_rectangle = Rectangle(Point(0.5, 0.5), Point(size - 0.5, size - 0.5)).draw(win)
     border_rectangle.setFill("gray")
     border_rectangle.setWidth(2)
 
     centre_square = Rectangle(
-        Point(squares_with_border / 2 - 0.5, squares_with_border / 2 - 0.5),
-        Point(squares_with_border / 2 + 0.5, squares_with_border / 2 + 0.5),
+        Point(size / 2 - 0.5, size / 2 - 0.5),
+        Point(size / 2 + 0.5, size / 2 + 0.5),
     ).draw(win)
     centre_square.setFill("cyan")
     centre_square.setOutline("")
 
-    person = Circle(Point(squares_with_border / 2, squares_with_border / 2), 0.25).draw(win)
+    person = Circle(Point(size / 2, size / 2), 0.25).draw(win)
     person.setFill("red")
 
     square_texts = [[""] * squares for _ in range(squares)]
@@ -66,8 +66,8 @@ def draw_grid(squares_with_border):
     for i in range(squares):
         for j in range(squares):
             # grid lines
-            Line(Point(1.5 + j, 0.5), Point(1.5 + j, squares_with_border - 0.5)).draw(win)
-            Line(Point(0.5, 1.5 + j), Point(squares_with_border - 0.5, 1.5 + j)).draw(win)
+            Line(Point(1.5 + j, 0.5), Point(1.5 + j, size - 0.5)).draw(win)
+            Line(Point(0.5, 1.5 + j), Point(size - 0.5, 1.5 + j)).draw(win)
 
             # text within each square
             square_text = Text(Point(1 + j, 1 + i), "").draw(win)
