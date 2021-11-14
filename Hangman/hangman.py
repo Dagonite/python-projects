@@ -1,3 +1,6 @@
+"""Graphical representation of the hangman."""
+# pylint: disable=anomalous-backslash-in-string
+
 HANGMAN_STAGES = [
     """
  +---+

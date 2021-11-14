@@ -1,8 +1,7 @@
 """
-A game of Hangman. Select a difficulty then try to win as many rounds as
-possible without losing all of your lives.
+A game of Hangman. Select a difficulty and try to win as many rounds as possible
+without losing all of your lives.
 """
-# pylint: disable=anomalous-backslash-in-string
 
 import json
 import os
@@ -79,6 +78,7 @@ def prompt_user_for_letters(lives, category, phrase, hidden_phrase):
                 indices = [i for i, ch in enumerate(phrase) if ch == letter]
                 for i in indices:
                     hidden_phrase[i] = letter
+
                 break
 
             except ValueError as error:
