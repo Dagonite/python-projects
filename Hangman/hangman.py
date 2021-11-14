@@ -4,8 +4,6 @@ possible without losing all of your lives.
 """
 # pylint: disable=anomalous-backslash-in-string
 
-import csv
-import datetime
 import json
 import os
 import random
@@ -100,7 +98,7 @@ used_letters = []
 
 
 def main():
-    starting_lives, difficulty = select_difficulty()
+    starting_lives = select_difficulty()
     lives = starting_lives
 
     rounds = 0
@@ -117,27 +115,23 @@ def main():
 
     if rounds:
         print(f"\nYou lasted {rounds} round{'s' if rounds != 1 else ''}\nGoobye!")
-        write_to_csv(rounds, difficulty, datetime.datetime.now().date())
     else:
         print("\nGoodbye!")
 
 
 def select_difficulty():
-    difficulty = ""
-    shortened_difficulties = [tmp_difficulty[1:2] for tmp_difficulty in DIFFICULTIES.keys()]
+    user_difficulty = ""
+    shortened_difficulties = {difficulty[1:2]: lives for difficulty, lives in DIFFICULTIES.items()}
 
-    while difficulty not in shortened_difficulties + ["q"]:
-        difficulty = input(f"\nEnter a difficulty or (q)uit:\n{' - '.join(DIFFICULTIES.keys())} > ")
+    while user_difficulty not in list(shortened_difficulties) + ["q"]:
+        user_difficulty = input(f"\nEnter a difficulty or (q)uit\n{' - '.join(DIFFICULTIES)}: > ")
 
-    if difficulty == "q":
+    if user_difficulty == "q":
         starting_lives = 0
     else:
-        for key in DIFFICULTIES.keys():
-            if key[1:2] == difficulty:
-                starting_lives = DIFFICULTIES[key]
-                break
+        starting_lives = shortened_difficulties[user_difficulty]
 
-    return starting_lives, difficulty
+    return starting_lives
 
 
 def prompt_user_for_letters(lives, category, phrase, hidden_phrase):
@@ -187,7 +181,6 @@ def prompt_user_for_letters(lives, category, phrase, hidden_phrase):
         print(f"You lose! The word was {phrase}")
 
     used_letters.clear()
-
     return lives
 
 
@@ -204,14 +197,7 @@ def choose_random_word():
 
     category = random.choice(list(j_obj.keys()))
     phrase = random.choice(j_obj[category]).upper()
-
     return category, phrase
-
-
-def write_to_csv(*data, path="scores.csv"):
-    with open(path, "a", newline="", encoding="utf_8") as csvfile:
-        writer = csv.writer(csvfile, delimiter=",")
-        writer.writerow(data)
 
 
 if __name__ == "__main__":
