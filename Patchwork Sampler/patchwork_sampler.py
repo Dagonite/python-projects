@@ -1,14 +1,18 @@
 """
 Program which displays a patchwork. The layout and patterns are specific to my
-student number but a user can stipulate the grid size and colours. This code
-uses input() functions so must be ran using the Python interpreter (REPL).
+student number but a user can stipulate the patchwork size and colours. This
+code uses the input() function so must be ran using the Python interpreter
+(REPL).
 """
-# pylint:disable=too-many-arguments
+# pylint: disable=too-many-arguments
+
+import random
 
 from graphics import GraphWin, Line, Circle, Point, Rectangle
 
-SIZES = ["4", "5", "6", "7", "8"]
-VALID_COLOURS = ["red", "green", "blue", "orange", "brown", "pink"]
+
+SIZES = ("4", "5", "6", "7", "8")
+VALID_COLOURS = ("red", "green", "blue", "orange", "brown", "pink")
 
 
 def main():
@@ -22,37 +26,46 @@ def main():
 
 def get_inputs():
     """Ask user for the patchwork size and colours."""
-    size = ""
-    while size not in SIZES:
+    while True:
         print(f"\nEnter one of the following sizes for the patchwork: {list_of_items(SIZES, conjunction='or')}")
-        size = input("> ").strip()
-        print(f"The patchwork will be a {size} x {size} grid" if size in SIZES else "Error: invalid size")
+        try:
+            size = input("> ").strip()
+            if size not in SIZES:
+                raise ValueError("Error: invalid size")
+        except ValueError as err:
+            print(err)
+        else:
+            print(f"The patchwork will be a {size} x {size} grid")
+            break
 
     colours = []
     while len(colours) < 3:
         print(f"\nEnter one of the following colours: {list_of_items(VALID_COLOURS, conjunction='or')}")
-        colour = input("> ").lower().strip()
-
-        if colour in VALID_COLOURS:
-            colours.append(colour)
-            VALID_COLOURS.remove(colour)
-            print(colour.capitalize(), "is valid")
-        elif colour in colours:
-            print(f"Error: {colour} already chosen")
+        print("Or (r)andomise your remaining options")
+        try:
+            colour = input("> ").lower().strip()
+            if colour == "r":
+                colours.extend(random.sample(VALID_COLOURS, 3 - len(colours)))
+            elif colour in colours:
+                raise ValueError(f"Error: {colour} already chosen")
+            elif colour not in VALID_COLOURS:
+                raise ValueError("Error: invalid colour")
+        except ValueError as err:
+            print(err)
         else:
-            print("Error: invalid colour")
+            colours.append(colour)
+            print(f"{colour.capitalize()} is valid")
 
     print(f"\nYou have chosen... {list_of_items(colours, conjunction='and')}")
-
     return int(size), colours
 
 
-def list_of_items(lst, *, conjunction):
+def list_of_items(items, *, conjunction):
     """
     Return a concatenated string of comma separated items. The conjuction is a
     string which is used as the separator for the last list item.
     """
-    return f"{', '.join(lst[:-1])}, {conjunction} {lst[-1]}"
+    return f"{', '.join(items[:-1])}, {conjunction} {items[-1]}"
 
 
 def create_patchwork(size, colours):
@@ -64,21 +77,19 @@ def create_patchwork(size, colours):
     win.setBackground("white")
     win.setCoords(0, size + 2, size + 2, 0)
 
-    # initialise a list of length size ** 2 which will be filled up with the
-    # shapes that make up the patchwork
+    # Initialise a list of length size^2 which will be filled up with the shapes
+    # that make up the patchwork later
     tiles = [None] * size ** 2
 
-    # initialise a list tracking the current colour of each tile
+    # Initialise a list tracking the current colour of each tile. For
+    # convenience, make all of the values 0 -- the initial colour of the first
+    # patch. This way we don't need to supply colour_tracker as an arg for
+    # first_patch()
     colour_tracker = [0] * size ** 2
 
-    # colour_tracker initialised to first patch colour so don't need to supply
-    # as arg
     first_patch(win, size, colours[0], tiles)
-
-    # call the second and third patch designs
     second_patch(win, size, colours[1], colour_tracker, tiles)
     third_patch(win, size, colours[2], colour_tracker, tiles)
-
     return win, colour_tracker, tiles
 
 
@@ -88,12 +99,12 @@ def first_patch(win, size, colour, tiles):
     positions.
     """
     for row in range(1, size + 1):
-        net_design(win, size, colour, 1, row, tiles)  # left column of tiles
-        net_design(win, size, colour, size, row, tiles)  # right column of tiles
+        net_design(win, size, colour, 1, row, tiles)  # Left column of tiles
+        net_design(win, size, colour, size, row, tiles)  # Right column of tiles
 
     for col in range(2, size):
-        net_design(win, size, colour, col, 1, tiles)  # top row of tiles
-        net_design(win, size, colour, col, size, tiles)  # bottom row of tiles
+        net_design(win, size, colour, col, 1, tiles)  # Top row of tiles
+        net_design(win, size, colour, col, size, tiles)  # Bottom row of tiles
 
 
 def second_patch(win, size, colour, colour_tracker, tiles):
@@ -135,10 +146,10 @@ def net_design(win, size, colour, col, row, tiles):
         draw_line(win, colour, (col + distance, row + 1), (col + 1, row + distance), current_tile)
         draw_line(win, colour, (col, row + distance), (col + 1 - distance, row + 1), current_tile)
 
-    # draw black border for current tile
+    # Draw black border for current tile
     draw_rectangle(win, "black", (col, row), (col + 1, row + 1), current_tile)
 
-    # store current_tile in a list of ordered tiles
+    # Store current_tile in a list of ordered tiles
     current_tile_pos = get_current_tile_pos(size, col, row)
     tiles[current_tile_pos] = current_tile
 
@@ -148,11 +159,11 @@ def circle_design(win, size, colour, col, row, tiles):
     current_tile = []
     for width in (0.1, 0.3, 0.5, 0.7, 0.9):
         for height in (0.1, 0.3, 0.5, 0.7, 0.9):
-            # draw filled circle
+            # Draw filled circle
             draw_circle(win, colour, (width + col, height + row), 0.1, current_tile, fill=True)
 
             if width in (0.3, 0.7):
-                # draw horizontal white rectangle
+                # Draw horizontal white rectangle
                 draw_rectangle(
                     win,
                     "white",
@@ -162,7 +173,7 @@ def circle_design(win, size, colour, col, row, tiles):
                     fill=True,
                 )
             else:
-                # draw vertical white rectangle
+                # Draw vertical white rectangle
                 draw_rectangle(
                     win,
                     "white",
@@ -172,13 +183,13 @@ def circle_design(win, size, colour, col, row, tiles):
                     fill=True,
                 )
 
-            # draw outlined circle
+            # Draw outlined circle
             draw_circle(win, colour, (width + col, height + row), 0.1, current_tile)
 
-    # draw black border for current tile
+    # Draw black border for current tile
     draw_rectangle(win, "black", (col, row), (col + 1, row + 1), current_tile)
 
-    # store current_tile in a list of ordered tiles
+    # Store current_tile in a list of ordered tiles
     current_tile_pos = get_current_tile_pos(size, col, row)
     tiles[current_tile_pos] = current_tile
 
@@ -193,18 +204,17 @@ def cycle_colours(win, size, colours, colour_tracker, tiles):
         col, row = int(cursor.getX()), int(cursor.getY())
         current_tile_pos = get_current_tile_pos(size, col, row)
 
-        if 1 <= row <= size and 1 <= col <= size:
-            colour_n = (colour_tracker[current_tile_pos] + 1) % 3
-            colour_tracker[current_tile_pos] = colour_n
-
-            undraw_shapes(current_tile_pos, tiles)
-            redraw_shapes(win, size, colours[colour_n], col, row, tiles)
-        else:
+        if not all((1 <= vector <= size) for vector in (col, row)):
             break
+
+        colour_n = (colour_tracker[current_tile_pos] + 1) % 3
+        colour_tracker[current_tile_pos] = colour_n
+        undraw_shapes(current_tile_pos, tiles)
+        redraw_shapes(win, size, colours[colour_n], col, row, tiles)
 
 
 def draw_line(win, colour, point1, point2, current_tile):
-    "Helper function for drawing lines."
+    """Helper function for drawing lines."""
     current_line = Line(Point(*point1), Point(*point2))
     current_line.setWidth(2)
     current_line.setFill(colour)
@@ -213,7 +223,7 @@ def draw_line(win, colour, point1, point2, current_tile):
 
 
 def draw_circle(win, colour, centre, radius, current_tile, fill=False):
-    "Helper function for drawing circles."
+    """Helper function for drawing circles."""
     current_circle = Circle(Point(*centre), radius)
     if fill:
         current_circle.setFill(colour)
@@ -225,7 +235,7 @@ def draw_circle(win, colour, centre, radius, current_tile, fill=False):
 
 
 def draw_rectangle(win, colour, point1, point2, current_tile, fill=False):
-    "Helper function for drawing rectangles."
+    """Helper function for drawing rectangles."""
     current_rectangle = Rectangle(Point(*point1), Point(*point2))
     if fill:
         current_rectangle.setFill(colour)
@@ -235,12 +245,12 @@ def draw_rectangle(win, colour, point1, point2, current_tile, fill=False):
 
 
 def get_current_tile_pos(size, col, row):
-    """Return the position within the patchwork of a tile using its coords."""
+    """Return the position within the patchwork of a tile using its vectors."""
     return (row - 1) * (size - 1) + (col - 1) + (row - 1)
 
 
 def undraw_shapes(current_tile_pos, tiles):
-    """Undraw the shapes that make up a tile using the provided tile position."""
+    """Using the provided tile position undraw the shapes that make up a tile."""
     current_tile = tiles[current_tile_pos]
     for shape in current_tile:
         shape.undraw()
@@ -249,10 +259,13 @@ def undraw_shapes(current_tile_pos, tiles):
 def redraw_shapes(win, size, colour, col, row, tiles):
     """
     Determine what tile design needs to be drawn then call the relevant design
-    function. Supply the design function with the next colour in the list of
-    chosen colours.
+    function with the next colour in the list of chosen colours for that tile.
+
+    If any of the supplied vectors are between 1 and the size of the patchwork
+    then the vectors must point to a net patch. Otherwise they must be pointing
+    to a circle patch.
     """
-    if row == 1 or row == size or col == 1 or col == size:
+    if any(vector in (1, size) for vector in (col, row)):
         net_design(win, size, colour, col, row, tiles)
     else:
         circle_design(win, size, colour, col, row, tiles)
