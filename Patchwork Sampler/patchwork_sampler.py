@@ -277,8 +277,8 @@ def redraw_shapes(win, size, colour, col, row, tiles):
     function with the next colour for that tile.
 
     If either of the supplied vectors point to a perimeter of the patchwork then
-    they must point to a net patch. Otherwise they must be pointing to a circle
-    patch.
+    they must pointing to a net patch. Otherwise they must be pointing to a
+    circle patch.
     """
     if any(vector in (1, size) for vector in (col, row)):
         net_design(win, size, colour, col, row, tiles)
