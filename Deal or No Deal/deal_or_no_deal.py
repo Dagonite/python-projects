@@ -1,8 +1,6 @@
 """Try to win as much money as possible."""
 # pylint: disable = anomalous-backslash-in-string
 
-import csv
-import datetime
 import os
 from dataclasses import dataclass
 from operator import attrgetter
@@ -71,7 +69,6 @@ class Box:
         """Generate a box number."""
         result = cls.next_box_number
         cls.next_box_number += 1
-
         return result
 
     def get_box_graphic(self):
@@ -99,14 +96,13 @@ class Scoreboard:
 
     def __init__(self, boxes):
         self.boxes = boxes
-        self.lows, self.highs = self._determine_low_and_high_values()
+        self.lows, self.highs = self.determine_low_and_high_values()
 
-    def _determine_low_and_high_values(self):
+    def determine_low_and_high_values(self):
         """Return a tuple of lists denoting the high and low values."""
         sorted_boxes = sorted(self.boxes, key=attrgetter("numeric_value"))
         lows = sorted_boxes[: BOXES_COUNT // 2]
         highs = sorted_boxes[BOXES_COUNT // 2 :]
-
         return lows, highs
 
     def print_scoreboard(self):
@@ -164,8 +160,6 @@ def main():
     print("\n", *messages, sep="\n")
     print(f"\nYou leave with £{winnings:,.2f}")
 
-    write_to_csv(winnings, datetime.datetime.now().date())
-
 
 def swap_or_no_swap(boxes):
     """
@@ -180,7 +174,6 @@ def swap_or_no_swap(boxes):
     while True:
         try:
             swap = input(f"\nDo you want to swap box {Box.chosen} with box {other_box.box_number}? (y/n) > ")
-
             if swap not in YES_RESPONSES + NO_RESPONSES:
                 raise ValueError("invalid: answer must be 'y' or 'n'")
             break
@@ -233,9 +226,9 @@ def open_boxes(boxes, opens, sb):
 
                 if Box.chosen == box:
                     raise ValueError("invalid: can't open your own box")
-                elif box < 1 or box > BOXES_COUNT:
+                if box < 1 or box > BOXES_COUNT:
                     raise ValueError(f"invalid: {box} is outside the range of boxes")
-                elif boxes[box - 1].opened:
+                if boxes[box - 1].opened:
                     raise ValueError(f"invalid: box {box} has already been opened")
 
                 boxy = boxes[box - 1]
@@ -272,13 +265,6 @@ def print_box(row_of_boxes, centre=False):
 
     for row in rows:
         print(f"{BOX_LEFT_MARGIN if centre else ''}{row}")
-
-
-def write_to_csv(*data, path=".\deals.csv"):
-    """Store supplied data in a CSV file."""
-    with open(path, "a", newline="", encoding="utf_8") as csvfile:
-        writer = csv.writer(csvfile, delimiter=",")
-        writer.writerow(data)
 
 
 if __name__ == "__main__":
