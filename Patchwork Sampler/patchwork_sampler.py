@@ -17,15 +17,25 @@ VALID_COLOURS = ("red", "green", "blue", "orange", "brown", "pink")
 
 def main():
     """Program entry point."""
-    size, colours = get_inputs()
+    size, colours = prompt_user_for_inputs()
     win, colour_tracker, tiles = create_patchwork(size, colours)
     cycle_colours(win, size, colours, colour_tracker, tiles)
     print("\nGoodbye!")
     win.close()
 
 
-def get_inputs():
-    """Ask user for the patchwork size and colours."""
+def prompt_user_for_inputs():
+    """
+    Call functions asking user for the patchwork size and colours then return
+    these values.
+    """
+    size = prompt_user_for_patchwork_size()
+    colours = prompt_user_for_patchwork_colours()
+    return size, colours
+
+
+def prompt_user_for_patchwork_size():
+    """Ask user for the patchwork size."""
     while True:
         print(f"\nEnter one of the following sizes for the patchwork: {list_of_items(SIZES, conjunction='or')}")
         try:
@@ -38,6 +48,11 @@ def get_inputs():
             print(f"The patchwork will be a {size} x {size} grid")
             break
 
+    return int(size)
+
+
+def prompt_user_for_patchwork_colours():
+    """Ask user for the patchwork colours."""
     colours = []
     while len(colours) < 3:
         print(f"\nEnter one of the following colours: {list_of_items(VALID_COLOURS, conjunction='or')}")
@@ -57,7 +72,7 @@ def get_inputs():
             print(f"{colour.capitalize()} is valid")
 
     print(f"\nYou have chosen... {list_of_items(colours, conjunction='and')}")
-    return int(size), colours
+    return colours
 
 
 def list_of_items(items, *, conjunction):
@@ -259,11 +274,11 @@ def undraw_shapes(current_tile_pos, tiles):
 def redraw_shapes(win, size, colour, col, row, tiles):
     """
     Determine what tile design needs to be drawn then call the relevant design
-    function with the next colour in the list of chosen colours for that tile.
+    function with the next colour for that tile.
 
-    If any of the supplied vectors are between 1 and the size of the patchwork
-    then the vectors must point to a net patch. Otherwise they must be pointing
-    to a circle patch.
+    If either of the supplied vectors point to a perimeter of the patchwork then
+    they must point to a net patch. Otherwise they must be pointing to a circle
+    patch.
     """
     if any(vector in (1, size) for vector in (col, row)):
         net_design(win, size, colour, col, row, tiles)
