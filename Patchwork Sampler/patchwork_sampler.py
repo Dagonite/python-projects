@@ -53,23 +53,26 @@ def prompt_user_for_patchwork_size():
 
 def prompt_user_for_patchwork_colours():
     """Ask user for the patchwork colours."""
+    available_colours = list(VALID_COLOURS)
     colours = []
     while len(colours) != 3:
-        print(f"\nEnter one of the following colours: {list_of_items(VALID_COLOURS, conjunction='or')}")
+        print(f"\nEnter one of the following colours: {list_of_items(available_colours, conjunction='or')}")
         print("Or (r)andomise your remaining options")
         try:
             colour = input("> ").lower().strip()
-            if colour == "r":
-                colours.extend(random.sample(VALID_COLOURS, 3 - len(colours)))
-            elif colour in colours:
+            if colour in colours:
                 raise ValueError(f"Error: {colour} already chosen")
-            elif colour not in VALID_COLOURS:
+            if colour not in available_colours + ["r"]:
                 raise ValueError("Error: invalid colour")
-            else:
-                colours.append(colour)
-                print(f"{colour.capitalize()} is valid")
         except ValueError as err:
             print(err)
+        else:
+            if colour == "r":
+                colours.extend(random.sample(available_colours, 3 - len(colours)))
+            else:
+                colours.append(colour)
+                available_colours.remove(colour)
+                print(f"{colour.capitalize()} is valid")
 
     print(f"\nThe colours will be {list_of_items(colours, conjunction='and')}")
     return colours
