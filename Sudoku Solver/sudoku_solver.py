@@ -36,11 +36,11 @@ def solve(puzzle: List) -> bool:
     # co-ords of empty square unless puzzle solved
     current_coords = find_empty_coords(puzzle)
 
-    # co-ords stored as row, col if current_coords is truthy
-    if current_coords != (-1, -1):
-        row, col = current_coords
-    else:
+    # puzzle solved if coords (-1, -1)
+    if current_coords == (-1, -1):
         return True
+
+    row, col = current_coords
 
     for n in range(1, 10):
         # check if n is valid for empty square
@@ -53,6 +53,7 @@ def solve(puzzle: List) -> bool:
 
             # puzzle isn't solved so current n must be wrong
             puzzle[row][col] = 0
+
     return False
 
 
