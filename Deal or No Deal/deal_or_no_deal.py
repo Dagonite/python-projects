@@ -1,5 +1,5 @@
 """Try to win as much money as possible."""
-# pylint: disable = anomalous-backslash-in-string
+# pylint: disable=anomalous-backslash-in-string
 
 import os
 from dataclasses import dataclass
