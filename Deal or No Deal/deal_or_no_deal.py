@@ -231,10 +231,10 @@ def open_boxes(boxes, opens, sb):
                 if boxes[box - 1].opened:
                     raise ValueError(f"invalid: box {box} has already been opened")
 
-                boxy = boxes[box - 1]
-                boxy.opened = True
+                current_box = boxes[box - 1]
+                current_box.opened = True
                 print_gui(boxes, sb)
-                print(f"\nBox {box} contained {boxy.text_value}")
+                print(f"\nBox {box} contained {current_box.text_value}")
                 break
 
             except ValueError as exc:
