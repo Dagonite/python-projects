@@ -290,3 +290,5 @@ def redraw_shapes(win, size, colour, col, row, tiles):
 
 if __name__ == "__main__":
     main()
+
+1
