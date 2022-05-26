@@ -7,9 +7,9 @@ code uses the input() function so must be ran using the Python interpreter
 # pylint: disable=too-many-arguments
 
 import random
+from itertools import product
 
-from graphics import GraphWin, Line, Circle, Point, Rectangle
-
+from graphics import Circle, GraphWin, Line, Point, Rectangle
 
 SIZES = ("4", "5", "6", "7", "8")
 VALID_COLOURS = ("red", "green", "blue", "orange", "brown", "pink")
@@ -175,34 +175,34 @@ def net_design(win, size, colour, col, row, tiles):
 def circle_design(win, size, colour, col, row, tiles):
     """Draw the circle design using the supplied position and colour."""
     current_tile = []
-    for width in (0.1, 0.3, 0.5, 0.7, 0.9):
-        for height in (0.1, 0.3, 0.5, 0.7, 0.9):
-            # Draw filled circle
-            draw_circle(win, colour, (width + col, height + row), 0.1, current_tile, fill=True)
+    points = (0.1, 0.3, 0.5, 0.7, 0.9)
+    for width, height in product(points, points):
+        # Draw filled circle
+        draw_circle(win, colour, (width + col, height + row), 0.1, current_tile, fill=True)
 
-            if width in (0.3, 0.7):
-                # Draw horizontal white rectangle
-                draw_rectangle(
-                    win,
-                    "white",
-                    (width + col - 0.1, height + row),
-                    (width + col + 0.1, height + row + 0.1),
-                    current_tile,
-                    fill=True,
-                )
-            else:
-                # Draw vertical white rectangle
-                draw_rectangle(
-                    win,
-                    "white",
-                    (width + col - 0.1, height + row - 0.1),
-                    (width + col, height + row + 0.1),
-                    current_tile,
-                    fill=True,
-                )
+        if width in (0.3, 0.7):
+            # Draw horizontal white rectangle
+            draw_rectangle(
+                win,
+                "white",
+                (width + col - 0.1, height + row),
+                (width + col + 0.1, height + row + 0.1),
+                current_tile,
+                fill=True,
+            )
+        else:
+            # Draw vertical white rectangle
+            draw_rectangle(
+                win,
+                "white",
+                (width + col - 0.1, height + row - 0.1),
+                (width + col, height + row + 0.1),
+                current_tile,
+                fill=True,
+            )
 
-            # Draw outlined circle
-            draw_circle(win, colour, (width + col, height + row), 0.1, current_tile)
+        # Draw outlined circle
+        draw_circle(win, colour, (width + col, height + row), 0.1, current_tile)
 
     # Draw black border for current tile
     draw_rectangle(win, "black", (col, row), (col + 1, row + 1), current_tile)
