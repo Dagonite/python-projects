@@ -68,7 +68,10 @@ player_score = 0
 ai_score = 0
 
 while player_score < 3 and ai_score < 3:
-    player_stance, player_stance_value = STANCES[input("(r)ock, (p)aper, or (s)cissors? ")]
+    try:
+        player_stance, player_stance_value = STANCES[input("(r)ock, (p)aper, or (s)cissors? ")]
+    except KeyError:
+        continue
     player_art = STANCE_ART[player_stance][0]
     player_art_len = len(player_art[0])
 
