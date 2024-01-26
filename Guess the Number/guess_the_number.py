@@ -9,8 +9,8 @@ import os
 import random
 import argparse
 
-_UPPER_LIMIT = 100  # highest number the secret number can be
-_GUESSES = 6  # number of guesses the player has
+_UPPER_LIMIT = 100  # Highest number the secret number can be
+_GUESSES = 6  # Number of guesses the player has
 
 
 def ordinal(n):
@@ -22,7 +22,7 @@ def guess_the_number(UPPER_LIMIT, GUESSES):
     if UPPER_LIMIT < GUESSES:
         raise ValueError(f"upper limit can't be less than guesses: {UPPER_LIMIT} < {GUESSES}")
 
-    SECRET_NUMBER = random.randint(1, UPPER_LIMIT)  # pick a random number
+    SECRET_NUMBER = random.randint(1, UPPER_LIMIT)  # Pick a random number
     print(
         f"I am thinking of a number between 1 and {UPPER_LIMIT}. You have {GUESSES} guess{'es' if GUESSES != 1 else ''}"
     )
@@ -56,8 +56,10 @@ def guess_the_number(UPPER_LIMIT, GUESSES):
 
     if won:
         print(f"\nYes! The number was {SECRET_NUMBER}. You got it in {attempt} guess{'es' if attempt != 1 else ''}\n")
-    else:
-        print(f"\nYou lose! The number I was thinking of was {SECRET_NUMBER}\n")
+        return True
+
+    print(f"\nYou lose! The number I was thinking of was {SECRET_NUMBER}\n")
+    return False
 
 
 def main():
