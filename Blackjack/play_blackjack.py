@@ -10,49 +10,49 @@ CHIPS = 1000
 
 def main(chips=CHIPS):
     while True:
-        # quit if player is out of chips
+        # Quit if player is out of chips
         if chips < 1:
             print("\nYou're out of chips. Thanks for playing!")
             break
 
-        # create a deck to use
+        # Create a deck to use
         deck = get_deck()
 
-        # get the player's initial bet
+        # Get the player's initial bet
         bet = get_bet(chips)
 
-        # deal the initial hands
+        # Deal the initial hands
         dealer_hand, player_hand = deal_initial_hands(deck)
 
-        # get player moves
+        # Get player moves
         prompt_player_for_moves(deck, (dealer_hand, player_hand), chips, bet)
 
-        # redisplay the board to hide player's previous actions
+        # Redisplay the board to hide player's previous actions
         display_hands((dealer_hand, player_hand), hidden=True)
 
-        # player has bust - move onto next round
+        # Player has bust - move onto next round
         if player_hand.value > 21:
             print("\nYou have gone over 21, you lose!")
             chips -= bet
             continue
 
-        # player has not bust - reveal dealer's hidden card
-        display_hands(deck, (dealer_hand, player_hand))
+        # Player has not bust - reveal dealer's hidden card
+        display_hands((dealer_hand, player_hand))
         print(f"\nDealer has revealed the {dealer_hand.cards[0]}")
 
-        # get the dealer's moves
+        # Get the dealer's moves
         prompt_dealer_for_moves(deck, (dealer_hand, player_hand))
 
-        # redisplay the board to hide dealer's previous actions
+        # Redisplay the board to hide dealer's previous actions
         display_hands((dealer_hand, player_hand))
 
-        # dealer has bust
+        # Dealer has bust
         if dealer_hand.value > 21:
             print(f"\nDealer has gone over 21, you win {bet} chips!")
             chips += bet
             continue
 
-        # determine who has the better hand
+        # Determine who has the better hand
         if player_hand.value > dealer_hand.value:
             print(f"\nYou have the stronger hand, you win {bet} chips!")
             chips += bet
@@ -186,7 +186,7 @@ def prompt_dealer_for_moves(deck, hands):
 
         new_card = hit(deck, dealer_hand)
         new_cards.append(new_card)
-        display_hands(deck, hands)
+        display_hands(hands)
 
         print(f"\nDealer has revealed the {dealer_hand.cards[0]}")
         for new_card in new_cards:
