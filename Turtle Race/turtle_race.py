@@ -121,8 +121,14 @@ def race(turtle_objs, pen):
                 racing = False
 
     end = perf_counter()
+    duration = end - start
+    draw_winners_name(pen, WINNER)
 
-    # draw black rectangle backdrop for winner's name
+    return WINNER, duration
+
+
+def draw_winners_name(pen, WINNER):
+    # Draw black rectangle backdrop for winner's name
     pen.penup()
     pen.goto(-10, HEIGHT // 2 + 60)
     pen.color("black")
