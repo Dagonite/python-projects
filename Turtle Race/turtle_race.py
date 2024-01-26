@@ -16,7 +16,6 @@ TURTLES = {
     "Lapis": "indigo",
     "Amethyst": "violet",
 }
-
 WIDTH, HEIGHT = 1000, 500
 
 
@@ -30,16 +29,16 @@ def main():
 
 
 def draw_screen(TURTLE_COUNT):
-    # create window
+    # Create window
     win = Screen()
     win.setup(WIDTH, HEIGHT)
     win.setworldcoordinates(0, 0, WIDTH, HEIGHT)
     win.title("Turtle Race")
 
-    # color background
+    # Color background
     win.bgcolor("chocolate")
 
-    # draw white track lines
+    # Draw white track lines
     pen = Turtle()
     pen.hideturtle()
     pen.speed(0)
@@ -52,7 +51,7 @@ def draw_screen(TURTLE_COUNT):
         pen.pendown()
         pen.forward(WIDTH)
 
-    # draw finish line
+    # Draw finish line
     white_square = Turtle("square")
     white_square.color("white")
     white_square.penup()
@@ -69,16 +68,16 @@ def draw_screen(TURTLE_COUNT):
     OFFSET_Y = HEIGHT - HEIGHT // 50 - 21.5
 
     for i in range(HEIGHT // 40):
-        # first column of white squares
+        # First column of white squares
         stamp_square(white_square, FIRST_ROW_X, BASE_Y - 43 * i)
 
-        # second column of black squares
+        # Second column of black squares
         stamp_square(black_square, SECOND_ROW_X, BASE_Y - 43 * i)
 
-        # first column of black squares
+        # First column of black squares
         stamp_square(black_square, FIRST_ROW_X, OFFSET_Y - 43 * i)
 
-        # second column of white squares
+        # Second column of white squares
         stamp_square(white_square, SECOND_ROW_X, OFFSET_Y - 43 * i)
 
     return win, v_spacing, pen
@@ -90,7 +89,7 @@ def stamp_square(square, x, y):
 
 
 def place_turtles(v_spacing):
-    # create objects for each turtle
+    # Create objects for each turtle
     turtle_objs = []
     for i, turtle_name in enumerate(TURTLES, start=1):
         turtle = Turtle("turtle")
@@ -107,7 +106,7 @@ def place_turtles(v_spacing):
 
 
 def race(turtle_objs, pen):
-    # simulate race
+    # Simulate race
     start = perf_counter()
     racing = True
     while racing:
@@ -142,14 +141,12 @@ def draw_winners_name(pen, WINNER):
     pen.forward(70)
     pen.end_fill()
 
-    # write winner's name
+    # Write winner's name
     pen.penup()
     pen.goto(WIDTH // 2, HEIGHT // 2)
     pen.down()
     pen.color(WINNER.color_str)
     pen.write(f"The winner is {WINNER.name}", align="center", font=("Deja Vu Sans Mono", 30, "normal"))
-
-    return WINNER, end - start
 
 
 def write_to_csv(*data, path="races.csv"):
@@ -163,7 +160,7 @@ def process_csv(path="races.csv"):
         reader = csv.reader(csvfile)
         data = [(turtle, float(duration)) for turtle, duration in reader]
 
-    # populate dict with data
+    # Populate dict with data
     stats = {}
     for turtle, duration in data:
         if turtle not in stats:
@@ -175,28 +172,18 @@ def process_csv(path="races.csv"):
 
 
 def create_graphs(stats):
-    # text size constants
+    # Text size constants
     MEDIUM_SIZE = 14
     BIGGER_SIZE = 20
 
-    # set style
+    # Set style
     plt.style.use("seaborn")
 
-    # create subplots
-    _, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 6))
+    # Create a figure for pie chart
+    _, ax = plt.subplots(figsize=(8, 6))
 
-    # create scatter graph
-    for turtle in stats:
-        ax1.scatter(stats[turtle], [" "] * len(stats[turtle]), label=turtle, marker="x", c=TURTLES[turtle], s=80)
-
-    # scatter graph design changes
-    ax1.invert_xaxis()
-    ax1.set_title("Winning Time for Each Race", fontsize=BIGGER_SIZE)
-    ax1.set_xlabel("Time (s)", fontsize=MEDIUM_SIZE)
-    ax1.legend()
-
-    # create pie chart
-    _, texts, autotexts = ax2.pie(
+    # Create pie chart
+    _, texts, autotexts = ax.pie(
         [len(stats[turtle]) for turtle in stats],
         labels=stats.keys(),
         autopct="%1.1f%%",
@@ -207,16 +194,16 @@ def create_graphs(stats):
         wedgeprops={"linewidth": 1.5, "edgecolor": "black"},
     )
 
-    # make pie % values white unless turtle is Lemon
+    # Make pie % values white unless turtle is Lemon
     for text, autotext in zip(texts, autotexts):
         if text.get_text() != "Lemon":
             autotext.set_color("white")
 
-    # pie chart design changes
+    # Pie chart design changes
     no_of_races = len(sum(stats.values(), []))
-    ax2.set_title(f"Win Distribution of {no_of_races} races", fontsize=BIGGER_SIZE, y=1.08)
+    ax.set_title(f"Win Distribution of {no_of_races} races", fontsize=BIGGER_SIZE, y=1.08)
 
-    # export as image
+    # Export as image
     plt.savefig("stats_graphs.png", bbox_inches="tight")
 
 
