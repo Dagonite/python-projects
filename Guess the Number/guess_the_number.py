@@ -22,7 +22,7 @@ def guess_the_number(UPPER_LIMIT, GUESSES):
     if UPPER_LIMIT < GUESSES:
         raise ValueError(f"upper limit can't be less than guesses: {UPPER_LIMIT} < {GUESSES}")
 
-    SECRET_NUMBER = random.randint(1, UPPER_LIMIT)  # Pick a random number
+    secret_number = random.randint(1, UPPER_LIMIT)  # Pick a random number
     print(
         f"I am thinking of a number between 1 and {UPPER_LIMIT}. You have {GUESSES} guess{'es' if GUESSES != 1 else ''}"
     )
@@ -46,19 +46,19 @@ def guess_the_number(UPPER_LIMIT, GUESSES):
             except ValueError as error:
                 print(error)
 
-        if guess > SECRET_NUMBER:
+        if guess > secret_number:
             print("Too high")
-        elif guess < SECRET_NUMBER:
+        elif guess < secret_number:
             print("Too low")
-        elif guess == SECRET_NUMBER:
+        elif guess == secret_number:
             won = True
             break
 
     if won:
-        print(f"\nYes! The number was {SECRET_NUMBER}. You got it in {attempt} guess{'es' if attempt != 1 else ''}\n")
+        print(f"\nYes! The number was {secret_number}. You got it in {attempt} guess{'es' if attempt != 1 else ''}\n")
         return True
 
-    print(f"\nYou lose! The number I was thinking of was {SECRET_NUMBER}\n")
+    print(f"\nYou lose! The number I was thinking of was {secret_number}\n")
     return False
 
 
