@@ -65,11 +65,11 @@ def draw_grid(size):
 
     for i in range(squares):
         for j in range(squares):
-            # grid lines
+            # Grid lines
             Line(Point(1.5 + j, 0.5), Point(1.5 + j, size - 0.5)).draw(win)
             Line(Point(0.5, 1.5 + j), Point(size - 0.5, 1.5 + j)).draw(win)
 
-            # text within each square
+            # Text within each square
             square_text = Text(Point(1 + j, 1 + i), "").draw(win)
             square_texts[i][j] = square_text
 
@@ -86,19 +86,19 @@ def simulate_steps(person, squares, square_texts):
         random_step = random()
         total_steps += 1
         if random_step < 0.25:
-            current_row -= 1  # go up
+            current_row -= 1  # Go up
             draw_step(person, 0, -1)
         elif random_step >= 0.25 and random_step < 0.5:
-            current_col += 1  # go right
+            current_col += 1  # Go right
             draw_step(person, 1, 0)
         elif random_step >= 0.5 and random_step < 0.75:
-            current_row += 1  # go down
+            current_row += 1  # Go down
             draw_step(person, 0, 1)
         else:
-            current_col -= 1  # go left
+            current_col -= 1  # Go left
             draw_step(person, -1, 0)
 
-        # break if person leaves the grid
+        # Break if person leaves the grid
         if current_row == -1 or current_row == squares or current_col == -1 or current_col == squares:
             break
 
@@ -133,10 +133,10 @@ def process_csv(path="traced_walks.csv"):
             # [walks, steps, high, low]
             stats[size] = [1] + [steps] * 3
         else:
-            stats[size][0] += 1  # walks
-            stats[size][1] += steps  # steps
-            stats[size][2] = max(stats[size][2], steps)  # high
-            stats[size][3] = min(stats[size][3], steps)  # low
+            stats[size][0] += 1  # Walks
+            stats[size][1] += steps  # Steps
+            stats[size][2] = max(stats[size][2], steps)  # High
+            stats[size][3] = min(stats[size][3], steps)  # Low
 
     print(("{}" + "{:>10}" * 5).format("Size", "Walks", "Steps", "Avg", "High", "Low"))
     for size, (walks, steps, max_steps, min_steps) in stats.items():
