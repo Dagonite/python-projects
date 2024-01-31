@@ -6,7 +6,7 @@ from itertools import combinations
 from random import choice, shuffle
 from time import sleep
 
-# globals
+# Globals
 MARKS = {"O": "Noughts", "X": "Crosses"}
 GRID_SIZE = 3
 MAGIC_VALUE = 15
@@ -19,7 +19,6 @@ MAGIC_SQUARE = [
 
 def main():
     """Entry point for the program."""
-    # determine if player 2 is cpu or human
     player2_is_cpu = cpu_or_human()
     play_game(player2_is_cpu)
 
@@ -35,32 +34,32 @@ def cpu_or_human():
 def play_game(player2_is_cpu):
     """Play a game of Noughts and Crosses."""
     while True:
-        # generate starting grid
+        # Generate starting grid
         squares = [[" " for _ in range(GRID_SIZE)] for _ in range(GRID_SIZE)]
 
-        # give player 1 and 2 random marks
+        # Give player 1 and 2 random marks
         mark_keys = list(MARKS.keys())
         shuffle(mark_keys)
         player1_mark = mark_keys.pop()
         player2_mark = mark_keys.pop()
 
-        # determine who will go first
+        # Determine who will go first
         turns = ["first", "second"]
         shuffle(turns)
         player1_turn = turns.pop()
         player2_turn = turns.pop()
 
-        # container for some player specific data
+        # Container for some player specific data
         data = [
             ["player 1", "computer" if player2_is_cpu else "player 2"],
             [player1_mark, player2_mark],
         ]
 
-        # reverse the data if player 1 is going second
+        # Reverse the data if player 1 is going second
         if player1_turn == "second":
             data = [data[::-1] for data in data]
 
-        # zip the data so the columns can be iterated over
+        # Zip the data so the columns can be iterated over
         data = list(zip(*data))
 
         if player2_is_cpu:
@@ -72,12 +71,12 @@ def play_game(player2_is_cpu):
         input("Press Enter to continue... ")
         print_grid(squares)
 
-        # main gameplay loop
+        # Main gameplay loop
         drawn = False
         gameover = False
         while not drawn and not gameover:
             for player, player_mark in data:
-                # determine whether to prompt cpu or human for a move
+                # Determine whether to prompt cpu or human for a move
                 if player == "computer":
                     print("The computer is thinking...")
                     prompt_cpu_for_move(squares, player_mark, player1_mark)
@@ -86,14 +85,14 @@ def play_game(player2_is_cpu):
 
                 print_grid(squares)
 
-                # check if the current player has won
+                # Check if the current player has won
                 player_has_won = check_for_win(squares, player_mark)
                 if player_has_won:
                     print(f"{player.title()} wins with {MARKS[player_mark]}")
                     gameover = True
                     break
 
-                # check if it is a drawn game
+                # Check if it is a drawn game
                 if len(get_available_squares(squares)) == 0:
                     print("It's a draw")
                     drawn = True
@@ -102,7 +101,7 @@ def play_game(player2_is_cpu):
         sleep(1.5)
         print()
 
-        # prompt user if they want to play again
+        # Prompt user if they want to play again
         ans = ""
         while ans not in ("y", "n"):
             ans = input("Play again, y/n? > ")
@@ -113,15 +112,15 @@ def play_game(player2_is_cpu):
 
 def prompt_cpu_for_move(squares, cpu_mark, player_mark):
     """Prompt computer for a square to put their mark in."""
-    # generate list of available moves for the cpu
+    # Generate list of available moves for the cpu
     available_squares = get_available_squares(squares)
 
-    # create a copy of the grid
+    # Create a copy of the grid
     tmp_squares = deepcopy(squares)
 
     sleep(1.5)
 
-    # cpu looks for a winning move first
+    # CPU looks for a winning move first
     ans = 0
     for square in available_squares:
         row, col = get_square_pos(square)
@@ -133,7 +132,7 @@ def prompt_cpu_for_move(squares, cpu_mark, player_mark):
 
         tmp_squares[row][col] = " "
 
-    # cpu looks for a blocking move second
+    # CPU looks for a blocking move second
     if ans == 0:
         for square in available_squares:
             row, col = get_square_pos(square)
@@ -144,7 +143,7 @@ def prompt_cpu_for_move(squares, cpu_mark, player_mark):
 
             tmp_squares[row][col] = " "
         else:
-            # otherwise goes for a random move
+            # Otherwise goes for a random move
             ans = choice(available_squares)
 
     make_move(squares, cpu_mark, ans)
