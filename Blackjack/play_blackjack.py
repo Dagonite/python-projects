@@ -25,7 +25,7 @@ def main(chips=CHIPS):
         dealer_hand, player_hand = deal_initial_hands(deck)
 
         # Get player moves
-        prompt_player_for_moves(deck, (dealer_hand, player_hand), chips, bet)
+        bet = prompt_player_for_moves(deck, (dealer_hand, player_hand), chips, bet)
 
         # Redisplay the board to hide player's previous actions
         display_hands((dealer_hand, player_hand), hidden=True)
@@ -152,7 +152,7 @@ def prompt_player_for_moves(deck, hands, chips, bet):
         if player_hand.value > 20:
             break
 
-        if len(player_hand.cards) == 2 and chips > 0:
+        if len(player_hand.cards) == 2 and chips >= bet * 2:
             moves.append("(d)ouble down")
 
         move = ""
@@ -166,7 +166,7 @@ def prompt_player_for_moves(deck, hands, chips, bet):
         elif move == "s":
             break
         elif move == "d" and "d" in [i[1:2] for i in moves]:
-            bet += get_bet(chips, initial_bet=bet)
+            bet *= 2
             new_card = hit(deck, player_hand)
             new_cards.append(new_card)
             display_hands(hands, hidden=True)
@@ -174,7 +174,7 @@ def prompt_player_for_moves(deck, hands, chips, bet):
             break
 
     input("\nPress Enter to continue... ")
-
+    return bet
 
 def prompt_dealer_for_moves(deck, hands):
     """Prompt dealer for moves until they go bust or go over 16."""
