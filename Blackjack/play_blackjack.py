@@ -176,6 +176,7 @@ def prompt_player_for_moves(deck, hands, chips, bet):
     input("\nPress Enter to continue... ")
     return bet
 
+
 def prompt_dealer_for_moves(deck, hands):
     """Prompt dealer for moves until they go bust or go over 16."""
     dealer_hand, _ = hands
