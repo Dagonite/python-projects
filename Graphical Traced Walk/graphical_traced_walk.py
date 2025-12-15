@@ -26,9 +26,7 @@ def main(squares=None):
 def get_input():
     while True:
         try:
-            squares = int(
-                input("\nEnter the grid size (must be an odd number more than 2 and less than 20): > ").strip()
-            )
+            squares = int(input("\nEnter the grid size (must be an odd number more than 2 and less than 20): > ").strip())
             if squares % 2 == 0:
                 raise ValueError("please enter an odd number")
             if squares < 3:
