@@ -146,7 +146,11 @@ def draw_winners_name(pen, WINNER):
     pen.goto(WIDTH // 2, HEIGHT // 2)
     pen.down()
     pen.color(WINNER.color_str)
-    pen.write(f"The winner is {WINNER.name}", align="center", font=("Deja Vu Sans Mono", 30, "normal"))
+    pen.write(
+        f"The winner is {WINNER.name}",
+        align="center",
+        font=("Deja Vu Sans Mono", 30, "normal"),
+    )
 
 
 def write_to_csv(*data, path="races.csv"):
@@ -201,7 +205,9 @@ def create_graphs(stats):
 
     # Pie chart design changes
     no_of_races = len(sum(stats.values(), []))
-    ax.set_title(f"Win Distribution of {no_of_races} races", fontsize=BIGGER_SIZE, y=1.08)
+    ax.set_title(
+        f"Win Distribution of {no_of_races} races", fontsize=BIGGER_SIZE, y=1.08
+    )
 
     # Export as image
     plt.savefig("stats_graphs.png", bbox_inches="tight")
