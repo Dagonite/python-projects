@@ -3,7 +3,12 @@
 # set up the constants
 FACE_CARDS = ("Jack", "Queen", "King", "Ace")
 RANKS = tuple(range(2, 11)) + FACE_CARDS
-SUITS = {chr(9830): "Diamonds", chr(9829): "Hearts", chr(9827): "Clubs", chr(9824): "Spades"}
+SUITS = {
+    chr(9830): "Diamonds",
+    chr(9829): "Hearts",
+    chr(9827): "Clubs",
+    chr(9824): "Spades",
+}
 
 
 class Card:
