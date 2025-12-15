@@ -1,10 +1,7 @@
 """
 Program which displays a patchwork. The layout and patterns are specific to my
-student number but a user can stipulate the patchwork size and colours. This
-code uses the input() function so must be ran using the Python interpreter
-(REPL).
+student number but a user can stipulate the patchwork size and colours. Run this script from a console so you can provide input and see the graphics window
 """
-# pylint: disable=too-many-arguments
 
 import random
 from itertools import product
@@ -97,13 +94,13 @@ def create_patchwork(size, colours):
 
     # Initialise a list of length size^2 which will be filled up with the shapes
     # that make up the patchwork later
-    tiles = [None] * size ** 2
+    tiles = [None] * size**2
 
     # Initialise a list tracking the current colour of each tile. For
     # convenience, make all of the values 0 -- the initial colour of the first
     # patch. This way we don't need to supply colour_tracker as an arg for
     # first_patch()
-    colour_tracker = [0] * size ** 2
+    colour_tracker = [0] * size**2
 
     first_patch(win, size, colours[0], tiles)
     second_patch(win, size, colours[1], colour_tracker, tiles)
