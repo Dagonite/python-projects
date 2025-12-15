@@ -1,0 +1,13 @@
+[tool.ruff]
+line-length = 140
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]        # extend as needed
+fixable = ["ALL"]
+
+[tool.ruff.lint.pycodestyle]
+max-line-length = 140                # applies to code and comments
+max-doc-length = 100                 # tighter cap for docstrings
+
+[tool.ruff.format]
+line-ending = "lf"                   # optional, shown for completeness
